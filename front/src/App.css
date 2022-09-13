@@ -11,7 +11,7 @@ html {
 	line-height: 1.2;
 	word-wrap: break-word;
 	font-size: 62.5%;
-	background-color: var(--black);
+	background-color: var(--mainDeepGray);
 }
 
 body {
