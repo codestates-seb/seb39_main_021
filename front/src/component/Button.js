@@ -39,7 +39,6 @@ const EtcButton = styled.button`
 
 function Button ({ children, ...props }) {
     const style = props.buttonStyle
-    console.log(style)
 
     return(
         <ButtonStyled>
