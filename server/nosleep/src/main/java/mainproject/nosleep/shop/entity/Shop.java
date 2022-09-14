@@ -1,4 +1,4 @@
-package mainproject.nosleep.store.entity;
+package mainproject.nosleep.shop.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,14 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StoreEntity {
+public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,6 +39,6 @@ public class StoreEntity {
     private Double latitude;
 
     @Column(nullable = false)
-    private StoreStatus status; //enum
+    private ShopStatus status; //enum
 
 }

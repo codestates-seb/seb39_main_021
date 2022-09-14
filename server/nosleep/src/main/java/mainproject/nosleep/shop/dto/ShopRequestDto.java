@@ -1,10 +1,10 @@
-package mainproject.nosleep.store.dto;
+package mainproject.nosleep.shop.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class StoreRequestDto {
+public class ShopRequestDto {
 
     @Getter
     @AllArgsConstructor

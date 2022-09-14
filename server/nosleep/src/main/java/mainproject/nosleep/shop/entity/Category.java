@@ -1,4 +1,4 @@
-package mainproject.nosleep.store.entity;
+package mainproject.nosleep.shop.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
