@@ -17,19 +17,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShopController {
 
-    private final ShopService storeService;
+    private final ShopService shopService;
     private final ShopMapper mapper;
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> postShop(@Valid @RequestBody ShopRequestDto.Post requestBody){
 
         Shop shop = mapper.shopPostToShop(requestBody);
-        Shop createdShop = storeService.createShop(shop);
+        Shop createdShop = shopService.createShop(shop);
         return new ResponseEntity<>(createdShop, HttpStatus.CREATED);
     }
 
-    @PatchMapping
-    public ResponseEntity<?> patchShop(){
-        return null;
+    @PatchMapping("/{shopId}")
+    public ResponseEntity<?> patchShop(@PathVariable Long shopId,
+                                       @Valid @RequestBody ShopRequestDto.Patch requestBody){
+
+        Shop shop = mapper.shopPatchToShop(requestBody);
+        Shop updateShop = shopService.updateShop(shopId, shop);
+        return new ResponseEntity<>(updateShop, HttpStatus.OK);
     }
 
     @GetMapping("/{StoreId}")

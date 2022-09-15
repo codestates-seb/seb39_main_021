@@ -7,4 +7,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface ShopMapper {
      Shop shopPostToShop(ShopRequestDto.Post postRequestBody);
+     Shop shopPatchToShop(ShopRequestDto.Patch postRequestBody);
 }
