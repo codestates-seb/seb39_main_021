@@ -30,9 +30,23 @@ public class ShopService {
         return shopRepository.save(updateShop);
     }
 
+    public Shop findShop(Long id) {
+        Shop verifiedShop = findVerifiedShop(id);
+        // 조회수 이슈
+        return verifiedShop;
+    }
 
 
-    public Shop findVerifiedShop(Long id){
+
+    public void deleteShop(Long id) {
+        Shop verifiedShop = findVerifiedShop(id);
+        //삭제를 바로하는 것이 아닌, 상태 변경, 변경일자 기록
+        //삭제로직 필요
+
+        shopRepository.delete(verifiedShop); // 바로삭제제
+    }
+
+   public Shop findVerifiedShop(Long id){
         Optional<Shop> optionalShop = shopRepository.findById(id);
         return optionalShop.orElseThrow(
                 ()-> new IllegalArgumentException("존재하지않는 사업장입니다.")

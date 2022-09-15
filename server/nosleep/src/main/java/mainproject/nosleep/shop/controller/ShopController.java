@@ -36,9 +36,10 @@ public class ShopController {
         return new ResponseEntity<>(updateShop, HttpStatus.OK);
     }
 
-    @GetMapping("/{StoreId}")
-    public ResponseEntity<?> getDetailShop(){
-        return null;
+    @GetMapping("/{shopId}")
+    public ResponseEntity<?> getDetailShop(@PathVariable Long shopId){
+        Shop findShop = shopService.findShop(shopId);
+        return new ResponseEntity<>(findShop, HttpStatus.OK);
     }
 
     //현재 위치 기반으로 근처 Shop pagination 응답
@@ -47,8 +48,9 @@ public class ShopController {
         return null;
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<?> deleteShop(){
-        return null;
+    @DeleteMapping("/{shopId}")
+    public ResponseEntity<?> deleteShop(@PathVariable Long shopId){
+        shopService.deleteShop(shopId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
