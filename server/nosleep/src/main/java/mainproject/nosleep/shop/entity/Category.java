@@ -27,6 +27,6 @@ public enum Category {
         return Arrays.stream(Category.values())
                 .filter(c-> c.getKrName().equals(category))
                 .findAny()
-                .orElse(Etc);
+                .orElseThrow(); //잘못된 Category 입니다.
     }
 }
