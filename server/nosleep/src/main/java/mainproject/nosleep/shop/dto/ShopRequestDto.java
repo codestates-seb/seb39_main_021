@@ -3,6 +3,8 @@ package mainproject.nosleep.shop.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mainproject.nosleep.shop.entity.Category;
+import mainproject.nosleep.shop.entity.ShopStatus;
 
 public class ShopRequestDto {
 
@@ -21,6 +23,20 @@ public class ShopRequestDto {
         private Double latitude;
         private String status; //enum
 
+        public Category getCategory(){
+            Category category1 = Category.of(category);
+            if(category1 == null){
+                //예외처리, BadRequest
+                return null;
+            }
+            return category1;
+        }
+        public ShopStatus getStatus(){
+            ShopStatus status1 = ShopStatus.of(status);
+            if (status1 == null)
+                return null; //예외처리, BadRequest
+            return status1;
+        }
 
     }
 }
