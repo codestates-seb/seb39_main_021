@@ -5,8 +5,11 @@ import Button from './component/Button';
 import CheckBox from './component/Checkbox';
 
 function App() {
-
+fetch('https://jsonplaceholder.typicode.com/posts')
+  .then(response => response.json())
+  .then(json => console.log(json))
   return (
+    
     <div className="App">
       <Input color={'gray'}></Input>
       <Input color={'yellow'}></Input>
