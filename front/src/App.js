@@ -13,7 +13,6 @@ fetch('https://jsonplaceholder.typicode.com/posts')
     <div className="App">
       <Input color={'gray'}></Input>
       <Input color={'yellow'}></Input>
-      
       <RadioButton />
         <Button buttonStyle={'sub'} > 예시입니다 </Button>
         <Button buttonStyle={'main'} > 예시입니다 </Button>
