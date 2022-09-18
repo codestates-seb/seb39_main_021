@@ -1,14 +1,20 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const Menu = () => {
+const Menu = ({ toggleMenu, openMenu }) => {
   return (
     <HambugerMenu>
       <header className="menuHeader">
         <Link className="loginBtn" to="/login">
           로그인 하기
         </Link>
-        <button>X</button>
+        <Link
+          to="/"
+          className="menuClose"
+          onClick={() => toggleMenu(!openMenu)}
+        >
+          X
+        </Link>
       </header>
       <section className="menuContent"></section>
       <footer className="menuFooter">
@@ -31,7 +37,7 @@ const HambugerMenu = styled.section`
   .loginBtn {
     color: white;
   }
-  button {
+  .menuClose {
     color: white;
   }
 

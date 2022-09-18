@@ -2,21 +2,22 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import Header from "./header";
 import Home from "./Home";
-import Store from "./Store";
 import Menu from "./menu";
+// import Store from "./Store";
 
 const Router = () => {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(true);
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
   return (
     <BrowserRouter>
-      {openMenu ? null : <Header toggleMenu={toggleMenu} openMenu={openMenu} />}
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/food" element={<Store />}>
+      {openMenu ? (
+        <>
+          <Header toggleMenu={toggleMenu} openMenu={openMenu} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/food" element={<Store />}>
           식당
         </Route>
         <Route path="/cafe">카페</Route>
@@ -30,8 +31,12 @@ const Router = () => {
         <Route path="/gas">주유소</Route>
         <Route path="/unmanned">무인판매점</Route>
         <Route path="/etc">기타 등등</Route> */}
-        <Route path="/login" element={<Menu />} />
-      </Routes>
+            <Route path="/login" element={<Menu />} />
+          </Routes>
+        </>
+      ) : (
+        <Menu toggleMenu={toggleMenu} openMenu={openMenu} />
+      )}
     </BrowserRouter>
   );
 };
