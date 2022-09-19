@@ -1,30 +1,22 @@
-import './App.css';
-import Input from './component/Input';
-import RadioButton from './component/RadioButton';
-import Button from './component/Button';
-import CheckBox from './component/Checkbox';
-import List from './Page/List';
-import MapList from './Page/MapList';
-import LocalFilter from './Page/Filter';
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import "./App.css";
+import List from "./Page/List";
+import MapList from "./Page/MapList";
+import LocalFilter from "./Page/Filter";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Router from "./mainPage/Router";
+
 
 function App() {
-fetch('https://jsonplaceholder.typicode.com/posts')
-  .then(response => response.json())
-  .then(json => console.log(json))
   return (
-    
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
-          <Route path="/List" element={<List />}>ee</Route>
-          <Route path='/LocalFilter' element={ <LocalFilter />}>ee</Route>
-          <Route path='/MapList' element={ <MapList />}>ee</Route>
-
-        </Routes>
-
+          <Route path="/List" element={<List />} />
+          <Route path="/LocalFilter" element={<LocalFilter />} />
+          <Route path="/MapList" element={<MapList />} />
         <List />
-      </BrowserRouter>
+      </BrowserRouter> */}
+      </Routes>
     </div>
   );
 }
