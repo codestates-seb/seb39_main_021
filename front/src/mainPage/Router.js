@@ -4,6 +4,9 @@ import Header from "./header";
 import Home from "./Home";
 import Menu from "./menu";
 // import Store from "./Store";
+import List from "../Page/List";
+import LocalFilter from "../Page/Filter";
+import MapList from "../Page/MapList";
 
 const Router = () => {
   const [openMenu, setOpenMenu] = useState(true);
@@ -32,6 +35,9 @@ const Router = () => {
         <Route path="/unmanned">무인판매점</Route>
         <Route path="/etc">기타 등등</Route> */}
             <Route path="/login" element={<Menu />} />
+            <Route path="/List" element={<List />} />{" "}
+            <Route path="/LocalFilter" element={<LocalFilter />} />{" "}
+            <Route path="/MapList" element={<MapList />} />
           </Routes>
         </>
       ) : (
