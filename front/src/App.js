@@ -14,7 +14,6 @@ function App() {
           <Route path="/LocalFilter" element={<LocalFilter />} />
           <Route path="/MapList" element={<MapList />} />
         </Routes>
-
         <List />
       </BrowserRouter> */}
       <Router />

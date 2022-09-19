@@ -35,6 +35,7 @@ const Home = () => {
       .get("http://localhost:4000/items")
       .then((data) => setItemList(data.data));
   }, []);
+
   return itemList !== null ? (
     <Maincontainer>
       <section className="categoryContainer">
