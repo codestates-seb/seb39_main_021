@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/v1/review")
 public class ReviewController {
 
     private final ReviewService reviewService;
@@ -27,7 +28,7 @@ public class ReviewController {
         return new ResponseEntity<>(createdReview, HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{shopId}")
+    @PatchMapping("/{reviewId}")
     public ResponseEntity<?> patchShop(@PathVariable Long reviewId,
                                        @Valid @RequestBody ReviewRequestDto.Patch requestBody){
 
@@ -36,7 +37,7 @@ public class ReviewController {
         return new ResponseEntity<>(updateReview, HttpStatus.OK);
     }
 
-    @GetMapping("/{shopId}")
+    @GetMapping("/{reviewId}")
     public ResponseEntity<?> getDetailShop(@PathVariable Long reviewId){
         Review findReview = reviewService.findReview(reviewId);
         return new ResponseEntity<>(findReview, HttpStatus.OK);
@@ -48,7 +49,7 @@ public class ReviewController {
         return null;
     }
 
-    @DeleteMapping("/{shopId}")
+    @DeleteMapping("/{reviewId}")
     public ResponseEntity<?> deleteShop(@PathVariable Long reviewId){
         reviewService.deleteReview(reviewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

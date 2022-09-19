@@ -17,6 +17,7 @@ public class SecurityConfig {
         http.authorizeRequests()
                     .antMatchers("/h2/**").permitAll()
                     .mvcMatchers("/v1/shop/**").permitAll()
+                    .mvcMatchers("/v1/review/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .csrf().disable()
