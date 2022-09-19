@@ -5,7 +5,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__340.jpg",
       "title": "식당",
       "path": "/food",
-      "store": [
+      "stores": [
         {
           "name": "에그써티",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -31,7 +31,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2017/06/20/23/15/coffee-2425303__340.jpg",
       "title": "카페",
       "path": "/cafe",
-      "store": [
+      "stores": [
         {
           "name": "카페더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -51,7 +51,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2017/01/31/13/59/baby-decoration-2024311__340.png",
       "title": "동물병원",
       "path": "/animal",
-      "store": [
+      "stores": [
         {
           "name": "동물병원 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -77,7 +77,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2013/07/13/13/33/pills-161087__340.png",
       "title": "약국",
       "path": "/pharmacy",
-      "store": [
+      "stores": [
         {
           "name": "약국 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -97,7 +97,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2017/10/08/19/55/cruz-2831364__340.png",
       "title": "병원",
       "path": "/hospital",
-      "store": [
+      "stores": [
         {
           "name": "병원 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -129,7 +129,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2016/01/10/21/05/mic-1132528__340.jpg",
       "title": "노래방",
       "path": "/sing",
-      "store": [
+      "stores": [
         {
           "name": "노래방 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -155,7 +155,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2014/08/08/20/54/laundry-413688__340.jpg",
       "title": "세탁방",
       "path": "/laundry",
-      "store": [
+      "stores": [
         {
           "name": "세탁방 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -187,7 +187,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2017/08/05/13/31/building-2583628__340.jpg",
       "title": "편의점",
       "path": "/convenience",
-      "store": [
+      "stores": [
         {
           "name": "편의점 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -225,7 +225,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2016/10/07/14/48/computer-1721709__340.png",
       "title": "pc방",
       "path": "/pc",
-      "store": [
+      "stores": [
         {
           "name": "pc방 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -257,7 +257,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2016/08/15/22/20/fuel-1596622__340.jpg",
       "title": "주요소",
       "path": "/gas",
-      "store": [
+      "stores": [
         {
           "name": "주유소 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -280,10 +280,10 @@
     },
     {
       "id": "11",
-      "imageUrl": "https://cdn.pixabay.com/photo/2019/04/26/07/14/store-4156934__340.png",
+      "imageUrl": "https://cdn.pixabay.com/photo/2019/04/26/07/14/stores-4156934__340.png",
       "title": "무인판매점",
       "path": "/unmanned",
-      "store": [
+      "stores": [
         {
           "name": "무인판매점 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",
@@ -309,7 +309,7 @@
       "imageUrl": "https://cdn.pixabay.com/photo/2017/03/17/06/16/plus-button-2151004__340.png",
       "title": "기타등등",
       "path": "/etc",
-      "store": [
+      "stores": [
         {
           "name": "기타 등등 더미데이터1",
           "address": "서울 마포구 동교로32길 19 202호",

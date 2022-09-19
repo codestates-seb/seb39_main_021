@@ -35,7 +35,7 @@ const Home = () => {
       .get("http://localhost:4000/items")
       .then((data) => setItemList(data.data));
   }, []);
-  console.log(itemList);
+
   return itemList !== null ? (
     <Maincontainer>
       <section className="categoryContainer">
@@ -70,6 +70,7 @@ const Home = () => {
   이 후 다른 기기에서는 대응이 안될 우려가 있어
   body 혹은 최상단에 태그에 padding 을 주려고 한다. 
   => 멘토님과 종렬님께 의견을 여쭤볼것.
+  ==> 24px 로 맞출것.
 */
 
 export default Home;
@@ -97,6 +98,7 @@ const Maincontainer = styled.main`
   }
   .categoryContainer img {
     width: 150px;
+    height: 150px;
   }
 
   .popularPostsContainer {
