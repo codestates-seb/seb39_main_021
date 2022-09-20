@@ -37,7 +37,7 @@ const Router = () => {
             <Route path="/List" element={<List />} />
             <Route path="/LocalFilter" element={<LocalFilter />} />
             <Route path="/MapList" element={<MapList />} />
-            <Route path="/storeDetail" element={<StoreDetail />} />
+            <Route path="storeDetail" element={<StoreDetail />} />
           </Routes>
         </>
       ) : (
