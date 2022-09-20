@@ -5,7 +5,6 @@ import LocalFilter from "./Page/Filter";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Router from "./mainPage/Router";
 
-
 function App() {
   return (
     <div className="App">
@@ -15,8 +14,9 @@ function App() {
           <Route path="/LocalFilter" element={<LocalFilter />} />
           <Route path="/MapList" element={<MapList />} />
         <List />
+        </Routes>
       </BrowserRouter> */}
-      </Routes>
+      <Router />
     </div>
   );
 }
