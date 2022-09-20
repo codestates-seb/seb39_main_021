@@ -8,7 +8,6 @@ import List from "../Page/List";
 import LocalFilter from "../Page/Filter";
 import MapList from "../Page/MapList";
 
-
 const Router = () => {
   const [openMenu, setOpenMenu] = useState(true);
   const toggleMenu = () => {
@@ -33,12 +32,12 @@ const Router = () => {
           <Route path="/gas">주유소</Route>
           <Route path="/unmanned">무인판매점</Route>
           <Route path="/etc">기타 등등</Route> */}
-          <Route path="/login" element={<Menu />} />
-          <Route path="/List" element={<List />} />{" "}
-          <Route path="/LocalFilter" element={<LocalFilter />} />{" "}
-          <Route path="/MapList" element={<MapList />} />
-        </Routes>
-      </>
+            <Route path="/login" element={<Menu />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/localFilter" element={<LocalFilter />} />
+            <Route path="/mapList" element={<MapList />} />
+          </Routes>
+        </>
       ) : (
         <Menu toggleMenu={toggleMenu} openMenu={openMenu} />
       )}

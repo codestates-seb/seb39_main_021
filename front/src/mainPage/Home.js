@@ -41,12 +41,20 @@ const Home = () => {
       <section className="categoryContainer">
         <h1>카테고리</h1>
         {itemList.map((category) => (
-          <Link key={category.id} className="categoryItems">
+          <Link
+            key={category.id}
+            className="categoryItems"
+            to={"/list"}
+            state={{
+              info: category,
+            }}
+          >
             <img src={category.imageUrl} alt="무언가" />
             <h3>{category.title}</h3>
           </Link>
         ))}
       </section>
+
       <section className="popularPostsContainer">
         <h2>인기게시물</h2>
         {popularPosts.map((post) => (
