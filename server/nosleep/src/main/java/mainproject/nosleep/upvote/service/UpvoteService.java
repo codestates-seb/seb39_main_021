@@ -2,6 +2,7 @@ package mainproject.nosleep.upvote.service;
 
 import lombok.RequiredArgsConstructor;
 import mainproject.nosleep.member.entity.Member;
+import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.upvote.entity.Upvote;
 import mainproject.nosleep.upvote.repository.UpvoteRepository;
 import org.springframework.stereotype.Service;
