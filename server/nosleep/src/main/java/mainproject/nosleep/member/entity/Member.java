@@ -1,8 +1,10 @@
 package mainproject.nosleep.member.entity;
 
 import lombok.*;
-import mainproject.nosleep.audit.Auditable;
-import mainproject.nosleep.upvote.entity.TestReview;
+import mainproject.nosleep.review.audit.Auditable;
+import mainproject.nosleep.review.entity.Review;
+import mainproject.nosleep.shop.entity.Shop;
+//import mainproject.nosleep.upvote.entity.TestReview;
 import mainproject.nosleep.upvote.entity.Upvote;
 
 import javax.persistence.*;
@@ -50,8 +52,8 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member")
     private List<Review> reviewList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member")
-    private List<OpenCheck> openCheckList = new ArrayList<>();
+//    @OneToMany(mappedBy = "member")
+//    private List<OpenCheck> openCheckList = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Shop> shopList = new ArrayList<>();
@@ -96,10 +98,10 @@ public class Member extends Auditable {
         reviewList.add(review);
     }
 
-    public void addOpenCheck(OpenCheck openCheck) {
-        openCheckList.add(openCheck);
-    }
+//    public void addOpenCheck(OpenCheck openCheck) {
+//        openCheckList.add(openCheck);
+//    }
     public void addShop(Shop shop) {
-        openCheckList.add(shop);
+        shopList.add(shop);
     }
 }

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mainproject.nosleep.member.entity.Member;
+import mainproject.nosleep.review.entity.Review;
 
 import javax.persistence.*;
 

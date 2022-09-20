@@ -4,8 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mainproject.nosleep.member.entity.Member;
+import mainproject.nosleep.review.entity.Review;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,7 +42,17 @@ public class Shop {
     @Column(nullable = false)
     private Double latitude;
 
+    @Column
+    private Double ratingAVG;
+
     @Column(nullable = false)
     private ShopStatus status; //enum
+
+
+    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
+
+    @ManyToOne
+    private Member member;
 
 }
