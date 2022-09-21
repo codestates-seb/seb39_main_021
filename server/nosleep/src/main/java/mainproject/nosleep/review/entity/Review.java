@@ -1,9 +1,6 @@
 package mainproject.nosleep.review.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.shop.entity.Shop;
 import mainproject.nosleep.upvote.entity.Upvote;
@@ -33,7 +30,7 @@ public class Review {
     private String content;
 
     @Column(nullable = false)
-    private String status; //이용후기 상태 enum
+    private ReviewStatus status; //이용후기 상태 enum
 
     @ManyToOne
     private Shop shop;
@@ -44,5 +41,12 @@ public class Review {
 
     @OneToMany(mappedBy = "review")
     private List<Upvote> upvotes = new ArrayList<>();
+    @Builder
+    public Review(String writer, Integer rating, String content) {
 
+        this.writer = writer;
+        this.rating = rating;
+        this.content = content;
+        this.status = ReviewStatus.common;
+    }
 }
