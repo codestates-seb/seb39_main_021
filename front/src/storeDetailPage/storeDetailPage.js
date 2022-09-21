@@ -1,8 +1,8 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import Button from "../component/Button";
+
 /*
     카테고리 선택 => 해당 카테고리 페이지로 이동
     => 리스트중 아이탬 선택 => axios 요청 
@@ -12,19 +12,34 @@ import Button from "../component/Button";
 
 const StoreDetail = () => {
   const [storeItemDetail, setStoreItemDetail] = useState(null);
-  const location = useLocation();
-  useEffect(() => {
-    setStoreItemDetail(location.state.storeData.stores[0]);
-  });
-  // console.log(location.state.storeData.stores[0]);
+  const {
+    state: { storeData },
+  } = useLocation();
 
-  return storeItemDetail !== null ? (
-    <Stroecontainer>
+  const [store] = storeData?.stores;
+  // 배열 구조분해할당 => 배열의 0번째
+
+  useEffect(() => {
+    setStoreItemDetail(store);
+    // axios
+    //   .get(
+    //     "https://bizno.net/api/fapi?key=eWhqMDQzOUBuYXZlci5jb20g&gb=1&q=3988701116"
+    //   )
+    //   .then((data) => console.log(JSON.stringify(data)));
+  }, []);
+
+  if (storeItemDetail === null) {
+    return;
+  }
+  // early return => 의도를 담기 위해 앞에서 if 문으로 리턴해도 좋다.
+  // 실무에서 사용하는 방법.
+
+  return (
+    <StoreContainer>
       <section className="detailDataContainer">
         <div className="detailDataHeader">
           <h3>{storeItemDetail.name}</h3>
           <button>방문 확인하기</button>
-          {/* <Button style={"main"} /> */}
         </div>
         <span className="storeDataAddress">주소</span>
         <p>{storeItemDetail.address}</p>
@@ -48,13 +63,13 @@ const StoreDetail = () => {
           <span>전체 {storeItemDetail.Reviews}개</span>
         </div>
       </section>
-    </Stroecontainer>
-  ) : null;
+    </StoreContainer>
+  );
 };
 
 export default StoreDetail;
 
-const Stroecontainer = styled.main`
+const StoreContainer = styled.main`
   margin: 20px 0;
   color: white;
   .detailDataHeader {
