@@ -1,6 +1,7 @@
 package mainproject.nosleep.review.entity;
 
 import lombok.*;
+import mainproject.nosleep.audit.Auditable;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.shop.entity.Shop;
 import mainproject.nosleep.upvote.entity.Upvote;
@@ -14,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review {
+public class Review extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -41,7 +42,7 @@ public class Review {
 
     @OneToMany(mappedBy = "review")
     private List<Upvote> upvotes = new ArrayList<>();
-    @Builder
+
     public Review(String writer, Integer rating, String content) {
 
         this.writer = writer;

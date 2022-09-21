@@ -25,7 +25,7 @@ public class ReviewController {
     public ResponseEntity<?> postShop(@Valid @RequestBody ReviewRequestDto.Post requestBody){
         Review review = mapper.reviewPostToReview(requestBody);
         Review createdReview = reviewService.createReview(review);
-        return new ResponseEntity<>(createdReview, HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.reviewToDetailReview(createdReview), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{reviewId}")
@@ -46,6 +46,8 @@ public class ReviewController {
     //현재 위치 기반으로 근처 Shop pagination 응답
     @GetMapping()
     public List<?> getListShop(){
+
+//        reviewService.testMethod();
         return null;
     }
 
