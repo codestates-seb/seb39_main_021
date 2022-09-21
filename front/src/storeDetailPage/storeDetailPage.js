@@ -16,7 +16,6 @@ const StoreDetail = () => {
   useEffect(() => {
     setStoreItemDetail(location.state.storeData.stores[0]);
   });
-  // console.log(location.state.storeData.stores[0]);
 
   return storeItemDetail !== null ? (
     <Stroecontainer>
@@ -24,7 +23,6 @@ const StoreDetail = () => {
         <div className="detailDataHeader">
           <h3>{storeItemDetail.name}</h3>
           <button>방문 확인하기</button>
-          {/* <Button style={"main"} /> */}
         </div>
         <span className="storeDataAddress">주소</span>
         <p>{storeItemDetail.address}</p>
