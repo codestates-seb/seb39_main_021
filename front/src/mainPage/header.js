@@ -5,7 +5,7 @@ const Header = ({ toggleMenu, openMenu }) => {
   return (
     <MainHeader>
       <div>
-        <h1>밤잠 없는 사람들</h1>
+        <a href="/">밤잠 없는 사람들</a>
         <Link
           to="/login"
           onClick={() => toggleMenu(!openMenu)}
@@ -31,5 +31,9 @@ const MainHeader = styled.header`
   }
   .menuBtn {
     color: white;
+  }
+  a {
+    color: white;
+    font-size: 20px;
   }
 `;
