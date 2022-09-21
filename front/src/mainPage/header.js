@@ -7,7 +7,7 @@ const Header = ({ toggleMenu, openMenu }) => {
       <div>
         <a href="/">밤잠 없는 사람들</a>
         <Link
-          to="/login"
+          to="/toggleMenu"
           onClick={() => toggleMenu(!openMenu)}
           className="menuBtn"
         >
