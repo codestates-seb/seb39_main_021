@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Button from "../component/Button";
 /*
     카테고리 선택 => 해당 카테고리 페이지로 이동
     => 리스트중 아이탬 선택 => axios 요청 
@@ -13,34 +14,78 @@ const StoreDetail = () => {
   const [storeItemDetail, setStoreItemDetail] = useState(null);
   const location = useLocation();
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/items")
-      .then(() => setStoreItemDetail(location.state.cafeItemList[0]));
+    setStoreItemDetail(location.state.storeData.stores[0]);
   });
-  console.log(storeItemDetail);
+  // console.log(location.state.storeData.stores[0]);
 
-  return (
+  return storeItemDetail !== null ? (
     <Stroecontainer>
-      {storeItemDetail !== null ? (
-        <section>
-          <div>
-            <h3>{storeItemDetail.name}</h3>
-            <button>방문 확인하기</button>
-          </div>
-          <span>주소</span>
-          <p>{storeItemDetail.address}</p>
-          <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EA%B8%B8%EC%B0%BE%EA%B8%B0">
-            네이버 지도로 길찾기
-          </a>
-          <div>지도</div>
-          <span>상세설명</span>
-          <p>{storeItemDetail.txt}</p>
-        </section>
-      ) : null}
+      <section className="detailDataContainer">
+        <div className="detailDataHeader">
+          <h3>{storeItemDetail.name}</h3>
+          <button>방문 확인하기</button>
+          {/* <Button style={"main"} /> */}
+        </div>
+        <span className="storeDataAddress">주소</span>
+        <p>{storeItemDetail.address}</p>
+        <a
+          href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EA%B8%B8%EC%B0%BE%EA%B8%B0"
+          className="naverMap"
+        >
+          네이버 지도로 길찾기
+        </a>
+        <div>
+          <img
+            src="https://cdn.pixabay.com/photo/2014/11/10/11/43/map-525349__340.png"
+            alt="더미데이터 지도"
+          ></img>
+        </div>
+        <span className="storeInfo">상세설명</span>
+        <p className="storeInfoTxt">{storeItemDetail.txt}</p>
+        <span className="reviews">이용후기</span>
+        <div>
+          <span className="reviewsLike">별{storeItemDetail.like}점</span>
+          <span>전체 {storeItemDetail.Reviews}개</span>
+        </div>
+      </section>
     </Stroecontainer>
-  );
+  ) : null;
 };
 
 export default StoreDetail;
 
-const Stroecontainer = styled.main``;
+const Stroecontainer = styled.main`
+  margin: 20px 0;
+  color: white;
+  .detailDataHeader {
+    display: flex;
+    justify-content: space-between;
+  }
+  span {
+    color: #76736e;
+  }
+  .storeDataAddress {
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .naverMap {
+    display: inline-block;
+    margin: 20px 0 10px;
+    color: white;
+  }
+  .storeInfo {
+    display: inline-block;
+    margin: 20px 0 10px;
+  }
+  .storeInfoTxt {
+    padding: 30px 10px;
+    border: 1px solid black;
+  }
+  .reviews {
+    display: inline-block;
+    margin: 20px 0 5px;
+  }
+  .reviewsLike {
+    margin-right: 5px;
+  }
+`;

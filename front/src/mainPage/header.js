@@ -20,6 +20,8 @@ const Header = ({ toggleMenu, openMenu }) => {
 export default Header;
 
 const MainHeader = styled.header`
+  border-bottom: 1px solid white;
+
   div {
     color: white;
     display: flex;

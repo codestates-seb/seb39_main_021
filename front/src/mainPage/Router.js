@@ -34,10 +34,10 @@ const Router = () => {
           <Route path="/unmanned">무인판매점</Route>
           <Route path="/etc">기타 등등</Route> */}
             <Route path="/login" element={<Menu />} />
-            <Route path="/List" element={<List />} />
-            <Route path="/LocalFilter" element={<LocalFilter />} />
-            <Route path="/MapList" element={<MapList />} />
-            <Route path="/storeDetail" element={<StoreDetail />} />
+            <Route path="/list" element={<List />} />
+            <Route path="/localFilter" element={<LocalFilter />} />
+            <Route path="/mapList" element={<MapList />} />
+            <Route path="/storeDetailPage" element={<StoreDetail />} />
           </Routes>
         </>
       ) : (
