@@ -24,7 +24,7 @@ public class ShopController {
 
         Shop shop = mapper.shopPostToShop(requestBody);
         Shop createdShop = shopService.createShop(shop);
-        return new ResponseEntity<>(createdShop, HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.shopToDetailPage(createdShop), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{shopId}")
@@ -39,7 +39,7 @@ public class ShopController {
     @GetMapping("/{shopId}")
     public ResponseEntity<?> getDetailShop(@PathVariable Long shopId){
         Shop findShop = shopService.findShop(shopId);
-        return new ResponseEntity<>(findShop, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.shopToDetailPage(findShop), HttpStatus.OK);
     }
 
     //현재 위치 기반으로 근처 Shop pagination 응답
