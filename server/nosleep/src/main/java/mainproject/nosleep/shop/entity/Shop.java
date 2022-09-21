@@ -43,7 +43,7 @@ public class Shop {
     private Double ratingAVG;
 
     @Column
-    private Long reviewCount;
+    private Long reviewCount = 0L;
 
     @Column(nullable = false)
     private ShopStatus status; //enum
@@ -57,7 +57,7 @@ public class Shop {
 
 
  // 테스트를 위한 빌드
-    @Builder
+
     public Shop( Double ratingAVG) {
 
         this.category = Category.Etc;

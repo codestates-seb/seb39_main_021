@@ -26,6 +26,8 @@ public class ShopResponseDto {
     @Getter
     @NoArgsConstructor
     public static class DetailPage{
+
+        private Long id;
         //사업장 명
         private String name;
         //주소
@@ -39,6 +41,7 @@ public class ShopResponseDto {
 
         private Double ratingAVG;
         //이용후기 리스트
+        private Long reviewCount;
         private List<ReviewResponseDto.ShortReview> reviews; // reviewDTO 필요
 
         public void setReviews(List<Review> reviews) {
