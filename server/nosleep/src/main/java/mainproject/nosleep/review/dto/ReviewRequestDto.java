@@ -3,22 +3,20 @@ package mainproject.nosleep.review.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import mainproject.nosleep.review.entity.ReviewStatus;
+import mainproject.nosleep.shop.dto.ShopRequestDto;
+import mainproject.nosleep.shop.entity.Shop;
 
 public class ReviewRequestDto {
 
     @Getter
     @AllArgsConstructor
     public static class Post{
-        //작성자
         private String writer;
         //사진
 
-        //별점
+        private Long shopId;
         private Integer rating;
-        //장소 오픈유무
         private Boolean openCheck;
-        // 상호(사업장)
-        private String shopName;
         private String content;
         private String status;
 
@@ -41,6 +39,14 @@ public class ReviewRequestDto {
             }
             return status1;
         }
+
+        public Shop getShop(){
+            Shop shop = new Shop();
+            if(shopId != null) // null 이면 예외처리 필요
+                shop.setId(shopId);
+            return shop;
+        }
+
     }
 
     @Getter
