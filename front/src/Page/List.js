@@ -6,14 +6,16 @@ import styled from "styled-components";
 const List = () => {
   const [storeList, setStoreList] = useState(null);
   const storeLists = useLocation();
-  const restaurantList = storeList.info.stores;
+  const restaurantList = storeList.stores;
 
   console.log(storeList);
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
-      .then((items) => setStoreList(storeLists.state));
+      .then(() => setStoreList(storeLists.state.info));
   }, []);
+
+  console.log(storeList);
 
   return (
     <StoreList>
@@ -26,9 +28,8 @@ const List = () => {
           <Link to="/MapList"> 지도 </Link>{" "}
         </button>
       </section>
-
       {restaurantList.map((restaurant) => (
-        <StoreContainer key={restaurant}>
+        <StoreContainer>
           <div className="imgContainer">
             <img src={restaurant.image} />
           </div>
