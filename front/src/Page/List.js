@@ -14,7 +14,7 @@ const List = () => {
   }, []);
   return (
     <StoreList>
-      {storeList === null ? null : <h2> {storeList.title} </h2>}
+      {storeList == null && <h2> {storeList.title} </h2>}
       <section className="buttonContainer">
         <button>
           <Link to="/LocalFilter"> 전국 </Link>
@@ -24,27 +24,32 @@ const List = () => {
         </button>
       </section>
       {storeList !== null
-        ? storeList.stores.map((itmes) => (
-            <Link
-              key={itmes.id}
-              to={"/storeDetailPage"}
-              state={{
-                storeData: storeList,
-              }}
-            >
-              <StoreContainer key={itmes.id}>
-                <div className="imgContainer">
-                  <img src={itmes.image} alt="더미데이터" />
-                </div>
-                <div className="informationContainer">
-                  <h3 className="title">{itmes.name}</h3>
-                  <div className="address">{itmes.address}</div>
-                  <div className="rating">{itmes.rating}</div>
-                </div>
-              </StoreContainer>
-            </Link>
-          ))
+        ? storeList.stores.map(
+            (
+              items // 구조분해할당으로 리펙토링
+            ) => (
+              <Link
+                key={items.id}
+                to={"/storeDetailPage"}
+                state={{
+                  storeData: storeList,
+                }}
+              >
+                <StoreContainer key={items.id}>
+                  <div className="imgContainer">
+                    <img src={items.image} alt="더미데이터" />
+                  </div>
+                  <div className="informationContainer">
+                    <h3 className="title">{items.name}</h3>
+                    <div className="address">{items.address}</div>
+                    <div className="rating">{items.rating}</div>
+                  </div>
+                </StoreContainer>
+              </Link>
+            )
+          )
         : null}
+      {/* early return */}
     </StoreList>
   );
 };

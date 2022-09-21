@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import Button from "../component/Button";
 
 const LocalFilter = () => {
@@ -11,9 +12,12 @@ const LocalFilter = () => {
     area: "",
   });
 
+  const [cities] = localList.filter((post) => post.city === local);
+  const { area: targetArea } = cities;
+  // 선언적 프로그래밍
   useEffect(() => {
-    setSelectLocalArea(localList.filter((post) => post.city === local)[0].area);
-  }, [local]);
+    setSelectLocalArea(targetArea);
+  }, []);
 
   useEffect(() => {
     setLocalFilterValue({
@@ -51,10 +55,10 @@ const LocalFilter = () => {
   ];
 
   //제출하기 눌렀을때의 함수
-  const localFilterSubmitFnc = () => {};
+  const handleLocalFilterSubmit = () => {};
 
   //초기화 눌렀을때의 함수
-  const resetFnc = () => {
+  const handleReset = () => {
     setLocalFilterValue({
       city: "전국",
     });
@@ -80,23 +84,23 @@ const LocalFilter = () => {
           ))}
         </LocalFilterSection>
         <AreaFilterSection>
-          {selectLocalArea === undefined
-            ? null
-            : selectLocalArea.map((post) => (
-                <button
-                  className="buttonStyle"
-                  key={post.index}
-                  onClick={() => {
-                    setArea(post);
-                  }}
-                >
-                  {post}
-                </button>
-              ))}
+          {selectLocalArea?.map((post) => (
+            //undefined, null 을 체크할때는 == 만 사용한다.
+            //data == null => null 또는 undefined 를 같이 찾는다.
+            <button
+              className="buttonStyle"
+              key={post.index}
+              onClick={() => {
+                setArea(post);
+              }}
+            >
+              {post}
+            </button>
+          ))}
         </AreaFilterSection>
       </section>
       <section>
-        <Button width="100px" onClick={resetFnc}>
+        <Button width="100px" onClick={handleReset}>
           초기화
         </Button>
         <Button width="220px">제출하기</Button>
