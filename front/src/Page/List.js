@@ -6,40 +6,46 @@ import styled from "styled-components";
 const List = () => {
   const [storeList, setStoreList] = useState(null);
   const storeLists = useLocation();
-  const restaurantList = storeList.stores;
 
-  console.log(storeList);
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
       .then(() => setStoreList(storeLists.state.info));
   }, []);
 
-  console.log(storeList);
-
   return (
     <StoreList>
-      {storeList === null ? null : <h2> {storeList.info.title} </h2>}
+      {storeList === null ? null : <h2> {storeList.title} </h2>}
       <section className="buttonContainer">
         <button>
-          <Link to="/LocalFilter"> 전국 </Link>{" "}
+          <Link to="/LocalFilter"> 전국 </Link>
         </button>
         <button>
-          <Link to="/MapList"> 지도 </Link>{" "}
+          <Link to="/MapList"> 지도 </Link>
         </button>
       </section>
-      {restaurantList.map((restaurant) => (
-        <StoreContainer>
-          <div className="imgContainer">
-            <img src={restaurant.image} />
-          </div>
-          <div className="informationContainer">
-            <h3 className="title">{restaurant.name}</h3>
-            <div className="address">{restaurant.address}</div>
-            <div className="rating">{restaurant.rating}</div>
-          </div>
-        </StoreContainer>
-      ))}
+      {storeList !== null
+        ? storeList.stores.map((itmes) => (
+            <Link
+              key={itmes.id}
+              to={"/storeDetailPage"}
+              state={{
+                storeData: storeList,
+              }}
+            >
+              <StoreContainer key={itmes.id}>
+                <div className="imgContainer">
+                  <img src={itmes.image} alt="더미데이터" />
+                </div>
+                <div className="informationContainer">
+                  <h3 className="title">{itmes.name}</h3>
+                  <div className="address">{itmes.address}</div>
+                  <div className="rating">{itmes.rating}</div>
+                </div>
+              </StoreContainer>
+            </Link>
+          ))
+        : null}
     </StoreList>
   );
 };
