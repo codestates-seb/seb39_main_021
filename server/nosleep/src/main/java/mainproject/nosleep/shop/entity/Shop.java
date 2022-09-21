@@ -1,9 +1,6 @@
 package mainproject.nosleep.shop.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.review.entity.Review;
 
@@ -45,6 +42,9 @@ public class Shop {
     @Column
     private Double ratingAVG;
 
+    @Column
+    private Long reviewCount;
+
     @Column(nullable = false)
     private ShopStatus status; //enum
 
@@ -54,5 +54,22 @@ public class Shop {
 
     @ManyToOne
     private Member member;
+
+
+ // 테스트를 위한 빌드
+    @Builder
+    public Shop( Double ratingAVG) {
+
+        this.category = Category.Etc;
+        this.businessNumber = "123456";
+        this.name = "테스트 더미값";
+        this.address = "TEST address";
+        this.detail = "TEST detail";
+        this.longitude = 123.456;
+        this.latitude = 123.789;
+        this.ratingAVG = ratingAVG;
+        this.reviewCount = 0L;
+    }
+
 
 }
