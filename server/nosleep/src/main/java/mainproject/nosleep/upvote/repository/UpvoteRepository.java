@@ -1,6 +1,7 @@
 package mainproject.nosleep.upvote.repository;
 
 import mainproject.nosleep.member.entity.Member;
+import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.upvote.entity.Upvote;
 import org.springframework.data.jpa.repository.JpaRepository;
 
