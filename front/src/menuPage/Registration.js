@@ -6,12 +6,24 @@ import Header from "../mainPage/header";
 
 const Registration = () => {
   const [registrationNumber, setRegistrationNumber] = useState(null);
+  const handleRegistration = () => {
+    axios
+      .get(
+        "https://bizno.net/api/fapi?key=eWhqMDQzOUBuYXZlci5jb20g&gb=1&q=3988701116"
+      )
+      .then((data) => console.log(data));
+  };
+
+  // const handleImageUpload = (e) => {
+  //   console.log(e.target.files);
+  // };
   return (
     <>
       <Header />
       <RegistrationContainer>
         <label htmlFor="category">카테고리</label>
         <select id="category">
+          <option>선택해 주세요</option>
           <option>음식점</option>
           <option>카페</option>
           <option>동물병원</option>
@@ -30,14 +42,24 @@ const Registration = () => {
           placeholder="- 없이 숫자만 작성해 주세요"
           id="registrationNumber"
         />
-        <button className="registrationCheckBtn">확인하기</button>
+        <button className="registrationCheckBtn" onClick={handleRegistration}>
+          확인하기
+        </button>
         <label htmlFor="registrationName">사업장 이름</label>
         <input id="registrationName" />
         <label htmlFor="registrationAddress">사업장 주소</label>
         <input id="registrationAddress" />
         <label htmlFor="registrationTxt">상세 설명</label>
         <textarea id="registrationTxt" />
-        <label>이미지</label>
+        <label htmlFor="imageUpload">이미지</label>
+        {/* <input
+          id="imageUpload"
+          type="file"
+          accept="image/*"
+          multiple="multiple"
+          onChange={handleImageUpload}
+        />
+        <div></div> */}
       </RegistrationContainer>
       ;
     </>

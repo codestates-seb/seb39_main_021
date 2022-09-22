@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import Home from "./Home";
 import Menu from "../menuPage/menu";
 import List from "../Page/List";
@@ -7,6 +6,7 @@ import LocalFilter from "../Page/Filter";
 import MapList from "../Page/MapList";
 import StoreDetail from "../storeDetailPage/storeDetailPage";
 import Registration from "../menuPage/Registration";
+import Review from "../storeDetailPage/Review";
 
 const Router = () => {
   return (
@@ -21,6 +21,7 @@ const Router = () => {
           <Route path="/businessRegistration" element={<Registration />} />
           <Route path="/toggleMenu" element={<Menu />} />
           <Route path="/businessRegistration" element={<Registration />} />
+          <Route path="/review" element={<Review />} />
         </Routes>
       </>
     </BrowserRouter>

@@ -66,7 +66,7 @@ const LocalFilter = () => {
 
   // console.log(local);
   // console.log(area);
-  console.log(localFilterValue);
+  // console.log(localFilterValue);
   // console.log(selectLocalArea);
 
   return (
@@ -130,6 +130,7 @@ const LocalFilterSection = styled.section`
   display: flex;
   flex-direction: column;
 `;
+
 const AreaFilterSection = styled.section`
   border: 1px solid blue;
   width: 50%;
