@@ -1,23 +1,44 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+
 import Button from "../component/Button";
 
 const Review = () => {
   const fileInput = useRef();
-  const [fileImage, setFileImage] = useState("");
+  const [fileImageUrl, setFileImageUrl] = useState("");
+  const [fileImageData, setFileImageData] = useState();
 
   const handleReviewImage = () => {
     fileInput.current.click();
   };
   const deleteFileImage = () => {
-    URL.revokeObjectURL(fileImage);
-    setFileImage("");
+    URL.revokeObjectURL(fileImageUrl);
+    setFileImageUrl("");
   };
 
   const handleReviewImageChange = (e) => {
-    console.log(e.target.files[0]);
-    console.log(URL.createObjectURL(e.target.files[0]));
-    setFileImage(URL.createObjectURL(e.target.files[0]));
+    const uploadFile = e.target.files[0];
+    console.log(uploadFile);
+    console.log(URL.createObjectURL(uploadFile));
+    setFileImageUrl(URL.createObjectURL(uploadFile));
+
+    if (uploadFile) {
+      const formData = new FormData();
+      formData.append("files", uploadFile);
+
+      console.log(formData);
+
+      axios({
+        method: "post",
+        url: "",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+        },
+        data: formData,
+      });
+    }
   };
 
   return (
@@ -39,7 +60,7 @@ const Review = () => {
         <div>star</div>
       </section>
       <div>사진</div>
-      <div>{fileImage && <img src={fileImage} alt="test" />}</div>
+      <div>{fileImageUrl && <img src={fileImageUrl} alt="test" />}</div>
       <input
         style={{ display: "none" }}
         type="file"
