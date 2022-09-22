@@ -4,53 +4,13 @@ import styled from "styled-components";
 
 const Image = () => {
   const fileInput = useRef();
-  const [fileImageUrl, setFileImageUrl] = useState("");
+  //   const [fileImageUrl, setFileImageUrl] = useState("");
 
   const handleReviewImage = () => {
     fileInput.current.click();
   };
-  const deleteFileImage = () => {
-    // URL.revokeObjectURL(fileImageUrl);
-    // setFileImageUrl("");
-  };
 
-  const [fileImageData, setFileImageData] = useState();
-
-  const handleReviewImageChange = (e) => {
-    // console.log(e.target.files);
-    // for (let i = 0; i < e.target.files.length; i++) {
-    //   if (e.target.files[i]) {
-    //     let render = new FileReader();
-    //     render.readAsDataURL(e.target.files[i]);
-    //     render.onloadend = () => {
-    //       const base64 = render.result;
-    //       //   console.log(base64);
-    //       let base64Sub = base64.toString();
-    //       if (base64) {
-    //         setPreviewImg([...base64, base64Sub]);
-    //       }
-    //     };
-    //   }
-    // }
-    // const uploadFile = e.target.files[0];
-    // console.log(URL.createObjectURL(previewImg));
-    // setFileImageUrl(URL.createObjectURL(previewImg));
-    // if (previewImg) {
-    //   const formData = new FormData();
-    //   formData.append("files", previewImg);
-    //   console.log(formData);
-    //   axios({
-    //     method: "post",
-    //     url: "",
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //     data: formData,
-    //   });
-    //     }
-  };
-  const [deleteImg, setDeleteImg] = useState();
+  //   const [deleteImg, setDeleteImg] = useState();
   const [previewImg, setPreviewImg] = useState([]);
 
   const insertImg = (e) => {
@@ -75,8 +35,6 @@ const Image = () => {
   const deletePreviewImg = (index) => {
     const imgView = previewImg.filter((img, imgIndex) => imgIndex !== index);
     setPreviewImg([...imgView]);
-    console.log(imgView);
-    console.log(previewImg);
   };
 
   const getPreviewImg = () => {
@@ -103,14 +61,6 @@ const Image = () => {
     <ImageContainer>
       <div>사진</div>
       {getPreviewImg()}
-      {/* <img
-          src={
-            previewImg.length === 0
-              ? "https://cdn.pixabay.com/photo/2017/08/01/00/01/map-2562138__340.jpg"
-              : previewImg
-          }
-          alt="noImage"
-        /> */}
       <input
         style={{ display: "none" }}
         type="file"

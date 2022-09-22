@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 
 import Header from "../mainPage/header";
+import Image from "../component/image";
 
 const Registration = () => {
   const [registrationNumber, setRegistrationNumber] = useState(null);
@@ -60,6 +61,7 @@ const Registration = () => {
           onChange={handleImageUpload}
         />
         <div></div> */}
+        <Image />
       </RegistrationContainer>
       ;
     </>
