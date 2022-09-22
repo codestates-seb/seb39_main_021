@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import Button from "../component/Button";
+import Image from "../component/image";
 
 const Review = () => {
   return (
@@ -22,7 +23,8 @@ const Review = () => {
         <div>star</div>
       </section>
       <div>후기</div>
-      <input></input>
+      {/* <input></input> */}
+      <Image />
       <Button buttonStyle="main"> 등록하기 </Button>
     </div>
   );
