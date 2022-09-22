@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+import Header from "./header";
+
 const Home = () => {
   const [itemList, setItemList] = useState(null);
+  const [openMenu, setOpenMenu] = useState(true);
+  const toggleMenu = () => {
+    setOpenMenu(!openMenu);
+  };
 
   const popularPosts = [
     {
@@ -37,35 +43,38 @@ const Home = () => {
   }, []);
 
   return itemList !== null ? (
-    <MainContainer>
-      <section className="categoryContainer">
-        <h1>카테고리</h1>
-        {itemList.map((category) => (
-          <Link
-            key={category.id}
-            className="categoryItems"
-            to={"/list"}
-            state={{
-              info: category,
-            }}
-          >
-            <img src={category.imageUrl} alt="무언가" />
-            <h3>{category.title}</h3>
-          </Link>
-        ))}
-      </section>
+    <>
+      <Header toggleMenu={toggleMenu} openMenu={openMenu} />
+      <MainContainer>
+        <section className="categoryContainer">
+          <h1>카테고리</h1>
+          {itemList.map((category) => (
+            <Link
+              key={category.id}
+              className="categoryItems"
+              to={"/list"}
+              state={{
+                info: category,
+              }}
+            >
+              <img src={category.imageUrl} alt="무언가" />
+              <h3>{category.title}</h3>
+            </Link>
+          ))}
+        </section>
 
-      <section className="popularPostsContainer">
-        <h2>인기게시물</h2>
-        {popularPosts.map((post) => (
-          <div key={post.id}>
-            <img src={post.imageUrl} alt={post.imageDescription} />
-            <h3>{post.title}</h3>
-            <span>{post.rating}</span>
-          </div>
-        ))}
-      </section>
-    </MainContainer>
+        <section className="popularPostsContainer">
+          <h2>인기게시물</h2>
+          {popularPosts.map((post) => (
+            <div key={post.id}>
+              <img src={post.imageUrl} alt={post.imageDescription} />
+              <h3>{post.title}</h3>
+              <span>{post.rating}</span>
+            </div>
+          ))}
+        </section>
+      </MainContainer>
+    </>
   ) : null;
 };
 

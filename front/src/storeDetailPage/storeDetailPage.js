@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+
+import Header from "../mainPage/header";
 
 /*
     카테고리 선택 => 해당 카테고리 페이지로 이동
@@ -36,10 +38,11 @@ const StoreDetail = () => {
 
   return (
     <StoreContainer>
+      <Header />
       <section className="detailDataContainer">
         <div className="detailDataHeader">
           <h3>{storeItemDetail.name}</h3>
-          <button>방문 확인하기</button>
+          <Link to="/review">방문 확인하기</Link>
         </div>
         <span className="storeDataAddress">주소</span>
         <p>{storeItemDetail.address}</p>

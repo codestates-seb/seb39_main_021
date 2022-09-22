@@ -16,7 +16,11 @@ const Menu = ({ toggleMenu, openMenu }) => {
           X
         </Link>
       </header>
-      <section className="menuContent"></section>
+      <section className="menuContent">
+        <Link to="/businessRegistration" className="registration">
+          사업장 등록하기
+        </Link>
+      </section>
       <footer className="menuFooter">
         <a href="*">개인정보 정책</a>
         <a href="*">이용 약관</a>
@@ -54,5 +58,10 @@ const HambugerMenu = styled.section`
   .menuFooter a {
     margin-top: 10px;
     color: #76736e;
+  }
+  .registration {
+    display: inline-block;
+    color: white;
+    margin-top: 10px;
   }
 `;

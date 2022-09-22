@@ -87,7 +87,6 @@ const LocalFilter = () => {
           {selectLocalArea?.map((post) => (
             //undefined, null 을 체크할때는 == 만 사용한다.
             //data == null => null 또는 undefined 를 같이 찾는다.
-
             <button
               className="buttonStyle"
               key={post.index}
