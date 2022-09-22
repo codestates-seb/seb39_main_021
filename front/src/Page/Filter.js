@@ -66,7 +66,7 @@ const LocalFilter = () => {
 
   // console.log(local);
   // console.log(area);
-  console.log(localFilterValue);
+  // console.log(localFilterValue);
   // console.log(selectLocalArea);
 
   return (
@@ -87,6 +87,7 @@ const LocalFilter = () => {
           {selectLocalArea?.map((post) => (
             //undefined, null 을 체크할때는 == 만 사용한다.
             //data == null => null 또는 undefined 를 같이 찾는다.
+
             <button
               className="buttonStyle"
               key={post.index}
@@ -130,6 +131,7 @@ const LocalFilterSection = styled.section`
   display: flex;
   flex-direction: column;
 `;
+
 const AreaFilterSection = styled.section`
   border: 1px solid blue;
   width: 50%;
