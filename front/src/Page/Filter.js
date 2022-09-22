@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
 import Button from "../component/Button";
 
 const LocalFilter = () => {
@@ -62,7 +63,7 @@ const LocalFilter = () => {
 
   // console.log(local);
   // console.log(area);
-  console.log(localFilterValue);
+  // console.log(localFilterValue);
   // console.log(selectLocalArea);
 
   return (
@@ -80,19 +81,17 @@ const LocalFilter = () => {
           ))}
         </LocalFilterSection>
         <AreaFilterSection>
-          {selectLocalArea === undefined
-            ? null
-            : selectLocalArea.map((post) => (
-                <button
-                  className="buttonStyle"
-                  key={post.index}
-                  onClick={() => {
-                    setArea(post);
-                  }}
-                >
-                  {post}
-                </button>
-              ))}
+          {selectLocalArea?.map((post) => (
+            <button
+              className="buttonStyle"
+              key={post.index}
+              onClick={() => {
+                setArea(post);
+              }}
+            >
+              {post}
+            </button>
+          ))}
         </AreaFilterSection>
       </section>
       <section>
@@ -126,6 +125,7 @@ const LocalFilterSection = styled.section`
   display: flex;
   flex-direction: column;
 `;
+
 const AreaFilterSection = styled.section`
   border: 1px solid blue;
   width: 50%;

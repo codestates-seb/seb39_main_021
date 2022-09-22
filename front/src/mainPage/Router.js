@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
+
 import Header from "./header";
 import Home from "./Home";
 import Menu from "./menu";
@@ -8,6 +9,7 @@ import List from "../Page/List";
 import LocalFilter from "../Page/Filter";
 import MapList from "../Page/MapList";
 import StoreDetail from "../storeDetailPage/storeDetailPage";
+import Review from "../storeDetailPage/Review";
 
 const Router = () => {
   const [openMenu, setOpenMenu] = useState(true);
@@ -38,6 +40,7 @@ const Router = () => {
             <Route path="/localFilter" element={<LocalFilter />} />
             <Route path="/mapList" element={<MapList />} />
             <Route path="/storeDetailPage" element={<StoreDetail />} />
+            <Route path="/review" element={<Review />} />
           </Routes>
         </>
       ) : (

@@ -37,7 +37,7 @@ const Home = () => {
   }, []);
 
   return itemList !== null ? (
-    <Maincontainer>
+    <MainContainer>
       <section className="categoryContainer">
         <h1>카테고리</h1>
         {itemList.map((category) => (
@@ -65,16 +65,16 @@ const Home = () => {
           </div>
         ))}
       </section>
-    </Maincontainer>
+    </MainContainer>
   ) : null;
 };
 
 /*
-  현재 catagory 와 인기게시물의 좌측 레이아웃이 맞지 않는 이유는 
+  현재 category 와 인기게시물의 좌측 레이아웃이 맞지 않는 이유는 
   카테고리에 space-between 이 적용되어 아이탬들의 위치가 조정되었기 때문
   그래서 안맞아 보이지만 border 를 넣으면 레이아웃이 맞는걸 확인할 수 있다. 
 
-  하지만 일부러 맞추기 위해 position 이나 tramsform 을 사용하면
+  하지만 일부러 맞추기 위해 position 이나 transform 을 사용하면
   이 후 다른 기기에서는 대응이 안될 우려가 있어
   body 혹은 최상단에 태그에 padding 을 주려고 한다. 
   => 멘토님과 종렬님께 의견을 여쭤볼것.
@@ -83,7 +83,7 @@ const Home = () => {
 
 export default Home;
 
-const Maincontainer = styled.main`
+const MainContainer = styled.main`
   padding: 20px 10px 0;
   border-top: 1px solid white;
   h1 {
