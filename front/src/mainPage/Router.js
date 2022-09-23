@@ -7,6 +7,7 @@ import MapList from "../Page/MapList";
 import StoreDetail from "../storeDetailPage/storeDetailPage";
 import Registration from "../menuPage/Registration";
 import Review from "../storeDetailPage/Review";
+import MoreReview from "../Page/MoreReview";
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="/toggleMenu" element={<Menu />} />
           <Route path="/businessRegistration" element={<Registration />} />
           <Route path="/review" element={<Review />} />
+          <Route path="/moreReviews" element={<MoreReview />} />
         </Routes>
       </>
     </BrowserRouter>

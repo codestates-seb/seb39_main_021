@@ -53,14 +53,6 @@ const Registration = () => {
         <label htmlFor="registrationTxt">상세 설명</label>
         <textarea id="registrationTxt" />
         <label htmlFor="imageUpload">이미지</label>
-        {/* <input
-          id="imageUpload"
-          type="file"
-          accept="image/*"
-          multiple="multiple"
-          onChange={handleImageUpload}
-        />
-        <div></div> */}
         <Image />
       </RegistrationContainer>
       ;

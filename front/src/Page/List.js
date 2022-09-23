@@ -12,7 +12,6 @@ const List = () => {
       .get("http://localhost:4000/items")
       .then(() => setStoreList(storeLists.state.info));
   }, []);
-  console.log(storeList);
   return (
     <StoreList>
       {storeList !== null && <h2> {storeList.title} </h2>}

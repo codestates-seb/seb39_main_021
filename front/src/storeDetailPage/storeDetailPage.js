@@ -35,7 +35,6 @@ const StoreDetail = () => {
   }
   // early return => 의도를 담기 위해 앞에서 if 문으로 리턴해도 좋다.
   // 실무에서 사용하는 방법.
-
   return (
     <StoreContainer>
       <Header />
@@ -63,8 +62,27 @@ const StoreDetail = () => {
         <span className="reviews">이용후기</span>
         <div>
           <span className="reviewsLike">별{storeItemDetail.like}점</span>
-          <span>전체 {storeItemDetail.Reviews}개</span>
+          <span>전체 {storeItemDetail.reviews.length}개</span>
         </div>
+        <section>
+          {/* 별점 많은 순으로 3개 노출 코드로 변경할것. */}
+          {storeItemDetail.reviews.map((reviewItems, index) => (
+            <div key={index}>
+              <span>{reviewItems.nickName}</span>
+              <span>별{reviewItems.star}</span>
+              <p>{reviewItems.reviewTxt}</p>
+            </div>
+          ))}
+          <Link
+            to="/moreReviews"
+            state={{
+              storeData: store,
+            }}
+            className="moreReviews"
+          >
+            더보기
+          </Link>
+        </section>
       </section>
     </StoreContainer>
   );
@@ -105,5 +123,8 @@ const StoreContainer = styled.main`
   }
   .reviewsLike {
     margin-right: 5px;
+  }
+  .moreReviews {
+    color: white;
   }
 `;

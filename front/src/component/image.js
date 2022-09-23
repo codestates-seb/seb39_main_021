@@ -48,7 +48,7 @@ const Image = () => {
     } else {
       return previewImg.map((imgs, index) => {
         return (
-          <span className="imgBox">
+          <span className="imgBox" key={index}>
             <img src={previewImg[index]} alt="사용자가 선택한 이미지" />
             <button onClick={() => deletePreviewImg(index)}>X</button>
           </span>
