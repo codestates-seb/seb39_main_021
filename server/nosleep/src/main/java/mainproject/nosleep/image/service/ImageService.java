@@ -34,13 +34,11 @@ public class ImageService {
     public List<String> uploadImages(Image.Type type, List<MultipartFile> multipartFileList) {
         List<String> fileUrlList = new ArrayList<>();
 
-
-        LocalDateTime localDateTimeNow = LocalDateTime.now();
         String now = String.valueOf(System.currentTimeMillis());
         int i = 0;
         for (MultipartFile multipartFile : multipartFileList) {
             if (fileUrlList.size() > 3) {
-                throw new RuntimeException();
+                throw new RuntimeException();       // 에러 핸들러 작성 필요
             }
 
             int fileExtensionIndex = multipartFile.getOriginalFilename().lastIndexOf(".");
@@ -90,9 +88,9 @@ public class ImageService {
         return imageRepository.save(savedImage);
     }
 
-    public List<Image> createImageEntities(List<Image> imageList) {            // 글작성 누르기 전에 S3에 이미지가 업로드된다고 가정하면
-        List<Image> createdImages = new ArrayList<>();                  // 글작성을 누르기 전까진 shop이나 review의 id를 알수 없기 때문에
-        if (imageList.size() == 0) {                                    // 해당 칸은 공란으로 두고 Image 생성
+    public List<Image> createImageEntities(List<Image> imageList) {
+        List<Image> createdImages = new ArrayList<>();
+        if (imageList.size() == 0) {
             return null;
         }
         else {
@@ -104,7 +102,44 @@ public class ImageService {
         return createdImages;
     }
 
-    public void deleteImage(long id) {
+
+    public void deleteImage1(List<String> urlList) {
+        for (String url : urlList) {
+            if (!imageExistsAtUrl(url)) {
+                throw new RuntimeException();           // 에러 관련 수정 필요
+            }
+
+            amazonS3Client.deleteObject(bucketName, url);
+
+            Image deletedImage = imageRepository.findByUrl(url);
+
+            if (deletedImage != null) {
+                imageRepository.delete(deletedImage);
+            }
+        }
+    }
+
+    public void deleteImage2(List<Image> imageList) {
+        for (Image requestedImage : imageList) {
+            Image image = imageRepository.findByUrl(requestedImage.getUrl());
+
+            if (!imageExistsAtUrl(image.getUrl())) {
+                throw new RuntimeException();           // 에러 핸들러 작성 필요
+            }
+
+            amazonS3Client.deleteObject(bucketName, image.getUrl());
+            imageRepository.delete(image);
+        }
+
+    }
+
+    public void deleteImageDBByUrl(String url) {
+        Image deletedImage = imageRepository.findByUrl(url);
+        if (deletedImage != null) {
+            imageRepository.delete(deletedImage);
+        }
+    }
+    public void deleteImageById(long id) {
         Image deletedImage = imageRepository.findById(id);
         if (deletedImage != null) {
             imageRepository.delete(deletedImage);

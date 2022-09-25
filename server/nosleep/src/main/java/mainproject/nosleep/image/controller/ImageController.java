@@ -38,8 +38,18 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadFiles (@RequestParam("type") Image.Type type, @RequestPart(value = "file") List<MultipartFile> multipartFileList) {
+    public ResponseEntity<?> uploadImages (@RequestParam("type") Image.Type type, @RequestPart(value = "file") List<MultipartFile> multipartFileList) {
         return new ResponseEntity<>(imageService.uploadImages(type, multipartFileList), HttpStatus.OK);
+    }
+
+    @DeleteMapping("")
+    public ResponseEntity<?> deleteImages (@RequestBody ImageRequestDto.Delete requestBody) {
+
+        System.out.println("EnterController");
+        System.out.println(requestBody.getUrlList().get(0));
+        imageService.deleteImage1(requestBody.getUrlList());
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 //    @GetMapping("/download")
