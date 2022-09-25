@@ -5,7 +5,11 @@ import mainproject.nosleep.image.dto.ImageRequestDto;
 import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.image.mapper.ImageMapper;
 import mainproject.nosleep.image.service.ImageService;
+import org.apache.coyote.Response;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,11 +38,20 @@ public class ImageController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadFiles (@RequestParam("type") String type, @RequestPart(value = "file") List<MultipartFile> multipartFileList) {
-        System.out.println("Entered ImageController");
+    public ResponseEntity<?> uploadFiles (@RequestParam("type") Image.Type type, @RequestPart(value = "file") List<MultipartFile> multipartFileList) {
         return new ResponseEntity<>(imageService.uploadImages(type, multipartFileList), HttpStatus.OK);
     }
 
+//    @GetMapping("/download")
+//    public ResponseEntity<ByteArrayResource> downloadImage(@RequestParam("url") String url) {     // 다운로드 API가 필요?
+//        byte[] image = imageService.downloadImage(url);
+//        ByteArrayResource resource = new ByteArrayResource(image);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentLength(image.length);
+//        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//
+//        return ResponseEntity.ok().headers(headers).body(resource);
+//    }
 
     //@DeleteMapping("")
 

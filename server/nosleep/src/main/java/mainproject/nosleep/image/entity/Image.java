@@ -2,6 +2,8 @@ package mainproject.nosleep.image.entity;
 
 import lombok.*;
 import mainproject.nosleep.audit.Auditable;
+import mainproject.nosleep.review.entity.Review;
+import mainproject.nosleep.shop.entity.Shop;
 
 import javax.persistence.*;
 
@@ -29,11 +31,11 @@ public class Image extends Auditable {
 
     // Mappings
 
-    //@ManyToOne
-    //private Review review;
+    @ManyToOne
+    private Review review;
 
-    //@ManyToOne
-    //private Shop shop;
+    @ManyToOne
+    private Shop shop;
 
 
 
