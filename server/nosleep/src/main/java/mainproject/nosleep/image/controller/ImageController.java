@@ -8,12 +8,13 @@ import mainproject.nosleep.image.service.ImageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/temp/image")
+@RequestMapping("/image")
 @RequiredArgsConstructor
 public class ImageController {
 
@@ -25,13 +26,18 @@ public class ImageController {
 
 
         List<Image> imageList = mapper.imagePostToImageList(requestBody);
-        List<Image> postedImageList = imageService.createImages(imageList);
+        List<Image> postedImageList = imageService.createImageEntities(imageList);
 
 
         //
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/upload")
+    public ResponseEntity<?> uploadFiles (@RequestParam("type") String type, @RequestPart(value = "file") List<MultipartFile> multipartFileList) {
+        System.out.println("Entered ImageController");
+        return new ResponseEntity<>(imageService.uploadImages(type, multipartFileList), HttpStatus.OK);
+    }
 
 
     //@DeleteMapping("")
