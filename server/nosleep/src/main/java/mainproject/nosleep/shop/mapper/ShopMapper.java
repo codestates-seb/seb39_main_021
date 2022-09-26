@@ -9,8 +9,10 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface ShopMapper {
-     Shop shopPostToShop(ShopRequestDto.Post postRequestBody);
-     Shop shopPatchToShop(ShopRequestDto.Patch postRequestBody);
-     ShopResponseDto.DetailPage shopToDetailPage(Shop shop);
+     Shop shopPostToShop(ShopRequestDto.Create postRequestBody);
+     Shop shopPatchToShop(ShopRequestDto.Update postRequestBody);
+
+     ShopResponseDto.CreateDetailPage shopToCreateDetailPage(Shop shop);
+     ShopResponseDto.ReadDetailPage shopToReadDetailPage(Shop shop);
 
 }

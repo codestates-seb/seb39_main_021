@@ -25,7 +25,28 @@ public class ShopResponseDto {
     @Setter
     @Getter
     @NoArgsConstructor
-    public static class DetailPage{
+    public static class CreateDetailPage{
+        private Long id;
+        //사업장 명
+        private String name;
+        //주소
+        private String address;
+        //설명
+        private String detail;
+
+        //좌표
+        private Double longitude;
+        private Double latitude;
+
+        private Double ratingAVG;
+        //이용후기 리스트
+        private Long reviewCount;
+    }
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    public static class ReadDetailPage{
 
         private Long id;
         //사업장 명
@@ -50,6 +71,7 @@ public class ShopResponseDto {
                         ReviewResponseDto.ShortReview shortReview = new ReviewResponseDto.ShortReview();
                         shortReview.setId(review.getId());
                         shortReview.setWriter(review.getWriter());
+                        shortReview.setRating(review.getRating());
                         shortReview.setContent(review.getContent());
                         return shortReview;
         }).collect(Collectors.toList());
