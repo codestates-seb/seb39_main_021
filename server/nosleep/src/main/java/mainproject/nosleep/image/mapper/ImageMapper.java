@@ -24,9 +24,18 @@ public interface ImageMapper {
         }
         return imageList;
     }
+
+    default ImageResponseDto.Post urlListToImageResponsePost(List<String> urlList) {
+        if (urlList == null)
+            return new ImageResponseDto.Post(new ArrayList<String>());
+        else {
+            return new ImageResponseDto.Post(urlList);
+        }
+
+    }
     Image imagePatchToImage(ImageRequestDto.Patch requestBody);
     ImageResponseDto.Get imageToImageResponseGet(Image image);
-    ImageResponseDto.Post imageToImageResponsePost(Image image);
+
     ImageResponseDto.Patch imageToImageResponsePatch(Image image);
 
 }

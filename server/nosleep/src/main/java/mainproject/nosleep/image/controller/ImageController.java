@@ -2,6 +2,7 @@ package mainproject.nosleep.image.controller;
 
 import lombok.RequiredArgsConstructor;
 import mainproject.nosleep.image.dto.ImageRequestDto;
+import mainproject.nosleep.image.dto.ImageResponseDto;
 import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.image.mapper.ImageMapper;
 import mainproject.nosleep.image.service.ImageService;
@@ -25,21 +26,33 @@ public class ImageController {
     private final ImageService imageService;
     private final ImageMapper mapper;
 
-    @PostMapping("")
-    public ResponseEntity<?> postImages(@RequestBody ImageRequestDto.Post requestBody) {
-
-
-        List<Image> imageList = mapper.imagePostToImageList(requestBody);
-        List<Image> postedImageList = imageService.createImageEntities(imageList);
-
-
-        //
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//    @PostMapping("")
+//    public ResponseEntity<?> postImages(@RequestBody ImageRequestDto.Post requestBody) {
+//
+//
+//        List<Image> imageList = mapper.imagePostToImageList(requestBody);
+//        List<Image> postedImageList = imageService.createImageEntities(imageList);
+//
+//
+//        //
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadImages (@RequestParam("type") Image.Type type, @RequestPart(value = "file") List<MultipartFile> multipartFileList) {
-        return new ResponseEntity<>(imageService.uploadImages(type, multipartFileList), HttpStatus.OK);
+    public ResponseEntity<?> uploadImages (@RequestParam("type") String requestType, @RequestPart(value = "file") List<MultipartFile> multipartFileList) {
+
+        for (Image.Type imageType : Image.Type.values()) {
+            System.out.println(imageType.toString());
+            if (imageType.toString().equals(requestType.toUpperCase())) {
+                List<String> urlList = imageService.uploadImages(imageType, multipartFileList);
+                ImageResponseDto.Post response = mapper.urlListToImageResponsePost(urlList);
+
+
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("")

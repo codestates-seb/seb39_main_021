@@ -29,7 +29,7 @@ public class ImageService {
     private final AmazonS3Client amazonS3Client;
 
     @Value("${cloud.aws.s3.bucket}")
-    private String bucketName;
+    private String bucket;
 
     public List<String> uploadImages(Image.Type type, List<MultipartFile> multipartFileList) {
         List<String> fileUrlList = new ArrayList<>();
@@ -40,6 +40,7 @@ public class ImageService {
             if (fileUrlList.size() > 3) {
                 throw new RuntimeException();       // 에러 핸들러 작성 필요
             }
+                                                    // 지원하는 확장자명 유효성검사 필요
 
             int fileExtensionIndex = multipartFile.getOriginalFilename().lastIndexOf(".");
             String fileExtension = multipartFile.getOriginalFilename().substring(fileExtensionIndex);
@@ -50,9 +51,9 @@ public class ImageService {
             objectMetadata.setContentType(multipartFile.getContentType());
 
             try (InputStream inputStream = multipartFile.getInputStream()) {
-                amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata)
+                amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
-                fileUrlList.add(amazonS3Client.getUrl(bucketName, fileName).toString());
+                fileUrlList.add(amazonS3Client.getUrl(bucket, fileName).toString());
                 createImageEntity(type, fileName);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -78,7 +79,7 @@ public class ImageService {
 //    }
 
     private boolean imageExistsAtUrl(String url) {
-        if(amazonS3Client.doesObjectExist(bucketName, url))
+        if(amazonS3Client.doesObjectExist(bucket, url))
             return true;
         else return false;
     }
@@ -109,7 +110,7 @@ public class ImageService {
                 throw new RuntimeException();           // 에러 관련 수정 필요
             }
 
-            amazonS3Client.deleteObject(bucketName, url);
+            amazonS3Client.deleteObject(bucket, url);
 
             Image deletedImage = imageRepository.findByUrl(url);
 
@@ -127,10 +128,14 @@ public class ImageService {
                 throw new RuntimeException();           // 에러 핸들러 작성 필요
             }
 
-            amazonS3Client.deleteObject(bucketName, image.getUrl());
+            amazonS3Client.deleteObject(bucket, image.getUrl());
             imageRepository.delete(image);
         }
+    }
 
+    public void deleteImageScheduled() {        // 1년전 탈퇴한 멤버를 삭제하는 로직과 같이, Review와 Shop이 모두 null값인 이미지를 삭제
+        List<Image> imageList = imageRepository.findByReviewAndShop(null, null);
+        deleteImage2(imageList);
     }
 
     public void deleteImageDBByUrl(String url) {
