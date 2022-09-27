@@ -1,6 +1,7 @@
 package mainproject.nosleep.review.controller;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.dto.MultiResponseDto;
 import mainproject.nosleep.review.dto.ReviewRequestDto;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.mapper.ReviewMapper;
@@ -53,7 +54,9 @@ public class ReviewController {
 
         Page<Review> reviewPage = reviewService.findReviews(page - 1, shopId);
         List<Review> reviews = reviewPage.getContent();
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(
+                new MultiResponseDto(mapper.reviewListToPages(reviews), reviewPage),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("/{reviewId}")

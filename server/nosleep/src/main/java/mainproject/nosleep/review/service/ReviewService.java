@@ -5,7 +5,6 @@ import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
 import mainproject.nosleep.opencheck.service.OpenCheckService;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
-import mainproject.nosleep.review.specification.ReviewSpecification;
 import mainproject.nosleep.shop.entity.Shop;
 import mainproject.nosleep.shop.repository.ShopRepository;
 import mainproject.nosleep.shop.service.ShopService;
@@ -61,7 +60,7 @@ public class ReviewService {
     public Page<Review> findReviews(int page, Long shopId){
         Shop shop = new Shop();
         shop.setId(shopId);
-        return reviewRepository.findByShop(shop, PageRequest.of(page, 5,  Sort.by("id").descending())); // 5개씩으로 고정
+        return reviewRepository.findByShop(shop, PageRequest.of(page, 10,  Sort.by("id").descending())); // 5개씩으로 고정
 
 
     }

@@ -27,8 +27,28 @@ public class ReviewResponseDto {
         private String content;
 
     }
-
     @Setter
+    @Getter
+    @NoArgsConstructor
+    public static class ReviewsPage {
+        private Long id;
+        private Long member;
+        private String nickname;
+        private LocalDateTime createdAt;
+        private Integer rating;
+        private Long upvotes;
+
+        public  void setMember(Member member){
+            this.member = member.getId();
+            this.nickname = member.getNickname();
+        }
+        public void setUpvotes(List<Upvote> upvotes){
+            this.upvotes = (long) upvotes.size();
+        }
+
+    }
+
+        @Setter
     @Getter
     @NoArgsConstructor
     public static class DetailReview{

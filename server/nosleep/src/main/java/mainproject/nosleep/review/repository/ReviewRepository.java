@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, Long> , JpaSpecificationExecutor<Review> {
+public interface ReviewRepository extends JpaRepository<Review, Long>  {
 
     //테트트용
     @Query(value = "select AVG(r.rating), COUNT(r.rating) From Review r ", nativeQuery = true)
