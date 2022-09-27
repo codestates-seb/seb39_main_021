@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import Header from "../mainPage/header";
 
 const List = () => {
   const [storeList, setStoreList] = useState(null);
@@ -14,6 +15,7 @@ const List = () => {
   }, []);
   return (
     <StoreList>
+      <Header />
       {storeList !== null && <h2> {storeList.title} </h2>}
       <section className="buttonContainer">
         <button>

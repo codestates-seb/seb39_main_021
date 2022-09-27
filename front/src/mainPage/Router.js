@@ -6,7 +6,7 @@ import LocalFilter from "../Page/Filter";
 import MapList from "../Page/MapList";
 import StoreDetail from "../storeDetailPage/storeDetailPage";
 import Registration from "../menuPage/Registration";
-import Review from "../storeDetailPage/Review";
+import Review from "../storeDetailPage/ReviewCreate";
 import MoreReview from "../Page/MoreReview";
 
 const Router = () => {

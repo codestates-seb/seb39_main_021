@@ -11,7 +11,7 @@ const Menu = ({ toggleMenu, openMenu }) => {
         <Link
           to="/"
           className="menuClose"
-          onClick={() => toggleMenu(!openMenu)}
+          // onClick={() => toggleMenu(!openMenu)}
         >
           X
         </Link>
