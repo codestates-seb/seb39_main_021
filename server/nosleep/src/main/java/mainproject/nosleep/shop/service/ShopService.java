@@ -3,14 +3,16 @@ package mainproject.nosleep.shop.service;
 import lombok.RequiredArgsConstructor;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
-import mainproject.nosleep.review.service.ReviewService;
 import mainproject.nosleep.shop.entity.Shop;
 import mainproject.nosleep.shop.repository.ShopRepository;
+import mainproject.nosleep.shop.specification.ShopSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -47,6 +49,10 @@ public class ShopService {
         return verifiedShop;
     }
 
+    public Page<Shop> findShops(int page, int size, Map<String, Object> spec, String sort) {
+        Specification<Shop> search = ShopSpecification.search(spec);
+        return shopRepository.findAll(search, PageRequest.of(page, size, Sort.by(sort).descending()));
+    }
 
 
     public void deleteShop(Long id) {

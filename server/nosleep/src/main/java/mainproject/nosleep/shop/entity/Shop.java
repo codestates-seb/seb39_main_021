@@ -30,6 +30,12 @@ public class Shop extends Auditable {
     private String name;
 
     @Column(nullable = false)
+    private String cityId; // 5자리
+
+    @Column(nullable = false)
+    private String areaId; // 5자리
+
+    @Column(nullable = false)
     private String address;
 
     @Column(nullable = false)

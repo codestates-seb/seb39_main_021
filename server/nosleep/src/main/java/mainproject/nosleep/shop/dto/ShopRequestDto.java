@@ -18,6 +18,8 @@ public class ShopRequestDto {
         private String businessNumber;
         private String name;
         private String address;
+        private String cityId;
+        private String areaId;
         private String detail;
         private Double longitude;
         private Double latitude;

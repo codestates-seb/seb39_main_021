@@ -81,4 +81,19 @@ public class ShopResponseDto {
         }).collect(Collectors.toList());
         }
     }
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    public static class ReadListPage{
+        private Long id;
+        private String name;
+        private String address;
+        private Double ratingAVG;
+        private Long reviewCount;
+        private Long visitorCount;
+        private Long openCount;
+
+
+
+    }
 }

@@ -5,6 +5,7 @@ import mainproject.nosleep.shop.dto.ShopResponseDto;
 import mainproject.nosleep.shop.entity.Shop;
 import org.mapstruct.Mapper;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
@@ -14,5 +15,9 @@ public interface ShopMapper {
 
      ShopResponseDto.CreateDetailPage shopToCreateDetailPage(Shop shop);
      ShopResponseDto.ReadDetailPage shopToReadDetailPage(Shop shop);
+
+     ShopResponseDto.ReadListPage shopToReadListPage(Shop shop);
+
+     List<ShopResponseDto.ReadListPage> shopListToPages(List<Shop> shops);
 
 }
