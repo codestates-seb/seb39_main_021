@@ -45,20 +45,9 @@ public class ShopRequestDto {
     @NoArgsConstructor
     public static class Update{
         private Long memberId; // 사용자 구분용 // 추후 Principal로 구별?
-        private String category; //enum
-        private String name;
-        private String address;
-        private String detail;
-        private Double longitude;
-        private Double latitude;
 
-        public Category getCategory(){
-            Category category1 = Category.of(category);
-            if(category1 == null){
-                //예외처리, BadRequest
-                return null;
-            }
-            return category1;
-        }
+        private String name;
+        private String detail;
+
     }
 }

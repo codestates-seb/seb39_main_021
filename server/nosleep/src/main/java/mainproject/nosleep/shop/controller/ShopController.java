@@ -40,7 +40,7 @@ public class ShopController {
 
         Shop shop = mapper.shopPatchToShop(requestBody);
         Shop updateShop = shopService.updateShop(shopId, shop);
-        return new ResponseEntity<>(updateShop, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.shopToReadDetailPage(updateShop), HttpStatus.OK);
     }
 
     @GetMapping("/{shopId}")
