@@ -22,11 +22,7 @@ public class Review extends Auditable {
     private Long id;
 
     @Column(nullable = false)
-    private String writer;
-
-    @Column(nullable = false)
     private Integer rating;
-
 
     @Column
     private String content;
@@ -37,7 +33,7 @@ public class Review extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
     @OneToMany(mappedBy = "review")
@@ -47,9 +43,8 @@ public class Review extends Auditable {
     private OpenCheck openCheck;  //매장 오픈유무
 
 
-    public Review(String writer, Integer rating, String content) {
-
-        this.writer = writer;
+    public Review(Integer rating, String content) {
+;
         this.rating = rating;
         this.content = content;
         this.status = ReviewStatus.common;

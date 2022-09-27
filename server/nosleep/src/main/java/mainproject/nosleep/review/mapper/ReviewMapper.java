@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
-    Review reviewPostToReview(ReviewRequestDto.Post request);
+    Review reviewPostToReview(ReviewRequestDto.Create request);
     Review reviewPatchToReview(ReviewRequestDto.Patch request);
 
     ReviewResponseDto.DetailReview reviewToDetailReview(Review review);

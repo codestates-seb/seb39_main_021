@@ -21,7 +21,7 @@ public class ReviewResponseDto {
 
         private Long id;
 
-        private String writer;
+        private String nickname;
         private Integer rating;
 
         private String content;
@@ -48,7 +48,7 @@ public class ReviewResponseDto {
         private Integer rating;
 
         private Long member;
-        private String writer;
+        private String nickname;
 
         private String content;
 
@@ -63,7 +63,7 @@ public class ReviewResponseDto {
 
         public  void setMember(Member member){
             this.member = member.getId();
-//            this.writer = member.getNickname();
+            this.nickname = member.getNickname();
         }
 
         public void setOpenCheck(OpenCheck openCheck){
