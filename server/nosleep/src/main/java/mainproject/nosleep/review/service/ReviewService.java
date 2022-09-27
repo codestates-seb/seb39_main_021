@@ -48,6 +48,7 @@ public class ReviewService {
     }
     public Review updateReview(Long id, Review review){
         Review updateReview = findVerifiedReview(id);
+        Optional.ofNullable(review.getRating()).ifPresent(updateReview::setRating);
         Optional.ofNullable(review.getContent()).ifPresent(updateReview::setContent);
 
         return reviewRepository.save(updateReview); // 더티체킹

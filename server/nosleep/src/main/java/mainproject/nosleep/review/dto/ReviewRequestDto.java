@@ -76,10 +76,9 @@ public class ReviewRequestDto {
     @Getter
     @AllArgsConstructor
     public static class Patch{
-        //작성자 - 확인유무
+
         //사진
-        //별점
-        // 상호(사업장)
+        private Integer rating;
         private String context;
     }
 }

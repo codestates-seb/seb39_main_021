@@ -38,7 +38,7 @@ public class ReviewController {
 
         Review review = mapper.reviewPatchToReview(requestBody);
         Review updateReview = reviewService.updateReview(reviewId, review);
-        return new ResponseEntity<>(updateReview, HttpStatus.OK);
+        return new ResponseEntity<>(mapper.reviewToDetailReview(updateReview), HttpStatus.OK);
     }
 
     @GetMapping("/{reviewId}")
