@@ -13,6 +13,6 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Shop s set s.ratingAVG = :ratingAVG , s.review_count = s.review_count + 1 WHERE s.id = :shopId", nativeQuery = true)
-    void updateRatingAVG(@Param("shopId") Long shopId,@Param("ratingAVG") Double ratingAVG);
+    @Query(value = "UPDATE Shop s set s.ratingAVG = :ratingAVG , s.review_count = s.review_count + 1 , s.visitor_count =:visitorCount , s.open_count= :openCount  WHERE s.id = :shopId", nativeQuery = true)
+    void updateShopData(@Param("shopId") Long shopId,@Param("ratingAVG") Double ratingAVG, @Param("visitorCount") Long visitorCount, @Param("openCount") Long openCount);
 }

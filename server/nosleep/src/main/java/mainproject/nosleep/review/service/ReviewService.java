@@ -1,6 +1,8 @@
 package mainproject.nosleep.review.service;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
+import mainproject.nosleep.opencheck.service.OpenCheckService;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
 import mainproject.nosleep.review.specification.ReviewSpecification;
@@ -14,6 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +28,23 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ShopRepository shopRepository;
 
+    private final OpenCheckRepository openCheckRepository;
+
     @Transactional
     public Review createReview(Review review){
         review.getOpenCheck().addReview(review);
         Review save = reviewRepository.save(review);
+        Long shopId = save.getShop().getId();
         //평점 계산
-        Double ratingAverage = findRatingAverage(save.getShop().getId());
+        Double ratingAverage = findRatingAverage(shopId);
         // 이용후기 + 1, 평점 갱신
-        shopRepository.updateRatingAVG(save.getShop().getId(), ratingAverage); // transactional
+
+        List<BigInteger[]> objects = openCheckRepository.allPeopleNumberAndCountOpenNumber(shopId);
+        Long visitorCount = objects.get(0)[0].longValue();;
+        Long openCount = objects.get(0)[1].longValue();
+
+        shopRepository.updateShopData(shopId, ratingAverage, visitorCount, openCount); // transactional
+
         return save;
     }
     public Review updateReview(Long id, Review review){
