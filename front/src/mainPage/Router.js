@@ -6,8 +6,9 @@ import LocalFilter from "../Page/Filter";
 import MapList from "../Page/MapList";
 import StoreDetail from "../storeDetailPage/storeDetailPage";
 import Registration from "../menuPage/Registration";
-import Review from "../storeDetailPage/ReviewCreate";
+import ReviewCreate from "../storeDetailPage/ReviewCreate";
 import MoreReview from "../Page/MoreReview";
+import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
 
 const Router = () => {
   return (
@@ -22,8 +23,9 @@ const Router = () => {
           <Route path="/businessRegistration" element={<Registration />} />
           <Route path="/toggleMenu" element={<Menu />} />
           <Route path="/businessRegistration" element={<Registration />} />
-          <Route path="/review" element={<Review />} />
+          <Route path="/review" element={<ReviewCreate />} />
           <Route path="/moreReviews" element={<MoreReview />} />
+          <Route path="/reviewDetail" element={<ReviewDetail />} />
         </Routes>
       </>
     </BrowserRouter>

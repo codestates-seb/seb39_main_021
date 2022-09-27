@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const Menu = ({ toggleMenu, openMenu }) => {
+const Menu = () => {
   return (
-    <HambugerMenu>
+    <HamburgerMenu>
       <header className="menuHeader">
         <Link className="loginBtn" to="/login">
           로그인 하기
@@ -25,13 +25,13 @@ const Menu = ({ toggleMenu, openMenu }) => {
         <a href="*">개인정보 정책</a>
         <a href="*">이용 약관</a>
       </footer>
-    </HambugerMenu>
+    </HamburgerMenu>
   );
 };
 
 export default Menu;
 
-const HambugerMenu = styled.section`
+const HamburgerMenu = styled.section`
   header {
     display: flex;
     justify-content: space-between;

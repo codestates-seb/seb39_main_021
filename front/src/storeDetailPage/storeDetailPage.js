@@ -35,13 +35,22 @@ const StoreDetail = () => {
   }
   // early return => 의도를 담기 위해 앞에서 if 문으로 리턴해도 좋다.
   // 실무에서 사용하는 방법.
+  console.log(storeItemDetail);
   return (
     <StoreContainer>
       <Header />
       <section className="detailDataContainer">
         <div className="detailDataHeader">
           <h3>{storeItemDetail.name}</h3>
-          <Link to="/review">방문 확인하기</Link>
+          <Link
+            to="/review"
+            className="reviewConfirm"
+            state={{
+              storeInfo: storeItemDetail,
+            }}
+          >
+            방문 확인하기
+          </Link>
         </div>
         <span className="storeDataAddress">주소</span>
         <p>{storeItemDetail.address}</p>
@@ -96,6 +105,9 @@ const StoreContainer = styled.main`
   .detailDataHeader {
     display: flex;
     justify-content: space-between;
+  }
+  .reviewConfirm {
+    color: white;
   }
   span {
     color: #76736e;

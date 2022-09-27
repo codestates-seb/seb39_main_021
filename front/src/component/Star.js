@@ -12,7 +12,6 @@ const Star = () => {
     }
     setChecked(clickStates);
   };
-  console.log(checked);
 
   // const sendReview = () => {
   //   let score = checked.filter(Boolean.length);
