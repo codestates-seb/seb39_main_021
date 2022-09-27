@@ -35,44 +35,84 @@ const ReviewCreate = () => {
   console.log(txtChange);
 
   return (
-    <>
+    <CreateReview>
       <Header />
-      <div>
+      <section className="reviewContainer">
         <div>상호</div>
-        <div>{storeInfo.name}</div>
+        <div className="storeInfo">{storeInfo.name}</div>
         <div>일시</div>
-        <div>날짜 데이터는 서버에서 받아서 사용할것.</div>
-        <div>장소가 열려있었나요?</div>
-        <section>
+        <div className="storeInfo">날짜 데이터는 서버에서 받아서 사용할것.</div>
+        <div className="opened">장소가 열려있었나요?</div>
+        <section className="storeBtn">
           <Button
             buttonStyle={buttonYes ? "main" : "sub"}
-            width="100px"
+            width="150px"
             onClick={handleOpenStore}
           >
             예
           </Button>
           <Button
             buttonStyle={buttonNo ? "main" : "sub"}
-            width="100px"
+            width="150px"
             onClick={handleOpenStore}
           >
             아니오
           </Button>
-          {/* radio 버튼 컴포넌트로 따로 분리하여 만들기. */}
         </section>
+        <div className="itemStarTxt">별점</div>
         <Star />
         <Image />
-        <div>후기</div>
+        <div className="reviewTxtTitle">후기</div>
         <textarea
           placeholder="후기 내용 작성하기"
           onChange={handleTxtChange}
+          className="reviewTxt"
         ></textarea>
         <Link to="/reviewDetail" state={{ storeInfo: CreateReviewValue }}>
           <Button buttonStyle="main"> 등록하기 </Button>
         </Link>
-      </div>
-    </>
+      </section>
+    </CreateReview>
   );
 };
 
 export default ReviewCreate;
+
+const CreateReview = styled.article`
+  .reviewContainer {
+    color: white;
+    margin-top: 28px;
+  }
+  .storeInfo {
+    color: #ffc700;
+    margin: 10px 0;
+  }
+  .opened:after {
+    content: "*";
+    color: red;
+  }
+  .storeBtn {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  .itemStarTxt:after {
+    content: "*";
+    color: red;
+  }
+  .itemStarTxt {
+    margin: 10px 0;
+  }
+  .reviewTxtTitle {
+    margin: 0 0 10px 0;
+  }
+  .reviewTxt {
+    width: 97%;
+    height: 200px;
+    padding: 5px;
+    background-color: #76736e;
+    color: white;
+    border: 1px solid white;
+    margin-bottom: 20px;
+  }
+`;

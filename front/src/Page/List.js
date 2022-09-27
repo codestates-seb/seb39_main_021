@@ -128,6 +128,8 @@ const StoreContainer = styled.div`
     display: flex;
   }
   .starContainer {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
   }
   .imgContainer {
