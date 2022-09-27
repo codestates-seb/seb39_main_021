@@ -56,6 +56,11 @@ const List = () => {
                     <h3 className="title">{items.name}</h3>
                     <div className="address">{items.address}</div>
                     <div className="rating">{items.rating}</div>
+                    <section>
+                      <div>{items.name}</div>
+                      <div>{items.name}</div>
+                      <div>{items.name}</div>
+                    </section>
                   </div>
                 </StoreContainer>
               </Link>
@@ -113,48 +118,11 @@ const StoreContainer = styled.div`
     .rating {
       font-size: 1.2rem;
     }
+
+    section {
+      display: flex;
+    }
   }
 `;
 
 export default List;
-
-// import { Link } from "react-router-dom";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-// import styled from "styled-components";
-
-// const List = () => {
-//   const [storeList, setStoreList] = useState();
-//   const restaurantList = storeList[1].stores;
-//   useEffect(() => {
-//     axios
-//       .get("http://localhost:4000/items")
-//       .then((items) => setStoreList(items.data));
-//   }, []);
-
-//   console.log(storeList[0].stores);
-//   return (
-//     <div>
-//       <h2> 식당 </h2>
-//       <button>
-//         {" "}
-//         <Link to="/LocalFilter"> 전국 </Link>{" "}
-//       </button>
-//       <button>
-//         {" "}
-//         <Link to="/MapList"> 지도 </Link>{" "}
-//       </button>
-
-//       {restaurantList.map((store) => (
-//         <div key={store}>
-//           <image src={store.image} alt="식당 사진" />
-//           <div>{store.name}</div>
-//           <div>{store.address}</div>
-//           <div>{store.rating}</div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default List;
