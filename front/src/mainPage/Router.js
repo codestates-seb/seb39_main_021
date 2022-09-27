@@ -7,7 +7,7 @@ import MapList from "../Page/MapList";
 import StoreDetail from "../storeDetailPage/storeDetailPage";
 import Registration from "../menuPage/Registration";
 import ReviewCreate from "../storeDetailPage/ReviewCreate";
-import MoreReview from "../Page/MoreReview";
+import MoreReview from "../storeDetailPage/MoreReview";
 import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
 
 const Router = () => {
