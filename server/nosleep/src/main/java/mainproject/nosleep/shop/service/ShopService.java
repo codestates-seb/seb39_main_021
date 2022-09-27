@@ -21,30 +21,28 @@ public class ShopService {
 
     private final ShopRepository shopRepository;
     private final ReviewRepository reviewRepository;
-    public Shop createShop(Shop shop){
-//        shop.setReviewCount(0L);
+
+    public Shop createShop(Shop shop) {
         return shopRepository.save(shop);
     }
 
 
-    public Shop updateShop(Long id, Shop shop){
+    public Shop updateShop(Long id, Shop shop) {
         Shop updateShop = findVerifiedShop(id);
 
-        Optional.ofNullable(shop.getCategory()).ifPresent(updateShop::setCategory);
         Optional.ofNullable(shop.getName()).ifPresent(updateShop::setName);
-        Optional.ofNullable(shop.getAddress()).ifPresent(updateShop::setAddress);
         Optional.ofNullable(shop.getDetail()).ifPresent(updateShop::setDetail);
-        Optional.ofNullable(shop.getLongitude()).ifPresent(updateShop::setLongitude);
-        Optional.ofNullable(shop.getLongitude()).ifPresent(updateShop::setLongitude);
-        return shopRepository.save(updateShop);
+        Shop save = shopRepository.save(updateShop);
+        save.setReviews(threeReviews(save).getContent());
+        return save;
     }
 
     public Shop findShop(Long id) {
         Shop verifiedShop = findVerifiedShop(id);
         // 추후, 좋아요순으로 수정 필요
-        Page<Review> threeReviews = reviewRepository.findByShop(verifiedShop, PageRequest.of(0, 3, Sort.by("id").descending()));// 최신순
 
-        verifiedShop.setReviews(threeReviews.getContent());
+
+        verifiedShop.setReviews( threeReviews(verifiedShop).getContent());
 
         return verifiedShop;
     }
@@ -63,11 +61,16 @@ public class ShopService {
         shopRepository.delete(verifiedShop); // 바로삭제
     }
 
-   public Shop findVerifiedShop(Long id){
+    public Shop findVerifiedShop(Long id) {
         Optional<Shop> optionalShop = shopRepository.findById(id);
         return optionalShop.orElseThrow(
-                ()-> new IllegalArgumentException("존재하지않는 사업장입니다.")
+                () -> new IllegalArgumentException("존재하지않는 사업장입니다.")
         );
 
     }
+
+    public Page<Review> threeReviews(Shop verifiedShop){
+        return reviewRepository.findByShop(verifiedShop, PageRequest.of(0, 3, Sort.by("id").descending()));// 최신순
+    }
+
 }
