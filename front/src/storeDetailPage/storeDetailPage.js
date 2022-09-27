@@ -4,7 +4,6 @@ import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 
 import Header from "../mainPage/header";
-import Button from "../component/Button";
 
 /*
     카테고리 선택 => 해당 카테고리 페이지로 이동
@@ -36,14 +35,22 @@ const StoreDetail = () => {
   }
   // early return => 의도를 담기 위해 앞에서 if 문으로 리턴해도 좋다.
   // 실무에서 사용하는 방법.
-
+  console.log(storeItemDetail);
   return (
     <StoreContainer>
       <Header />
       <section className="detailDataContainer">
         <div className="detailDataHeader">
           <h3>{storeItemDetail.name}</h3>
-          <Link to="/review">방문 확인하기</Link>
+          <Link
+            to="/review"
+            className="reviewConfirm"
+            state={{
+              storeInfo: storeItemDetail,
+            }}
+          >
+            방문 확인하기
+          </Link>
         </div>
         <span className="storeDataAddress">주소</span>
         <p>{storeItemDetail.address}</p>
@@ -64,14 +71,27 @@ const StoreDetail = () => {
         <span className="reviews">이용후기</span>
         <div>
           <span className="reviewsLike">별{storeItemDetail.like}점</span>
-          <span>전체 {storeItemDetail.Reviews}개</span>
+          <span>전체 {storeItemDetail.reviews.length}개</span>
         </div>
         <section>
-          <div> 이름</div>
-          <div> 별점 </div>
-          <div> 내용 </div>
+          {/* 별점 많은 순으로 3개 노출 코드로 변경할것. */}
+          {storeItemDetail.reviews.map((reviewItems, index) => (
+            <div key={index}>
+              <span>{reviewItems.nickName}</span>
+              <span>별{reviewItems.star}</span>
+              <p>{reviewItems.reviewTxt}</p>
+            </div>
+          ))}
+          <Link
+            to="/moreReviews"
+            state={{
+              storeData: store,
+            }}
+            className="moreReviews"
+          >
+            더보기
+          </Link>
         </section>
-        <Button> 더보기 </Button>
       </section>
     </StoreContainer>
   );
@@ -85,6 +105,9 @@ const StoreContainer = styled.main`
   .detailDataHeader {
     display: flex;
     justify-content: space-between;
+  }
+  .reviewConfirm {
+    color: white;
   }
   span {
     color: #76736e;
@@ -112,5 +135,8 @@ const StoreContainer = styled.main`
   }
   .reviewsLike {
     margin-right: 5px;
+  }
+  .moreReviews {
+    color: white;
   }
 `;

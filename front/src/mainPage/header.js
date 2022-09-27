@@ -8,7 +8,7 @@ const Header = ({ toggleMenu, openMenu }) => {
         <a href="/">밤잠 없는 사람들</a>
         <Link
           to="/toggleMenu"
-          onClick={() => toggleMenu(!openMenu)}
+          // onClick={() => toggleMenu(!openMenu)}
           className="menuBtn"
         >
           햄버거 이미지

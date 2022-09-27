@@ -4,57 +4,89 @@ import styled from "styled-components";
 
 const Image = () => {
   const fileInput = useRef();
-  const [fileImageUrl, setFileImageUrl] = useState("");
+  //   const [fileImageUrl, setFileImageUrl] = useState("");
 
   const handleReviewImage = () => {
     fileInput.current.click();
   };
-  const deleteFileImage = () => {
-    URL.revokeObjectURL(fileImageUrl);
-    setFileImageUrl("");
+
+  //   const [deleteImg, setDeleteImg] = useState();
+  const [previewImg, setPreviewImg] = useState([]);
+
+  const insertImg = (e) => {
+    let render = new FileReader();
+
+    if (e.target.files[0]) {
+      render.readAsDataURL(e.target.files[0]);
+    }
+    render.onloadend = () => {
+      const previewImgURL = render.result;
+
+      if (previewImgURL) {
+        setPreviewImg([...previewImg, previewImgURL]);
+      }
+    };
   };
 
-  const [fileImageData, setFileImageData] = useState();
+  const deleteImage = () => {
+    setPreviewImg([]);
+  };
 
-  const handleReviewImageChange = (e) => {
-    const uploadFile = e.target.files[0];
-    console.log(uploadFile);
-    console.log(URL.createObjectURL(uploadFile));
-    setFileImageUrl(URL.createObjectURL(uploadFile));
+  const deletePreviewImg = (index) => {
+    const imgView = previewImg.filter((img, imgIndex) => imgIndex !== index);
+    setPreviewImg([...imgView]);
+  };
 
-    if (uploadFile) {
-      const formData = new FormData();
-      formData.append("files", uploadFile);
-
-      console.log(formData);
-
-      axios({
-        method: "post",
-        url: "",
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Access-Control-Allow-Origin": "*",
-        },
-        data: formData,
+  const getPreviewImg = () => {
+    if (previewImg.length === 0) {
+      return (
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_b-7T0rzH4vDbjXDL_vttMylTsT7p44ajMPkTmPCJqM3DGSKz33pUhllrAe4PNlbm0ME&usqp=CAU"
+          alt="이미지 없음"
+        />
+      );
+    } else {
+      return previewImg.map((imgs, index) => {
+        return (
+          <span className="imgBox" key={index}>
+            <img src={previewImg[index]} alt="사용자가 선택한 이미지" />
+            <button onClick={() => deletePreviewImg(index)}>X</button>
+          </span>
+        );
       });
     }
   };
 
   return (
-    <>
+    <ImageContainer>
       <div>사진</div>
-      <div>{fileImageUrl && <img src={fileImageUrl} alt="test" />}</div>
+      {getPreviewImg()}
       <input
         style={{ display: "none" }}
         type="file"
-        onChange={handleReviewImageChange}
+        onChange={insertImg}
         ref={fileInput}
         accept="image/*"
+        multiple="multiple"
       />
       <button onClick={handleReviewImage}> 이미지 등록하기 </button>
-      <button onClick={deleteFileImage}> 삭제 </button>
-    </>
+      <button onClick={deleteImage}> 삭제 </button>
+    </ImageContainer>
   );
 };
 
 export default Image;
+
+const ImageContainer = styled.section`
+  label {
+    color: white;
+    display: block;
+  }
+  img {
+    width: 200px;
+    height: 100px;
+  }
+  .imgBox {
+    margin-right: 10px;
+  }
+`;

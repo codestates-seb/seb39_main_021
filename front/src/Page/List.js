@@ -2,19 +2,30 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { IoRestaurantOutline, IoCafeOutline } from "react-icons/io";
+import { GiPlantsAndAnimals } from "react-icons/gi";
+import { MdOutlineLocalPharmacy } from "react-icons/md";
+
+import Header from "../mainPage/header";
 
 const List = () => {
   const [storeList, setStoreList] = useState(null);
   const storeLists = useLocation();
+  const images = [
+    // <IoRestaurantOutline />,
+    // <IoCafeOutline />,
+    // <GiPlantsAndAnimals />,
+    // <MdOutlineLocalPharmacy />,
+  ];
 
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
       .then(() => setStoreList(storeLists.state.info));
   }, []);
-  console.log(storeList);
   return (
     <StoreList>
+      <Header />
       {storeList !== null && <h2> {storeList.title} </h2>}
       <section className="buttonContainer">
         <button>
@@ -27,7 +38,8 @@ const List = () => {
       {storeList !== null
         ? storeList.stores.map(
             (
-              items // 구조분해할당으로 리펙토링
+              items,
+              idx // 구조분해할당으로 리펙토링
             ) => (
               <Link
                 key={items.id}
