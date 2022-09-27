@@ -78,7 +78,6 @@ const Home = () => {
           <h1>카테고리</h1>
           {itemList.map((category, idx) => {
             const Icons = imgArr[idx];
-            console.log(Icons);
             return (
               <Link
                 key={category.id}
@@ -98,7 +97,7 @@ const Home = () => {
         <section className="popularPostsContainer">
           <h2>인기게시물</h2>
           {popularPosts.map((post) => (
-            <div key={post.id}>
+            <div key={post.id} className="popularContainer">
               <img src={post.imageUrl} alt={post.imageDescription} />
               <h3>{post.title}</h3>
               <span>{post.rating}</span>
@@ -118,6 +117,9 @@ const MainContainer = styled.main`
   h1 {
     display: none;
   }
+  h2 {
+    color: white;
+  }
   .categoryContainer {
     text-align: center;
     display: flex;
@@ -132,6 +134,7 @@ const MainContainer = styled.main`
   }
   .categoryItems h3 {
     margin-top: 5px;
+    color: white;
   }
   .categoryContainer img {
     width: 150px;
@@ -140,18 +143,23 @@ const MainContainer = styled.main`
 
   .popularPostsContainer {
     text-align: center;
-    padding-bottom: 10px;
+    padding: 10px 0;
+    width: 100%;
   }
-
+  .popularContainer {
+    width: 100%;
+    border: 1px solid white;
+    background-color: #76736e;
+    margin: 30px 0;
+  }
   .popularPostsContainer h2 {
     margin-bottom: 20px;
     text-align: left;
   }
 
   .popularPostsContainer img {
-    width: 150px;
+    width: 100%;
   }
-
   .iconsImage {
     font-size: 50px;
     height: 50px;
