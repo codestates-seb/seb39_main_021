@@ -63,6 +63,10 @@ public class ShopResponseDto {
         private Double ratingAVG;
         //이용후기 리스트
         private Long reviewCount;
+
+        private Long visitorCount;
+
+        private Long openCount;
         private List<ReviewResponseDto.ShortReview> reviews; // reviewDTO 필요
 
         public void setReviews(List<Review> reviews) {
@@ -70,7 +74,7 @@ public class ShopResponseDto {
                     review -> {
                         ReviewResponseDto.ShortReview shortReview = new ReviewResponseDto.ShortReview();
                         shortReview.setId(review.getId());
-                        shortReview.setWriter(review.getWriter());
+                        shortReview.setNickname(review.getMember().getNickname());
                         shortReview.setRating(review.getRating());
                         shortReview.setContent(review.getContent());
                         return shortReview;
