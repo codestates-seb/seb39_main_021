@@ -7,6 +7,7 @@ import {
   RiRestaurant2Line,
   RiComputerLine,
   RiGasStationFill,
+  RiStarFill,
 } from "react-icons/ri";
 import { GiLoveSong, GiMedicines, GiSittingDog } from "react-icons/gi";
 import {
@@ -100,7 +101,10 @@ const Home = () => {
             <div key={post.id} className="popularContainer">
               <img src={post.imageUrl} alt={post.imageDescription} />
               <h3>{post.title}</h3>
-              <span>{post.rating}</span>
+              <span>
+                <RiStarFill className="star" />
+                {post.rating}
+              </span>
             </div>
           ))}
         </section>
@@ -151,6 +155,7 @@ const MainContainer = styled.main`
     border: 1px solid white;
     background-color: #76736e;
     margin: 30px 0;
+    text-align: left;
   }
   .popularPostsContainer h2 {
     margin-bottom: 20px;
@@ -164,5 +169,9 @@ const MainContainer = styled.main`
     font-size: 50px;
     height: 50px;
     color: white;
+  }
+  .star {
+    color: #ffc700;
+    margin-right: 5px;
   }
 `;
