@@ -4,6 +4,7 @@ import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 
 import Header from "../mainPage/header";
+import Button from "../component/Button";
 
 /*
     카테고리 선택 => 해당 카테고리 페이지로 이동
@@ -65,6 +66,12 @@ const StoreDetail = () => {
           <span className="reviewsLike">별{storeItemDetail.like}점</span>
           <span>전체 {storeItemDetail.Reviews}개</span>
         </div>
+        <section>
+          <div> 이름</div>
+          <div> 별점 </div>
+          <div> 내용 </div>
+        </section>
+        <Button> 더보기 </Button>
       </section>
     </StoreContainer>
   );
