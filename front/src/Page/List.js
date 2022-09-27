@@ -2,21 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import { IoRestaurantOutline, IoCafeOutline } from "react-icons/io";
-import { GiPlantsAndAnimals } from "react-icons/gi";
-import { MdOutlineLocalPharmacy } from "react-icons/md";
 
 import Header from "../mainPage/header";
 
 const List = () => {
   const [storeList, setStoreList] = useState(null);
   const storeLists = useLocation();
-  const images = [
-    // <IoRestaurantOutline />,
-    // <IoCafeOutline />,
-    // <GiPlantsAndAnimals />,
-    // <MdOutlineLocalPharmacy />,
-  ];
 
   useEffect(() => {
     axios
