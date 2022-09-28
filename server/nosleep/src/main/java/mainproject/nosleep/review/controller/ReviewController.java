@@ -25,8 +25,9 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewMapper mapper;
+
     @PostMapping
-    public ResponseEntity<?> postShop(@Valid @RequestBody ReviewRequestDto.Create requestBody){
+    public ResponseEntity<?> postShop(@Valid @RequestBody ReviewRequestDto.Create requestBody) {
         Review review = mapper.reviewCreateToReview(requestBody);
         Review createdReview = reviewService.createReview(review, requestBody.getImageList());
         return new ResponseEntity<>(mapper.reviewToDetailReview(createdReview), HttpStatus.CREATED);
@@ -34,7 +35,7 @@ public class ReviewController {
 
     @PatchMapping("/{reviewId}")
     public ResponseEntity<?> patchShop(@PathVariable Long reviewId,
-                                       @Valid @RequestBody ReviewRequestDto.Update requestBody){
+                                       @Valid @RequestBody ReviewRequestDto.Update requestBody) {
 
         Review review = mapper.reviewPatchToReview(requestBody);
         Review updateReview = reviewService.updateReview(reviewId, review, requestBody.getImageList());
@@ -42,7 +43,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{reviewId}")
-    public ResponseEntity<?> getDetailShop(@PathVariable Long reviewId){
+    public ResponseEntity<?> getDetailShop(@PathVariable Long reviewId) {
         Review findReview = reviewService.findReview(reviewId);
         return new ResponseEntity<>(mapper.reviewToDetailReview(findReview), HttpStatus.OK);
     }
@@ -50,9 +51,14 @@ public class ReviewController {
     //현재 위치 기반으로 근처 Shop pagination 응답
     @GetMapping()
     public ResponseEntity<?> getListShop(@RequestParam int page,
-                               @RequestParam Long shopId){
+                                         @RequestParam Long shopId,
+                                         @RequestParam String sort) {
+        String sortPonint = "id"; // 기본값
+        if(sort.equals("upvote")){
+            sortPonint = "upvoteCount";
+        }
 
-        Page<Review> reviewPage = reviewService.findReviews(page - 1, shopId);
+        Page<Review> reviewPage = reviewService.findReviews(page - 1, shopId, sortPonint);
         List<Review> reviews = reviewPage.getContent();
         return new ResponseEntity<>(
                 new MultiResponseDto(mapper.reviewListToPages(reviews), reviewPage),
@@ -60,7 +66,7 @@ public class ReviewController {
     }
 
     @DeleteMapping("/{reviewId}")
-    public ResponseEntity<?> deleteShop(@PathVariable Long reviewId){
+    public ResponseEntity<?> deleteShop(@PathVariable Long reviewId) {
         reviewService.deleteReview(reviewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

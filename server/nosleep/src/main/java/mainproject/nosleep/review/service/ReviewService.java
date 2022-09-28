@@ -62,10 +62,10 @@ public class ReviewService {
         //좋아요 이슈
         return verifiedReview;
     }
-    public Page<Review> findReviews(int page, Long shopId){
+    public Page<Review> findReviews(int page, Long shopId, String sort){
         Shop shop = new Shop();
         shop.setId(shopId);
-        return reviewRepository.findByShop(shop, PageRequest.of(page, 10,  Sort.by("id").descending())); // 5개씩으로 고정
+        return reviewRepository.findByShop(shop, PageRequest.of(page, 10,  Sort.by(sort).descending()));
 
 
     }

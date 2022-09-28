@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ReviewMapper {
-    Review reviewPostToReview(ReviewRequestDto.Create request);
-    Review reviewPatchToReview(ReviewRequestDto.Patch request);
+    Review reviewCreateToReview(ReviewRequestDto.Create request);
+    Review reviewPatchToReview(ReviewRequestDto.Update request);
 
     ReviewResponseDto.DetailReview reviewToDetailReview(Review review);
 
