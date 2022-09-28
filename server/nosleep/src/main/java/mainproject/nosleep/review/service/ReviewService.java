@@ -2,7 +2,6 @@ package mainproject.nosleep.review.service;
 
 import lombok.RequiredArgsConstructor;
 import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
-import mainproject.nosleep.opencheck.service.OpenCheckService;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
 import mainproject.nosleep.shop.entity.Shop;

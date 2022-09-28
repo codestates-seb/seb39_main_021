@@ -6,6 +6,7 @@ import mainproject.nosleep.member.repository.MemberRepository;
 import mainproject.nosleep.member.service.MemberService;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
+import mainproject.nosleep.review.service.ReviewService;
 import mainproject.nosleep.upvote.dto.UpvoteResponseDto;
 import mainproject.nosleep.upvote.entity.Upvote;
 import mainproject.nosleep.upvote.mapper.UpvoteMapper;
@@ -18,7 +19,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/v1")
 @RequiredArgsConstructor
 public class UpvoteController {
 
@@ -26,16 +27,15 @@ public class UpvoteController {
     private final UpvoteService upvoteService;
     private final UpvoteMapper mapper;
 
-    private final ReviewRepository reviewRepository;
-    private final MemberRepository memberRepository;
+    private final ReviewService reviewService;
     private final MemberService memberService;
     @PostMapping("/review/{review-id}/upvote")
     public ResponseEntity<?> postUpvote(@PathVariable("review-id") long reviewId) {
 
         Member member = memberService.findMember(1L);
-        Optional<Review> review = reviewRepository.findById(reviewId);
+        Review review = reviewService.findReview(1L);
 
-        Upvote response = upvoteService.createUpvote(member, review.get());
+        Upvote response = upvoteService.createUpvote(member, review);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -43,9 +43,9 @@ public class UpvoteController {
     public ResponseEntity<?> deleteUpvote(@PathVariable("review-id") long reviewId) {
 
         Member member = memberService.findMember(1L);
-        Optional<Review> review = reviewRepository.findById(reviewId);
+        Review review = reviewService.findReview(1L);
 
-        upvoteService.deleteUpvote(member, review.get());
+        upvoteService.deleteUpvote(member, review);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -53,9 +53,9 @@ public class UpvoteController {
     @GetMapping("/review/{review-id}/upvote")
     public ResponseEntity<?> getUpvote(@PathVariable("review-id") long reviewId) {
         Member member = memberService.findMember(1L);
-        Optional<Review> review = reviewRepository.findById(reviewId);
+        Review review = reviewService.findReview(1L);
 
-        UpvoteResponseDto.Get response = new UpvoteResponseDto.Get(upvoteService.upvoteExists(member, review.get()));
+        UpvoteResponseDto.Get response = new UpvoteResponseDto.Get(upvoteService.upvoteExists(member, review));
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

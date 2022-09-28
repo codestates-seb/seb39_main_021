@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/v1/image")
 @RequiredArgsConstructor
 public class ImageController {
 
@@ -61,21 +61,11 @@ public class ImageController {
     @DeleteMapping("")
     public ResponseEntity<?> deleteImages (@RequestBody ImageRequestDto.Delete requestBody) {
 
-        System.out.println(requestBody.getUrlList().get(0));
         imageService.deleteImage1(requestBody.getUrlList());
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/test")
-    public ResponseEntity<?> deleteImages2 (@RequestBody ImageRequestDto.Delete requestBody) {
-
-
-        Review review = reviewService.findReview(1L);
-        imageService.updateImage(requestBody.getUrlList(), review);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 
 
 //    @GetMapping("/download")

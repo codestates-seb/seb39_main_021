@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/member")
+@RequestMapping("/v1/member")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -19,7 +19,7 @@ public class MemberController {
     private final MemberService memberService;
 
 
-    @GetMapping("")
+    @GetMapping("/info")
     public ResponseEntity<?> getMemberInfo() {
         Member member = memberService.findMember(1L);
         MemberResponseDto.Get response = mapper.memberToMemberResponseGet(member);
