@@ -42,6 +42,10 @@ const StarContainer = styled.div`
   & svg {
     color: gray;
     cursor: pointer;
+<<<<<<< HEAD
+    font-size: 20px;
+=======
+>>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
   }
 
   :hover svg {

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = ({ toggleMenu, openMenu }) => {
   return (
@@ -11,7 +12,7 @@ const Header = ({ toggleMenu, openMenu }) => {
           // onClick={() => toggleMenu(!openMenu)}
           className="menuBtn"
         >
-          햄버거 이미지
+          <GiHamburgerMenu />
         </Link>
       </div>
     </MainHeader>

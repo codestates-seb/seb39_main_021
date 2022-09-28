@@ -47,8 +47,7 @@ const Review = () => {
       <div>후기</div>
       <input></input>
       <Button buttonStyle="main">
-        {" "}
-        <Link to={"/reviewDetail"} /> 등록하기{" "}
+        <Link to={"/reviewDetail"} /> 등록하기
       </Button>
     </div>
   );
