@@ -38,11 +38,6 @@ const LocalFilter = () => {
     setLocal("전국");
   };
 
-  // console.log(local);
-  // console.log(area);
-  console.log(filterResult);
-  // console.log(targetArea);
-
   return (
     <FilterSection>
       <Header />
