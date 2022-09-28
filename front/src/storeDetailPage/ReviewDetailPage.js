@@ -78,7 +78,6 @@ export default ReviewDetail;
 const ReviewDetailInfo = styled.main`
   color: white;
   margin-top: 20px;
-  /* width: 100%; */
   .storeName {
     margin: 10px 0;
   }
