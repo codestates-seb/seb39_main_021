@@ -52,7 +52,7 @@ public class ImageService {
             ObjectMetadata objectMetadata = new ObjectMetadata();
             objectMetadata.setContentType(multipartFile.getContentType());
 
-            try (InputStream inputStream = multipartFile.getInputStream()) {
+            try (InputStream inputStream = multipartFile.getInputStream()) {            // try with resource 관련 알아보기
                 amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
                         .withCannedAcl(CannedAccessControlList.PublicRead));
                 fileUrlList.add(amazonS3Client.getUrl(bucket, fileName).toString());
@@ -72,8 +72,7 @@ public class ImageService {
     public void updateImage(List<String> urlList, Review review) {
 
         for (String rawUrl:urlList) {
-            int lastIndex = rawUrl.lastIndexOf("/");
-            String url = rawUrl.substring(lastIndex+1);
+            String url = rawUrlToUrl(rawUrl);
             Image image = findByUrl(url);
             image.setReview(review);
             imageRepository.save(image);
@@ -82,8 +81,7 @@ public class ImageService {
 
     public void updateImage(List<String> urlList, Shop shop) {
         for (String rawUrl:urlList) {
-            int lastIndex = rawUrl.lastIndexOf("/");
-            String url = rawUrl.substring(lastIndex+1);
+            String url = rawUrlToUrl(rawUrl);
             Image image = findByUrl(url);
             image.setShop(shop);
             imageRepository.save(image);
@@ -105,13 +103,15 @@ public class ImageService {
 //        }
 //    }
 
-    private boolean imageExistsAtUrl(String url) {
+    private boolean imageExistsAtUrl(String rawUrl) {
+        String url = rawUrlToUrl(rawUrl);
         if(amazonS3Client.doesObjectExist(bucket, url))
             return true;
         else return false;
     }
 
-    public Image createImageEntity(Image.Type type, String url) {
+    public Image createImageEntity(Image.Type type, String rawUrl) {
+        String url = rawUrlToUrl(rawUrl);
         Image savedImage = Image.builder().type(type).url(url).build();
         return imageRepository.save(savedImage);
     }
@@ -132,7 +132,9 @@ public class ImageService {
 
 
     public void deleteImage1(List<String> urlList) {
-        for (String url : urlList) {
+        for (String rawUrl : urlList) {
+            String url = rawUrlToUrl(rawUrl);
+
             if (!imageExistsAtUrl(url)) {
                 throw new RuntimeException();           // 에러 관련 수정 필요
             }
@@ -165,7 +167,8 @@ public class ImageService {
         deleteImage2(imageList);
     }
 
-    public void deleteImageDBByUrl(String url) {
+    public void deleteImageDBByUrl(String rawUrl) {
+        String url = rawUrlToUrl(rawUrl);
         Image deletedImage = imageRepository.findByUrl(url);
         if (deletedImage != null) {
             imageRepository.delete(deletedImage);
@@ -179,5 +182,16 @@ public class ImageService {
     }
 
 
+    public String rawUrlToUrl(String rawUrl) {
+        String url;
+        if(!rawUrl.contains("/"))
+            url = rawUrl;
+        else {
+            int lastIndex = rawUrl.lastIndexOf("/");
+            url = rawUrl.substring(lastIndex+1);
+        }
+
+        return url;
+    }
 
 }
