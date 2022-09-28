@@ -29,6 +29,10 @@ public class Review extends Auditable {
     @Column
     private String content;
 
+    @Column
+    private Long upvoteCount = 0L;
+
+
     @Column(nullable = false)
 
     private ReviewStatus status = ReviewStatus.common; //이용후기 상태 enum
