@@ -24,9 +24,7 @@ public class MemberService {
         return memberRepository.findById(id);
     }
 
-    public Member findMemberByNickname(String nickname) {
-        return memberRepository.findByNickname(nickname);
-    }
+    public Member findMemberByNickname(String nickname) {return memberRepository.findByNickname(nickname);}
 
     public Member updateMember(Member member) {
 
@@ -65,13 +63,14 @@ public class MemberService {
     }
 
 
-    public void deleteMembersCompletely(Long month) {   // 테스트 단계이므로 연/월 단위가 아닌 분 단위로 계산
-        List<MemberDeleted> memberDeletedList = memberDeletedRepository.findByCreatedAtBefore(LocalDateTime.now().minusMinutes(month));
+    public void deleteMembersCompletely(Long month) {   // 테스트 단계이므로 연/월 단위가 아닌 초 단위로 계산
+        List<MemberDeleted> memberDeletedList = memberDeletedRepository.findByCreatedAtBefore(LocalDateTime.now().minusMonths(month));
         Member member = Member.builder().nickname("삭제된 회원").email("Deleted").build();
 
         if (memberDeletedList != null && memberDeletedList.size() > 0) {
             for (int i = 0; i < memberDeletedList.size(); i++) {
                 //memberRepository.delete(memberDeletedList.get(i).getMember());
+                member.setId(memberDeletedList.get(i).getId());
                 updateMember(member);
                 memberDeletedRepository.delete(memberDeletedList.get(i));
             }
@@ -101,6 +100,7 @@ public class MemberService {
 //    }
 //
     public Member findVerifiedMember(Long id) {
+
 
         Optional<Member> optionalMember = memberRepository.findById(id);
         Member foundMember = optionalMember.orElseThrow(() ->

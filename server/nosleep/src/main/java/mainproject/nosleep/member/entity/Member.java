@@ -1,7 +1,7 @@
 package mainproject.nosleep.member.entity;
 
 import lombok.*;
-import mainproject.nosleep.review.audit.Auditable;
+import mainproject.nosleep.audit.Auditable;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.shop.entity.Shop;
 //import mainproject.nosleep.upvote.entity.TestReview;

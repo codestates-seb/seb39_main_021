@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mainproject.nosleep.image.entity.Image;
+
+import java.util.List;
 
 public class ImageResponseDto {
 
@@ -20,7 +23,7 @@ public class ImageResponseDto {
     @AllArgsConstructor
     //@NoArgsConstructor
     public static class Post {
-
+        List<String> urlList;
     }
 
     @Getter

@@ -1,7 +1,9 @@
 package mainproject.nosleep.review.entity;
 
+
 import lombok.*;
 import mainproject.nosleep.audit.Auditable;
+
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.shop.entity.Shop;
@@ -28,7 +30,9 @@ public class Review extends Auditable {
     private String content;
 
     @Column(nullable = false)
+
     private ReviewStatus status = ReviewStatus.common; //이용후기 상태 enum
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
@@ -38,6 +42,7 @@ public class Review extends Auditable {
 
     @OneToMany(mappedBy = "review")
     private List<Upvote> upvotes = new ArrayList<>();
+
 
     @OneToOne(mappedBy = "review", cascade = CascadeType.ALL)
     private OpenCheck openCheck;  //매장 오픈유무
@@ -55,6 +60,7 @@ public class Review extends Auditable {
         if(openCheck.getReview() != this){
             openCheck.addReview(this);
         }
+
     }
 
 }
