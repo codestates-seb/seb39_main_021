@@ -27,17 +27,17 @@ public class ReviewController {
     private final ReviewMapper mapper;
     @PostMapping
     public ResponseEntity<?> postShop(@Valid @RequestBody ReviewRequestDto.Create requestBody){
-        Review review = mapper.reviewPostToReview(requestBody);
-        Review createdReview = reviewService.createReview(review);
+        Review review = mapper.reviewCreateToReview(requestBody);
+        Review createdReview = reviewService.createReview(review, requestBody.getImageList());
         return new ResponseEntity<>(mapper.reviewToDetailReview(createdReview), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{reviewId}")
     public ResponseEntity<?> patchShop(@PathVariable Long reviewId,
-                                       @Valid @RequestBody ReviewRequestDto.Patch requestBody){
+                                       @Valid @RequestBody ReviewRequestDto.Update requestBody){
 
         Review review = mapper.reviewPatchToReview(requestBody);
-        Review updateReview = reviewService.updateReview(reviewId, review);
+        Review updateReview = reviewService.updateReview(reviewId, review, requestBody.getImageList());
         return new ResponseEntity<>(mapper.reviewToDetailReview(updateReview), HttpStatus.OK);
     }
 

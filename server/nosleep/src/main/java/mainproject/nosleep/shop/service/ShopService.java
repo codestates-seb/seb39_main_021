@@ -1,6 +1,7 @@
 package mainproject.nosleep.shop.service;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.image.service.ImageService;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
 import mainproject.nosleep.shop.entity.Shop;
@@ -11,27 +12,36 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ShopService {
 
     private final ShopRepository shopRepository;
     private final ReviewRepository reviewRepository;
+    private final ImageService imageService;
 
-    public Shop createShop(Shop shop) {
-        return shopRepository.save(shop);
+
+    public Shop createShop(Shop shop,  List<String> images) {
+
+        Shop save = shopRepository.save(shop);
+        imageService.updateImage(images, save);
+        return save;
     }
 
 
-    public Shop updateShop(Long id, Shop shop) {
+    public Shop updateShop(Long id, Shop shop, List<String> images) {
         Shop updateShop = findVerifiedShop(id);
 
         Optional.ofNullable(shop.getName()).ifPresent(updateShop::setName);
         Optional.ofNullable(shop.getDetail()).ifPresent(updateShop::setDetail);
+        if(images.size() >0){imageService.updateImage(images, updateShop);}
         Shop save = shopRepository.save(updateShop);
         save.setReviews(threeReviews(save).getContent());
         return save;

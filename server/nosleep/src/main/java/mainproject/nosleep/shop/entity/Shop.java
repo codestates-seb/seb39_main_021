@@ -2,6 +2,7 @@ package mainproject.nosleep.shop.entity;
 
 import lombok.*;
 import mainproject.nosleep.audit.Auditable;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.review.entity.Review;
@@ -73,6 +74,8 @@ public class Shop extends Auditable {
     @ManyToOne
     private Member member;
 
+    @OneToMany(mappedBy = "shop")
+    private List<Image> images = new ArrayList<>();
 
 
 

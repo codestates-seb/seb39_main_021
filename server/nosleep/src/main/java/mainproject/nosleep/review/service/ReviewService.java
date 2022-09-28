@@ -1,6 +1,7 @@
 package mainproject.nosleep.review.service;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.image.service.ImageService;
 import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
 import mainproject.nosleep.opencheck.service.OpenCheckService;
 import mainproject.nosleep.review.entity.Review;
@@ -26,13 +27,16 @@ import java.util.Optional;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ShopRepository shopRepository;
-
     private final OpenCheckRepository openCheckRepository;
+    private final ImageService imageService;
 
     @Transactional
-    public Review createReview(Review review){
+    public Review createReview(Review review, List<String> images){
         review.getOpenCheck().addReview(review);
         Review save = reviewRepository.save(review);
+
+        imageService.updateImage(images, save);
+
         Long shopId = save.getShop().getId();
         //평점 계산
         Double ratingAverage = findRatingAverage(shopId);
@@ -46,11 +50,11 @@ public class ReviewService {
 
         return save;
     }
-    public Review updateReview(Long id, Review review){
+    public Review updateReview(Long id, Review review, List<String> images){
         Review updateReview = findVerifiedReview(id);
         Optional.ofNullable(review.getRating()).ifPresent(updateReview::setRating);
         Optional.ofNullable(review.getContent()).ifPresent(updateReview::setContent);
-
+        if(images.size() >0){imageService.updateImage(images, updateReview);}
         return reviewRepository.save(updateReview); // 더티체킹
     }
     public Review findReview(Long id){

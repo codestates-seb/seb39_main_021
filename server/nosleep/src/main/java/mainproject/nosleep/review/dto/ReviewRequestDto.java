@@ -2,12 +2,16 @@ package mainproject.nosleep.review.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.entity.ReviewStatus;
 import mainproject.nosleep.shop.dto.ShopRequestDto;
 import mainproject.nosleep.shop.entity.Shop;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewRequestDto {
 
@@ -22,8 +26,8 @@ public class ReviewRequestDto {
         private Integer rating;
         private String content;
         private Boolean openCheck;
-//        private String status;
 
+        private List<String> imageList;
         public Integer getRating(){ // 별점 범위
             try {
                 if (rating > 5 || rating < 0) {
@@ -49,36 +53,26 @@ public class ReviewRequestDto {
             return shop;
         }
         public OpenCheck getOpenCheck(){
-//            Review review = new Review();
-//            review.setWriter(writer);
-//            review.setRating(rating);
-//            review.setContent(content);
+
             OpenCheck openCheck1 = new OpenCheck();
             openCheck1.setOpenTrue(this.openCheck);
             openCheck1.setMember(getMember());
             openCheck1.setShop(getShop());
-//            openCheck1.addReview(review);
+
             return openCheck1;
         }
-
-
-//        public ReviewStatus getStatus(){
-//            ReviewStatus status1 = ReviewStatus.of(status);
-//            if(status1 ==null){
-//                return null;//예외 처리
-//            }
-//            return status1;
-//        }
 
 
     }
 
     @Getter
     @AllArgsConstructor
-    public static class Patch{
+    public static class Update{
 
-        //사진
         private Integer rating;
-        private String context;
+        private String content;
+        private List<String> imageList;
+
+
     }
 }

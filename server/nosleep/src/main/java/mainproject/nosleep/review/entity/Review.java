@@ -2,6 +2,7 @@ package mainproject.nosleep.review.entity;
 
 import lombok.*;
 import mainproject.nosleep.audit.Auditable;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.shop.entity.Shop;
@@ -45,6 +46,9 @@ public class Review extends Auditable {
 
     @OneToOne(mappedBy = "review", cascade = CascadeType.ALL)
     private OpenCheck openCheck;  //매장 오픈유무
+
+    @OneToMany(mappedBy = "review")
+    private List<Image> images = new ArrayList<>();
 
 
     public Review(Integer rating, String content) {

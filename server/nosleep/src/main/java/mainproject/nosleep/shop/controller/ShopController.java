@@ -30,7 +30,7 @@ public class ShopController {
     public ResponseEntity<?> postShop(@Valid @RequestBody ShopRequestDto.Create requestBody) {
 
         Shop shop = mapper.shopPostToShop(requestBody);
-        Shop createdShop = shopService.createShop(shop);
+        Shop createdShop = shopService.createShop(shop, requestBody.getImageList());
         return new ResponseEntity<>(mapper.shopToCreateDetailPage(createdShop), HttpStatus.CREATED);
     }
 
@@ -39,7 +39,7 @@ public class ShopController {
                                        @Valid @RequestBody ShopRequestDto.Update requestBody) {
 
         Shop shop = mapper.shopPatchToShop(requestBody);
-        Shop updateShop = shopService.updateShop(shopId, shop);
+        Shop updateShop = shopService.updateShop(shopId, shop, requestBody.getImageList());
         return new ResponseEntity<>(mapper.shopToReadDetailPage(updateShop), HttpStatus.OK);
     }
 
