@@ -1,10 +1,9 @@
 package mainproject.nosleep.review.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import mainproject.nosleep.audit.Auditable;
 import mainproject.nosleep.member.entity.Member;
+import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.shop.entity.Shop;
 import mainproject.nosleep.upvote.entity.Upvote;
 
@@ -17,32 +16,45 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Review {
+public class Review extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String writer;
-
-    @Column(nullable = false)
     private Integer rating;
 
-
-    @Column(nullable = false)
+    @Column
     private String content;
 
     @Column(nullable = false)
-    private String status; //이용후기 상태 enum
+    private ReviewStatus status = ReviewStatus.common; //이용후기 상태 enum
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
     @OneToMany(mappedBy = "review")
     private List<Upvote> upvotes = new ArrayList<>();
+
+    @OneToOne(mappedBy = "review", cascade = CascadeType.ALL)
+    private OpenCheck openCheck;  //매장 오픈유무
+
+
+    public Review(Integer rating, String content) {
+;
+        this.rating = rating;
+        this.content = content;
+        this.status = ReviewStatus.common;
+    }
+
+    public void addOpenCheck(OpenCheck openCheck){
+        this.openCheck = openCheck;
+        if(openCheck.getReview() != this){
+            openCheck.addReview(this);
+        }
+    }
 
 }
