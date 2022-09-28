@@ -1,21 +1,30 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Button from "../component/Button";
 import localList from "../DummyData/localList";
+import Header from "../mainPage/header";
 
 const LocalFilter = () => {
   const [local, setLocal] = useState("전국");
   const [area, setArea] = useState();
-  const [filterResult, setFilterResult] = useState();
+  const [filterResult, setFilterResult] = useState({
+    local: "01",
+    area: "000",
+  });
 
   const [cities] = localList.filter((post) => post.city === local);
   const { area: targetArea } = cities;
+  const submitLocal = area?.slice(0, 2);
+  const submitArea = area?.slice(2, 5);
 
   //제출하기 눌렀을때의 함수
   const handleLocalFilterSubmit = () => {
     if (area != null) {
+      setFilterResult({ local: submitLocal, area: submitArea });
+
       axios
         .post("", area)
         .then((res) => console.log(res))
@@ -29,11 +38,20 @@ const LocalFilter = () => {
     setLocal("전국");
   };
 
-  console.log(local);
-  console.log(area.slice(0, 2));
+  // console.log(local);
+  // console.log(area);
+  console.log(filterResult);
+  // console.log(targetArea);
 
   return (
     <FilterSection>
+      <Header />
+      <section>
+        {/* <div> {local}</div> */}
+        <Link to="/list" state={{ info: local }}>
+          검색 적용하기
+        </Link>
+      </section>
       <section>
         <LocalFilterSection>
           {localList.map((post) => (
@@ -53,6 +71,7 @@ const LocalFilter = () => {
             <button
               className="buttonStyle"
               key={post.id}
+              name={post.name}
               onClick={() => {
                 setArea(post.id);
               }}
@@ -67,7 +86,7 @@ const LocalFilter = () => {
           초기화
         </Button>
         <Button width="220px" onClick={handleLocalFilterSubmit}>
-          제출하기
+          설정하기
         </Button>
       </section>
     </FilterSection>

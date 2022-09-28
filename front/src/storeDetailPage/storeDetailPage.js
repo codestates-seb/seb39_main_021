@@ -34,12 +34,9 @@ const StoreDetail = () => {
   if (storeItemDetail === null) {
     return;
   }
-<<<<<<< HEAD
-=======
   // early return => 의도를 담기 위해 앞에서 if 문으로 리턴해도 좋다.
   // 실무에서 사용하는 방법.
   console.log(storeItemDetail);
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
   return (
     <StoreContainer>
       <Header />
@@ -53,13 +50,7 @@ const StoreDetail = () => {
               storeInfo: storeItemDetail,
             }}
           >
-<<<<<<< HEAD
-            <Button buttonStyle="main" width="100px" className="Confirmation">
-              방문 확인하기
-            </Button>
-=======
             방문 확인하기
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
           </Link>
         </div>
         <span className="storeDataAddress">주소</span>
@@ -84,33 +75,16 @@ const StoreDetail = () => {
         <span className="storeInfo">상세설명</span>
         <p className="storeInfoTxt">{storeItemDetail.txt}</p>
         <span className="reviews">이용후기</span>
-<<<<<<< HEAD
-        <div className="reviewPoint">
-          <span className="reviewsLike">
-            전체 평점:{storeItemDetail.like}점
-          </span>
-=======
         <div>
           <span className="reviewsLike">별{storeItemDetail.like}점</span>
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
           <span>전체 {storeItemDetail.reviews.length}개</span>
         </div>
         <section>
           {/* 별점 많은 순으로 3개 노출 코드로 변경할것. */}
           {storeItemDetail.reviews.map((reviewItems, index) => (
-<<<<<<< HEAD
-            <div key={index} className="reviewContainer">
-              <span>{reviewItems.nickName}</span>
-              <div className="reviewStar">
-                <RiStarFill className="star" />
-                {reviewItems.star}
-                {/* 서버와 통신 후 받아온 숫자 or 문자값을 반복문을 사용하여 별 찍어낼것. */}
-              </div>
-=======
             <div key={index}>
               <span>{reviewItems.nickName}</span>
               <span>별{reviewItems.star}</span>
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
               <p>{reviewItems.reviewTxt}</p>
             </div>
           ))}
@@ -192,30 +166,4 @@ const StoreContainer = styled.main`
   .moreReviews {
     color: white;
   }
-<<<<<<< HEAD
-  .star {
-    color: #ffc700;
-    margin-right: 5px;
-  }
-  .reviewContainer {
-    border: 1px solid white;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  .reviewContainer span {
-    color: white;
-  }
-  .reviewPoint {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  .reviewPoint span {
-    color: white;
-  }
-  .reviewStar {
-    margin: 5px 0;
-  }
-=======
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
 `;

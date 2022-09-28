@@ -2,19 +2,16 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-<<<<<<< HEAD
-import { RiRoadMapLine, RiStarFill } from "react-icons/ri";
-=======
 import { IoRestaurantOutline, IoCafeOutline } from "react-icons/io";
 import { GiPlantsAndAnimals } from "react-icons/gi";
 import { MdOutlineLocalPharmacy } from "react-icons/md";
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
 
 import Header from "../mainPage/header";
 
 const List = () => {
   const [storeList, setStoreList] = useState(null);
-  const storeLists = useLocation();
+  const location = useLocation();
+
   const images = [
     // <IoRestaurantOutline />,
     // <IoCafeOutline />,
@@ -25,12 +22,17 @@ const List = () => {
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
-      .then(() => setStoreList(storeLists.state.info));
+      // .get(`http://localhost:8080/v1/shop?page=1&size=10&cityId=${}&areaId=${}&category=${storeList.title}`)
+      .then(() => setStoreList(location.state.info));
   }, []);
+
+  // console.log(storeList);
+
   return (
     <StoreList>
       <Header />
-      {storeList !== null && <h2> {storeList.title} </h2>}
+      {JSON.stringify(location)}
+      {storeList !== null && <h2> {JSON.stringify(storeList)} </h2>}
       <section className="buttonContainer">
         <button className="filterLocal">
           <Link to="/LocalFilter" className="filterLocal-txt">
@@ -39,14 +41,13 @@ const List = () => {
         </button>
         <button className="filterMap">
           <Link to="/MapList" className="filterMap-txt">
-            <RiRoadMapLine />
+            {/* <RiRoadMapLine /> */}
           </Link>
         </button>
       </section>
-<<<<<<< HEAD
       <section>
         {storeList !== null
-          ? storeList.stores.map(
+          ? storeList.stores?.map(
               (
                 items,
                 idx // 구조분해할당으로 리펙토링
@@ -59,45 +60,15 @@ const List = () => {
                   }}
                 >
                   <StoreContainer key={items.id}>
-                    <section className="storeInfo">
-                      <div className="imgContainer">
-                        <img src={items.image} alt="더미데이터" />
-                      </div>
-                      <div className="informationContainer">
-                        <h3 className="title">{items.name}</h3>
-                        <div className="address">{items.address}</div>
-                        <div className="rating">{items.rating}</div>
-                        <div className="starContainer">
-                          <RiStarFill className="star" />
-                          평점
-                        </div>
-                      </div>
-                    </section>
-                    <section className="storeReviewsInfo">
-=======
-      {storeList !== null
-        ? storeList.stores.map(
-            (
-              items,
-              idx // 구조분해할당으로 리펙토링
-            ) => (
-              <Link
-                key={items.id}
-                to={"/storeDetailPage"}
-                state={{
-                  storeData: storeList,
-                }}
-              >
-                <StoreContainer key={items.id}>
-                  <div className="imgContainer">
-                    <img src={items.image} alt="더미데이터" />
-                  </div>
-                  <div className="informationContainer">
-                    <h3 className="title">{items.name}</h3>
-                    <div className="address">{items.address}</div>
-                    <div className="rating">{items.rating}</div>
+                    <div className="imgContainer">
+                      <img src={items.image} alt="더미데이터" />
+                    </div>
+                    <div className="informationContainer">
+                      <h3 className="title">{items.name}</h3>
+                      <div className="address">{items.address}</div>
+                      <div className="rating">{items.rating}</div>
+                    </div>
                     <section>
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
                       <div>{items.name}</div>
                       <div>{items.name}</div>
                       <div>{items.name}</div>
