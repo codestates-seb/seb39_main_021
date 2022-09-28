@@ -19,6 +19,7 @@ import {
 import { BiStore, BiDotsHorizontal } from "react-icons/bi";
 
 import Header from "./header";
+import Map from "../Page/sample";
 
 const Home = () => {
   const [itemList, setItemList] = useState(null);
@@ -68,6 +69,7 @@ const Home = () => {
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
+      // .then((data) => console.log(data));
       .then((data) => setItemList(data.data));
   }, []);
 
@@ -109,6 +111,7 @@ const Home = () => {
           ))}
         </section>
       </MainContainer>
+      <Map />
     </>
   ) : null;
 };

@@ -2,13 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-<<<<<<< HEAD
 import { RiRoadMapLine, RiStarFill } from "react-icons/ri";
-=======
-import { IoRestaurantOutline, IoCafeOutline } from "react-icons/io";
-import { GiPlantsAndAnimals } from "react-icons/gi";
-import { MdOutlineLocalPharmacy } from "react-icons/md";
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
 
 import Header from "../mainPage/header";
 
@@ -43,7 +37,6 @@ const List = () => {
           </Link>
         </button>
       </section>
-<<<<<<< HEAD
       <section>
         {storeList !== null
           ? storeList.stores.map(
@@ -74,30 +67,6 @@ const List = () => {
                       </div>
                     </section>
                     <section className="storeReviewsInfo">
-=======
-      {storeList !== null
-        ? storeList.stores.map(
-            (
-              items,
-              idx // 구조분해할당으로 리펙토링
-            ) => (
-              <Link
-                key={items.id}
-                to={"/storeDetailPage"}
-                state={{
-                  storeData: storeList,
-                }}
-              >
-                <StoreContainer key={items.id}>
-                  <div className="imgContainer">
-                    <img src={items.image} alt="더미데이터" />
-                  </div>
-                  <div className="informationContainer">
-                    <h3 className="title">{items.name}</h3>
-                    <div className="address">{items.address}</div>
-                    <div className="rating">{items.rating}</div>
-                    <section>
->>>>>>> a9f8246b8a9052035771ca721012b882cbbf4730
                       <div>{items.name}</div>
                       <div>{items.name}</div>
                       <div>{items.name}</div>
