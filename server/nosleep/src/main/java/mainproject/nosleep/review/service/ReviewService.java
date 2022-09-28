@@ -85,4 +85,10 @@ public class ReviewService {
     }
 
 
+    public void upvoteCountPlus(Long reviewId){
+        reviewRepository.upvotePlus(reviewId);
+    }
+    public void upvoteCountMinus(Long reviewId){
+        reviewRepository.upvoteMinus(reviewId);
+    }
 }
