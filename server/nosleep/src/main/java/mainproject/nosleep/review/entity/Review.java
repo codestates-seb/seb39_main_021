@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.shop.entity.Shop;
 import mainproject.nosleep.upvote.entity.Upvote;
@@ -33,6 +34,9 @@ public class Review {
     private String content;
 
     @Column(nullable = false)
+    private Long upvoteCount = 0L;
+
+    @Column(nullable = false)
     private String status; //이용후기 상태 enum
 
     @ManyToOne
@@ -44,5 +48,12 @@ public class Review {
 
     @OneToMany(mappedBy = "review")
     private List<Upvote> upvotes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "review")
+    private List<Image> imageList = new ArrayList<>();
+
+    public void addImage (Image image) {
+        this.imageList.add(image);
+    }
 
 }

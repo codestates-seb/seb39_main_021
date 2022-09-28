@@ -6,6 +6,8 @@ import com.amazonaws.util.IOUtils;
 import lombok.RequiredArgsConstructor;
 import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.image.repository.ImageRepository;
+import mainproject.nosleep.review.entity.Review;
+import mainproject.nosleep.shop.entity.Shop;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,6 +65,31 @@ public class ImageService {
 
         return fileUrlList;
     }
+
+    public Image findByUrl(String url) {
+        return imageRepository.findByUrl(url);
+    }
+    public void updateImage(List<String> urlList, Review review) {
+
+        for (String rawUrl:urlList) {
+            int lastIndex = rawUrl.lastIndexOf("/");
+            String url = rawUrl.substring(lastIndex+1);
+            Image image = findByUrl(url);
+            image.setReview(review);
+            imageRepository.save(image);
+        }
+    }
+
+    public void updateImage(List<String> urlList, Shop shop) {
+        for (String rawUrl:urlList) {
+            int lastIndex = rawUrl.lastIndexOf("/");
+            String url = rawUrl.substring(lastIndex+1);
+            Image image = findByUrl(url);
+            image.setShop(shop);
+            imageRepository.save(image);
+        }
+    }
+
 
 //    public byte[] downloadImage(String url) {       // 이미지 파일 자체를 다운받을 필요가 있는가? (프론트측에서 링크만 갖고 이미지 로딩 가능했던걸로 기억..)
 //        if (!imageExistsAtUrl(url)) {

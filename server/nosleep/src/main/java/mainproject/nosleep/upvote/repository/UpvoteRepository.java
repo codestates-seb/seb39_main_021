@@ -9,6 +9,8 @@ public interface UpvoteRepository extends JpaRepository<Upvote, Long> {
 
 
     boolean existsByMemberAndReview(Member member, Review review);
+    boolean existsByReview(Review review);
     void deleteByMemberAndReview(Member member, Review review);
+    void deleteByReview(Review review);
     //boolean existsByMemberAndReview(Member member, Review review);
 }

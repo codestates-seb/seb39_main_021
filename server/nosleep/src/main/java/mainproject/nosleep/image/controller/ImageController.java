@@ -6,6 +6,8 @@ import mainproject.nosleep.image.dto.ImageResponseDto;
 import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.image.mapper.ImageMapper;
 import mainproject.nosleep.image.service.ImageService;
+import mainproject.nosleep.review.entity.Review;
+import mainproject.nosleep.review.service.ReviewService;
 import org.apache.coyote.Response;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +26,7 @@ import java.util.List;
 public class ImageController {
 
     private final ImageService imageService;
+    private final ReviewService reviewService;
     private final ImageMapper mapper;
 
 //    @PostMapping("")
@@ -58,12 +61,22 @@ public class ImageController {
     @DeleteMapping("")
     public ResponseEntity<?> deleteImages (@RequestBody ImageRequestDto.Delete requestBody) {
 
-        System.out.println("EnterController");
         System.out.println(requestBody.getUrlList().get(0));
         imageService.deleteImage1(requestBody.getUrlList());
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PatchMapping("/test")
+    public ResponseEntity<?> deleteImages2 (@RequestBody ImageRequestDto.Delete requestBody) {
+
+
+        Review review = reviewService.findReview(1L);
+        imageService.updateImage(requestBody.getUrlList(), review);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 
 //    @GetMapping("/download")
 //    public ResponseEntity<ByteArrayResource> downloadImage(@RequestParam("url") String url) {     // 다운로드 API가 필요?
