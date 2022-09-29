@@ -67,6 +67,16 @@ const ReviewCreate = () => {
           placeholder="후기 내용 작성하기"
           onChange={handleTxtChange}
           className="reviewTxt"
+        />
+        {/* // </section> */}
+        <div className="itemStarTxt">별점</div>
+        <Star />
+        <Image />
+        <div className="reviewTxtTitle">후기</div>
+        <textarea
+          placeholder="후기 내용 작성하기"
+          onChange={handleTxtChange}
+          className="reviewTxt"
         ></textarea>
         <Link to="/reviewDetail" state={{ storeInfo: CreateReviewValue }}>
           <Button buttonStyle="main"> 등록하기 </Button>

@@ -8,6 +8,7 @@ import StoreDetail from "../storeDetailPage/storeDetailPage";
 import Registration from "../menuPage/Registration";
 import ReviewCreate from "../storeDetailPage/ReviewCreate";
 import MoreReview from "../storeDetailPage/MoreReview";
+// import MoreReview from "../Page/MoreReview";
 import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
 
 const Router = () => {

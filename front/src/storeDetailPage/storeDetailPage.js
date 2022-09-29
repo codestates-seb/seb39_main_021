@@ -35,6 +35,9 @@ const StoreDetail = () => {
   if (storeItemDetail === null) {
     return;
   }
+  // early return => 의도를 담기 위해 앞에서 if 문으로 리턴해도 좋다.
+  // 실무에서 사용하는 방법.
+  console.log(storeItemDetail);
   return (
     <StoreContainer>
       <Header />
@@ -48,6 +51,9 @@ const StoreDetail = () => {
               storeInfo: storeItemDetail,
             }}
           >
+            <Button buttonStyle="main" width="100px" className="Confirmation">
+              방문 확인하기
+            </Button>
             <Button buttonStyle="main" width="100px" className="Confirmation">
               방문 확인하기
             </Button>

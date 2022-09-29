@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+
 import { RiRoadMapLine, RiStarFill } from "react-icons/ri";
 
 import Header from "../mainPage/header";
@@ -31,6 +32,7 @@ const List = () => {
           </Link>
         </button>
       </section>
+
       <section>
         {storeList !== null
           ? storeList.stores.map(
