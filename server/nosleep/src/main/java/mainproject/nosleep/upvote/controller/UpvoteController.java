@@ -33,7 +33,7 @@ public class UpvoteController {
     public ResponseEntity<?> postUpvote(@PathVariable("review-id") long reviewId) {
 
         Member member = memberService.findMember(1L);
-        Review review = reviewService.findReview(1L);
+        Review review = reviewService.findReview(reviewId);
 
         Upvote response = upvoteService.createUpvote(member, review);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -43,7 +43,7 @@ public class UpvoteController {
     public ResponseEntity<?> deleteUpvote(@PathVariable("review-id") long reviewId) {
 
         Member member = memberService.findMember(1L);
-        Review review = reviewService.findReview(1L);
+        Review review = reviewService.findReview(reviewId);
 
         upvoteService.deleteUpvote(member, review);
 
@@ -53,7 +53,7 @@ public class UpvoteController {
     @GetMapping("/review/{review-id}/upvote")
     public ResponseEntity<?> getUpvote(@PathVariable("review-id") long reviewId) {
         Member member = memberService.findMember(1L);
-        Review review = reviewService.findReview(1L);
+        Review review = reviewService.findReview(reviewId);
 
         UpvoteResponseDto.Get response = new UpvoteResponseDto.Get(upvoteService.upvoteExists(member, review));
 
