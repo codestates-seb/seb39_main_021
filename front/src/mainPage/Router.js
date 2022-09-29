@@ -13,58 +13,54 @@ import MoreReview from "../Page/MoreReview";
 import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
 
 const Router = () => {
-  const [state, setState] = useState();
+  const [selectData, setSelectData] = useState({
+    category: "임시",
+    filter: {
+      local: "전국",
+      localId: "01",
+      area: "전체",
+      areaId: "000",
+    },
+  });
 
   return (
     <BrowserRouter>
-      <>
-        <Routes>
-          <Route
-            path="/"
-            element={<Home state={state} setState={setState} />}
-          />
-          <Route
-            path="/list"
-            element={<List state={state} setState={setState} />}
-          />
-          <Route
-            path="/localFilter"
-            element={<LocalFilter state={state} setState={setState} />}
-          />
-          <Route
-            path="/mapList"
-            element={<MapList state={state} setState={setState} />}
-          />
-          <Route
-            path="/storeDetailPage"
-            element={<StoreDetail state={state} setState={setState} />}
-          />
-          <Route
-            path="/businessRegistration"
-            element={<Registration state={state} setState={setState} />}
-          />
-          <Route
-            path="/toggleMenu"
-            element={<Menu state={state} setState={setState} />}
-          />
-          <Route
-            path="/businessRegistration"
-            element={<Registration state={state} setState={setState} />}
-          />
-          <Route
-            path="/review"
-            element={<ReviewCreate state={state} setState={setState} />}
-          />
-          <Route
-            path="/moreReviews"
-            element={<MoreReview state={state} setState={setState} />}
-          />
-          <Route
-            path="/reviewDetail"
-            element={<ReviewDetail state={state} setState={setState} />}
-          />
-        </Routes>
-      </>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home selectData={selectData} setSelectData={setSelectData} />
+          }
+        />
+        <Route
+          path="/list"
+          element={
+            <List selectData={selectData} setSelectData={setSelectData} />
+          }
+        />
+        <Route
+          path="/localFilter"
+          element={
+            <LocalFilter
+              selectData={selectData}
+              setSelectData={setSelectData}
+            />
+          }
+        />
+        <Route
+          path="/mapList"
+          element={
+            <MapList selectData={selectData} setSelectData={setSelectData} />
+          }
+        />
+        <Route path="/storeDetailPage" element={<StoreDetail />} />
+        <Route path="/businessRegistration" element={<Registration />} />
+        <Route path="/toggleMenu" element={<Menu />} />
+        <Route path="/businessRegistration" element={<Registration />} />
+        <Route path="/review" element={<ReviewCreate />} />
+        <Route path="/moreReviews" element={<MoreReview />} />
+        <Route path="/reviewDetail" element={<ReviewDetail />} />
+      </Routes>
     </BrowserRouter>
   );
 };
