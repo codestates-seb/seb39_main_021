@@ -8,7 +8,7 @@ import { MdOutlineLocalPharmacy } from "react-icons/md";
 
 import Header from "../mainPage/header";
 
-const List = ({ filter, setFilter }) => {
+const List = ({ selectData, setSelectData }) => {
   const [storeData, setStoreData] = useState(null);
 
   const images = [
@@ -18,26 +18,26 @@ const List = ({ filter, setFilter }) => {
     // <MdOutlineLocalPharmacy />,
   ];
 
-  // 1. filter된 값들을 요청보낸다 (기본값 : 전국)
-  // 2. 서버에서 받은 값을 storeData 로 저장한다.
+  // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
+  // 2. 서버에서 받은 값을 storeData 로 저장한다. - 종렬
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/v1/shop?page=1&size=10&cityId=${filter.localId}&areaId=${filter.areaId}&category=${filter}`
+        `http://localhost:8080/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category="${selectData.category}"`
       )
       .then((filterData) => setStoreData(filterData));
   }, []);
 
-  console.log(filter);
+  console.log(selectData);
 
   return (
     <StoreData>
       <Header />
-      {storeData !== null && <h2> {JSON.stringify(storeData)} </h2>}
+      {selectData !== null && <h2> {selectData.category} </h2>}
       <section className="buttonContainer">
         <button className="filterLocal">
           <Link to="/LocalFilter" className="filterLocal-txt">
-            {filter.local} {filter.area}
+            {selectData.filter.local} {selectData.filter.area}
           </Link>
         </button>
         <button className="filterMap">

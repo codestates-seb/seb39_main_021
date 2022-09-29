@@ -1,3 +1,18 @@
+import {
+  RiRestaurant2Line,
+  RiComputerLine,
+  RiGasStationFill,
+  RiStarFill,
+} from "react-icons/ri";
+import { GiLoveSong, GiMedicines, GiSittingDog } from "react-icons/gi";
+import {
+  MdOutlineLocalCafe,
+  MdOutlineLocalHospital,
+  MdOutlineLocalLaundryService,
+  MdOutlineLocalConvenienceStore,
+} from "react-icons/md";
+import { BiStore, BiDotsHorizontal } from "react-icons/bi";
+
 const categoryList = [
   {
     id: "1",

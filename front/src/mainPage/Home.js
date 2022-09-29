@@ -1,31 +1,23 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
-import {
-  RiRestaurant2Line,
-  RiComputerLine,
-  RiGasStationFill,
-  RiStarFill,
-} from "react-icons/ri";
-import { GiLoveSong, GiMedicines, GiSittingDog } from "react-icons/gi";
-import {
-  MdOutlineLocalCafe,
-  MdOutlineLocalHospital,
-  MdOutlineLocalLaundryService,
-  MdOutlineLocalConvenienceStore,
-} from "react-icons/md";
-import { BiStore, BiDotsHorizontal } from "react-icons/bi";
+import { RiStarFill } from "react-icons/ri";
 
 import Header from "./header";
+import categoryList from "../DummyData/categoryList";
 
-const Home = () => {
+const Home = ({ selectData, setSelectData }) => {
   const [itemList, setItemList] = useState(null);
   const [openMenu, setOpenMenu] = useState(true);
+
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
+
+  // console.log(categoryList);
+  // console.log(selectData);
 
   const popularPosts = [
     {
@@ -63,19 +55,22 @@ const Home = () => {
       <MainContainer>
         <section className="categoryContainer">
           <h1>카테고리</h1>
-          {itemList.map((category, idx) => {
-            const Icons = imgArr[idx];
+          {categoryList.map((category) => {
+            const Icons = category.icon;
             return (
               <Link
                 key={category.id}
                 className="categoryItems"
                 to={"/list"}
-                state={{
-                  info: category,
+                onClick={() => {
+                  setSelectData({
+                    ...selectData,
+                    category: category.name,
+                  });
                 }}
               >
                 <Icons className="iconsImage" />
-                <h3>{category.title}</h3>
+                <h3>{category.name}</h3>
               </Link>
             );
           })}

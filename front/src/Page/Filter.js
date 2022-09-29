@@ -7,7 +7,7 @@ import Button from "../component/Button";
 import localList from "../DummyData/localList";
 import Header from "../mainPage/header";
 
-const LocalFilter = ({ filter, setFilter }) => {
+const LocalFilter = ({ selectData, setSelectData }) => {
   const [fullId, setFullId] = useState("01000");
   const [local, setLocal] = useState("전국");
   const [area, setArea] = useState("전체보기");
@@ -20,22 +20,28 @@ const LocalFilter = ({ filter, setFilter }) => {
   //제출하기 눌렀을때의 함수
   const handleLocalFilterSubmit = () => {
     if (fullId != null) {
-      setFilter({
-        local: local,
-        localId: submitLocal,
-        area: area,
-        areaId: submitArea,
+      setSelectData({
+        ...selectData,
+        filter: {
+          local: local,
+          localId: submitLocal,
+          area: area,
+          areaId: submitArea,
+        },
       });
     }
   };
 
   //초기화 눌렀을때의 함수
   const handleReset = () => {
-    setFilter({
-      local: "전국",
-      localId: "01",
-      area: "전체",
-      areaId: "000",
+    setSelectData({
+      ...selectData,
+      filter: {
+        local: "전국",
+        localId: "01",
+        area: "전체",
+        areaId: "000",
+      },
     });
   };
 
