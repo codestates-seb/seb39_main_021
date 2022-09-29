@@ -22,9 +22,8 @@ public class UpvoteService {
     public Upvote createUpvote(Member member, Review review) {
         if(!upvoteExists(member, review)) {
             Upvote upvote = Upvote.builder().member(member).review(review).build();
-            //reviewService.upvoteCountPlus(review);
-            //save
             upvoteRepository.save(upvote);
+            reviewService.upvoteCountPlus(review);
 
             return upvote;
         }
@@ -33,25 +32,24 @@ public class UpvoteService {
     }
 
 
-    public void cancelUpvote(Member member, Review review) {
-        deleteUpvote(member, review);
-        minusUpvote(review);
-    }
     public void deleteUpvote(Member member, Review review) {
         if(upvoteExists(member, review)) {
             upvoteRepository.deleteByMemberAndReview(member, review);
+            reviewService.upvoteCountMinus(review);
         }
     }
 
-
-
-    public void minusUpvote(Review review) {
-
+    public void deleteAllUpvote(Review review) {
+        upvoteRepository.deleteByReview(review);
     }
+
+
+
 
     public boolean upvoteExists(Member member, Review review) {
         return upvoteRepository.existsByMemberAndReview(member, review);
     }
+
 
     public boolean upvoteExists(Review review) {
         return upvoteRepository.existsByReview(review);
