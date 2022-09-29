@@ -15,11 +15,11 @@ const Image = () => {
   //   const [deleteImg, setDeleteImg] = useState();
   const [previewImg, setPreviewImg] = useState([]);
 
-  const insertImg = (e) => {
+  const handleInsertImg = (event) => {
     let render = new FileReader();
 
-    if (e.target.files[0]) {
-      render.readAsDataURL(e.target.files[0]);
+    if (event.target.files[0]) {
+      render.readAsDataURL(event.target.files[0]);
     }
     render.onloadend = () => {
       const previewImgURL = render.result;
@@ -28,6 +28,15 @@ const Image = () => {
         setPreviewImg([...previewImg, previewImgURL]);
       }
     };
+    axios.post("", {
+      header: {
+        // content: "application.json",
+        // 멀티파트
+      },
+      body: {
+        fileInput: event.target.files[0],
+      },
+    });
   };
 
   const deleteImage = () => {
@@ -74,7 +83,7 @@ const Image = () => {
       <input
         style={{ display: "none" }}
         type="file"
-        onChange={insertImg}
+        onChange={handleInsertImg}
         ref={fileInput}
         accept="image/*"
         multiple="multiple"

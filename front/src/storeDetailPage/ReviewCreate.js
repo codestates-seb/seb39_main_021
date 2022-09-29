@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
 
 import Button from "../component/Button";
-import Image from "../component/image";
+import Image from "../component/Image";
 import Star from "../component/Star";
 import Header from "../mainPage/header";
 

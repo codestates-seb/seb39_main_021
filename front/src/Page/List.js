@@ -9,12 +9,6 @@ import Header from "../mainPage/header";
 const List = () => {
   const [storeList, setStoreList] = useState(null);
   const storeLists = useLocation();
-  const images = [
-    // <IoRestaurantOutline />,
-    // <IoCafeOutline />,
-    // <GiPlantsAndAnimals />,
-    // <MdOutlineLocalPharmacy />,
-  ];
 
   useEffect(() => {
     axios

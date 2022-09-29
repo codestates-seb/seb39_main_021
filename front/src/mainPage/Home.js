@@ -19,7 +19,7 @@ import {
 import { BiStore, BiDotsHorizontal } from "react-icons/bi";
 
 import Header from "./header";
-import Map from "../Page/sample";
+import Map from "../Page/Sample";
 
 const Home = () => {
   const [itemList, setItemList] = useState(null);
