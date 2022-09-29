@@ -7,42 +7,49 @@ import Button from "../component/Button";
 import localList from "../DummyData/localList";
 import Header from "../mainPage/header";
 
-const LocalFilter = () => {
+const LocalFilter = ({ filter, setFilter }) => {
+  const [fullId, setFullId] = useState("01000");
   const [local, setLocal] = useState("전국");
-  const [area, setArea] = useState();
-  const [filterResult, setFilterResult] = useState({
-    local: "01",
-    area: "000",
-  });
+  const [area, setArea] = useState("전체보기");
 
   const [cities] = localList.filter((post) => post.city === local);
   const { area: targetArea } = cities;
-  const submitLocal = area?.slice(0, 2);
-  const submitArea = area?.slice(2, 5);
+  const submitLocal = fullId?.slice(0, 2);
+  const submitArea = fullId?.slice(2, 5);
 
   //제출하기 눌렀을때의 함수
   const handleLocalFilterSubmit = () => {
-    if (area != null) {
-      setFilterResult({ local: submitLocal, area: submitArea });
-
-      axios
-        .post("", area)
-        .then((res) => console.log(res))
-        .catch();
+    if (fullId != null) {
+      setFilter({
+        local: local,
+        localId: submitLocal,
+        area: area,
+        areaId: submitArea,
+      });
     }
   };
 
   //초기화 눌렀을때의 함수
   const handleReset = () => {
-    setArea("01000");
-    setLocal("전국");
+    setFilter({
+      local: "전국",
+      localId: "01",
+      area: "전체",
+      areaId: "000",
+    });
   };
 
   return (
     <FilterSection>
       <Header />
       <section>
-        {/* <div> {local}</div> */}
+        {local === "전국" ? (
+          <div>{local}</div>
+        ) : (
+          <div>
+            {local} {area}
+          </div>
+        )}
         <Link to="/list" state={{ info: local }}>
           검색 적용하기
         </Link>
@@ -53,7 +60,10 @@ const LocalFilter = () => {
             <button
               className="buttonStyle"
               key={post.id}
-              onClick={() => setLocal(post.city)}
+              onClick={() => {
+                setLocal(post.city);
+                setArea("");
+              }}
             >
               {post.city}
             </button>
@@ -66,9 +76,9 @@ const LocalFilter = () => {
             <button
               className="buttonStyle"
               key={post.id}
-              name={post.name}
               onClick={() => {
-                setArea(post.id);
+                setFullId(post.id);
+                setArea(post.name);
               }}
             >
               {post.name}

@@ -8,7 +8,7 @@ const localList = [
     id: "2",
     city: "서울시",
     area: [
-      { id: "02000", name: "서울시 전체" },
+      { id: "02000", name: "전체" },
       { id: "02001", name: "강남구" },
       { id: "02002", name: "강동구" },
       { id: "02003", name: "강서구" },
@@ -40,7 +40,7 @@ const localList = [
     id: "3",
     city: "부산시",
     area: [
-      { id: "03000", name: "부산시 전체" },
+      { id: "03000", name: "전체" },
       { id: "03001", name: "강서구" },
       { id: "03002", name: "북구" },
       { id: "03003", name: "금정구" },
@@ -63,7 +63,7 @@ const localList = [
     id: "4",
     city: "대구시",
     area: [
-      { id: "04000", name: "대구시 전체" },
+      { id: "04000", name: "전체" },
       { id: "04001", name: "중구" },
       { id: "04002", name: "동구" },
       { id: "04003", name: "서구" },
@@ -78,7 +78,7 @@ const localList = [
     id: "5",
     city: "인천시",
     area: [
-      { id: "05000", name: "인천시 전체" },
+      { id: "05000", name: "전체" },
       { id: "05001", name: "중구" },
       { id: "05002", name: "동구" },
       { id: "05003", name: "미추홀구" },
@@ -95,7 +95,7 @@ const localList = [
     id: "6",
     city: "광주시",
     area: [
-      { id: "06000", name: "광주시 전체" },
+      { id: "06000", name: "전체" },
       { id: "06001", name: "동구" },
       { id: "06002", name: "서구" },
       { id: "06003", name: "남구" },
@@ -107,7 +107,7 @@ const localList = [
     id: "7",
     city: "대전시",
     area: [
-      { id: "07000", name: "대전시 전체" },
+      { id: "07000", name: "전체" },
       { id: "07001", name: "동구" },
       { id: "07002", name: "중구" },
       { id: "07003", name: "서구" },
@@ -119,7 +119,7 @@ const localList = [
     id: "8",
     city: "울산시",
     area: [
-      { id: "08000", name: "울산시 전체" },
+      { id: "08000", name: "전체" },
       { id: "08001", name: "중구" },
       { id: "08002", name: "남구" },
       { id: "08003", name: "동구" },
@@ -130,7 +130,7 @@ const localList = [
   {
     id: "9",
     city: "세종시",
-    area: [{ id: "09000", name: "세종시 전체" }],
+    area: [{ id: "09000", name: "전체" }],
   },
   {
     id: "10",

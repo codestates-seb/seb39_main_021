@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { usefilter, useState } from "react";
 
 import Home from "./Home";
 import Menu from "../menuPage/menu";
@@ -13,58 +13,61 @@ import MoreReview from "../Page/MoreReview";
 import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
 
 const Router = () => {
-  const [state, setState] = useState();
+  const [filter, setFilter] = useState({
+    local: "전국",
+    localId: "01",
+    area: "전체",
+    areaId: "000",
+  });
 
   return (
     <BrowserRouter>
-      <>
-        <Routes>
-          <Route
-            path="/"
-            element={<Home state={state} setState={setState} />}
-          />
-          <Route
-            path="/list"
-            element={<List state={state} setState={setState} />}
-          />
-          <Route
-            path="/localFilter"
-            element={<LocalFilter state={state} setState={setState} />}
-          />
-          <Route
-            path="/mapList"
-            element={<MapList state={state} setState={setState} />}
-          />
-          <Route
-            path="/storeDetailPage"
-            element={<StoreDetail state={state} setState={setState} />}
-          />
-          <Route
-            path="/businessRegistration"
-            element={<Registration state={state} setState={setState} />}
-          />
-          <Route
-            path="/toggleMenu"
-            element={<Menu state={state} setState={setState} />}
-          />
-          <Route
-            path="/businessRegistration"
-            element={<Registration state={state} setState={setState} />}
-          />
-          <Route
-            path="/review"
-            element={<ReviewCreate state={state} setState={setState} />}
-          />
-          <Route
-            path="/moreReviews"
-            element={<MoreReview state={state} setState={setState} />}
-          />
-          <Route
-            path="/reviewDetail"
-            element={<ReviewDetail state={state} setState={setState} />}
-          />
-        </Routes>
-      </>
+      <Routes>
+        <Route
+          path="/"
+          element={<Home filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/list"
+          element={<List filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/localFilter"
+          element={<LocalFilter filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/mapList"
+          element={<MapList filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/storeDetailPage"
+          element={<StoreDetail filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/businessRegistration"
+          element={<Registration filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/toggleMenu"
+          element={<Menu filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/businessRegistration"
+          element={<Registration filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/review"
+          element={<ReviewCreate filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/moreReviews"
+          element={<MoreReview filter={filter} setFilter={setFilter} />}
+        />
+        <Route
+          path="/reviewDetail"
+          element={<ReviewDetail filter={filter} setFilter={setFilter} />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 };
