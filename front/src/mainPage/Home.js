@@ -26,21 +26,7 @@ const Home = () => {
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
-  const imgArr = [
-    RiRestaurant2Line,
-    MdOutlineLocalCafe,
-    GiSittingDog,
-    GiMedicines,
-    MdOutlineLocalHospital,
-    GiLoveSong,
-    MdOutlineLocalLaundryService,
-    MdOutlineLocalConvenienceStore,
-    RiComputerLine,
-    RiGasStationFill,
-    BiStore,
-    BiDotsHorizontal,
-    MdOutlineLocalCafe,
-  ];
+
   const popularPosts = [
     {
       id: "1",
