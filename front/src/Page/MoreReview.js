@@ -1,41 +1,98 @@
 import Header from "../mainPage/header";
 
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
+import styled from "styled-components";
+import { RiStarFill } from "react-icons/ri";
 
 const MoreReview = () => {
-  const [reviewList, setReviewList] = useState([]);
+  // const [reviewList, setReviewList] = useState([]);
+
   const {
     state: { storeData },
   } = useLocation();
-  console.log(storeData);
+
   const reviewInfo = storeData.reviews;
   return (
-    <article>
+    <MoreReviews>
       <Header />
-      <section>
+      <section className="titleContainer">
         <h1>{storeData.name}</h1>
-        <select>
+        <select className="filterContainer">
           <option>도움이 많이 된 순서</option>
           <option>최신순서</option>
         </select>
       </section>
-      <section>
-        <div>
+      <section className="itemsContainer">
+        <div className="itemsHeader">
           <span>전체평점{storeData.like}</span>
-          <span>개수{reviewInfo.length}</span>
+          <span className="itemsQuantity">개수{reviewInfo.length}</span>
         </div>
         {reviewInfo.map((reviews, index) => (
-          <div key={index}>
+          <div key={index} className="itemsContents">
             <img src={storeData.image} alt="가게 더미데이터" />
-            <div>{reviews.nickName}</div>
-            <div>별{reviews.star}</div>
-            <p>{reviews.reviewTxt}</p>
+            <div>
+              <div className="itemsName">{reviews.nickName}</div>
+              <div className="itemsStar">
+                <RiStarFill className="star" />
+                {reviews.star}
+              </div>
+              <p>{reviews.reviewTxt}</p>
+            </div>
           </div>
         ))}
       </section>
-    </article>
+    </MoreReviews>
   );
 };
 
 export default MoreReview;
+
+const MoreReviews = styled.article`
+  .titleContainer {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    margin: 20px 0;
+  }
+  .filterContainer {
+    background-color: #76736e;
+    color: white;
+  }
+  .filterContainer option {
+    font-size: 10px;
+  }
+  .itemsContainer {
+    color: white;
+  }
+  .itemsHeader {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .itemsQuantity {
+    padding-right: 10px;
+  }
+  .itemsContents {
+    display: flex;
+    margin-bottom: 20px;
+    background-color: #504e4a;
+    padding: 10px;
+  }
+  .itemsContents img {
+    width: 96px;
+    margin-right: 16px;
+  }
+  .itemsName {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+  .itemsStar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .star {
+    color: #ffc700;
+  }
+`;

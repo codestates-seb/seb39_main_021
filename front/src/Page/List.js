@@ -1,71 +1,68 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import { RiRoadMapLine, RiStarFill } from "react-icons/ri";
-
 import Header from "../mainPage/header";
 
-const List = () => {
-  const [storeList, setStoreList] = useState(null);
-  const storeLists = useLocation();
+const List = ({ selectData, setSelectData }) => {
+  const [storeData, setStoreData] = useState(null);
 
+  // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
+  // 2. 서버에서 받은 값을 storeData 로 저장한다. - 종렬
   useEffect(() => {
     axios
-      .get("http://localhost:4000/items")
-      .then(() => setStoreList(storeLists.state.info));
+      .get(
+        `http://localhost:8080/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category="${selectData.category}"`
+      )
+      .then((filterData) => setStoreData(filterData));
   }, []);
+
+  console.log(selectData);
+
   return (
-    <StoreList>
+    <StoreData>
       <Header />
-      {storeList !== null && <h2> {storeList.title} </h2>}
+      {selectData !== null && <h2> {selectData.category} </h2>}
       <section className="buttonContainer">
         <button className="filterLocal">
           <Link to="/LocalFilter" className="filterLocal-txt">
-            전국
+            {selectData.filter.local} {selectData.filter.area}
           </Link>
         </button>
         <button className="filterMap">
           <Link to="/MapList" className="filterMap-txt">
-            <RiRoadMapLine />
+            {/* <RiRoadMapLine /> */}
           </Link>
         </button>
       </section>
-
       <section>
-        {storeList !== null
-          ? storeList.stores.map(
+        {storeData !== null
+          ? storeData.data?.map(
               (
-                items,
+                individualStore,
                 idx // 구조분해할당으로 리펙토링
               ) => (
                 <Link
-                  key={items.id}
+                  key={individualStore.id}
                   to={"/storeDetailPage"}
                   state={{
-                    storeData: storeList,
+                    storeData: storeData,
                   }}
                 >
-                  <StoreContainer key={items.id}>
-                    <section className="storeInfo">
-                      <div className="imgContainer">
-                        <img src={items.image} alt="더미데이터" />
-                      </div>
-                      <div className="informationContainer">
-                        <h3 className="title">{items.name}</h3>
-                        <div className="address">{items.address}</div>
-                        <div className="rating">{items.rating}</div>
-                        <div className="starContainer">
-                          <RiStarFill className="star" />
-                          평점
-                        </div>
-                      </div>
-                    </section>
-                    <section className="storeReviewsInfo">
-                      <div>{items.name}</div>
-                      <div>{items.name}</div>
-                      <div>{items.name}</div>
+                  <StoreContainer key={individualStore.id}>
+                    <div className="imgContainer">
+                      <img src={individualStore.images[0]} alt="더미데이터" />
+                    </div>
+                    <div className="informationContainer">
+                      <h3 className="title">{individualStore.name}</h3>
+                      <div className="address">{individualStore.address}</div>
+                      <div className="rating">{individualStore.ratingAVG}</div>
+                    </div>
+                    <section>
+                      <div>{individualStore.reviewCount}</div>
+                      <div>{individualStore.visitorCount}</div>
+                      <div>{individualStore.openCount}</div>
                     </section>
                   </StoreContainer>
                 </Link>
@@ -74,10 +71,10 @@ const List = () => {
           : null}
       </section>
       {/* early return */}
-    </StoreList>
+    </StoreData>
   );
 };
-const StoreList = styled.section`
+const StoreData = styled.section`
   color: white;
   padding-top: 24px;
   h2 {

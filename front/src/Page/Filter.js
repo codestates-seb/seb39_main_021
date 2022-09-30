@@ -1,46 +1,75 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Button from "../component/Button";
 import localList from "../DummyData/localList";
+import Header from "../mainPage/header";
 
-const LocalFilter = () => {
+const LocalFilter = ({ selectData, setSelectData }) => {
+  const [fullId, setFullId] = useState("01000");
   const [local, setLocal] = useState("전국");
-  const [area, setArea] = useState();
-  const [filterResult, setFilterResult] = useState();
+  const [area, setArea] = useState("전체보기");
 
   const [cities] = localList.filter((post) => post.city === local);
   const { area: targetArea } = cities;
+  const submitLocal = fullId?.slice(0, 2);
+  const submitArea = fullId?.slice(2, 5);
 
   //제출하기 눌렀을때의 함수
   const handleLocalFilterSubmit = () => {
-    if (area != null) {
-      axios
-        .post("", area)
-        .then((res) => console.log(res))
-        .catch();
+    if (fullId != null) {
+      setSelectData({
+        ...selectData,
+        filter: {
+          local: local,
+          localId: submitLocal,
+          area: area,
+          areaId: submitArea,
+        },
+      });
     }
   };
 
   //초기화 눌렀을때의 함수
   const handleReset = () => {
-    setArea("01000");
-    setLocal("전국");
+    setSelectData({
+      ...selectData,
+      filter: {
+        local: "전국",
+        localId: "01",
+        area: "전체",
+        areaId: "000",
+      },
+    });
   };
-
-  console.log(local);
-  console.log(area.slice(0, 2));
 
   return (
     <FilterSection>
+      <Header />
+      <section>
+        {local === "전국" ? (
+          <div>{local}</div>
+        ) : (
+          <div>
+            {local} {area}
+          </div>
+        )}
+        <Link to="/list" state={{ info: local }}>
+          검색 적용하기
+        </Link>
+      </section>
       <section>
         <LocalFilterSection>
           {localList.map((post) => (
             <button
               className="buttonStyle"
               key={post.id}
-              onClick={() => setLocal(post.city)}
+              onClick={() => {
+                setLocal(post.city);
+                setArea("");
+              }}
             >
               {post.city}
             </button>
@@ -54,7 +83,8 @@ const LocalFilter = () => {
               className="buttonStyle"
               key={post.id}
               onClick={() => {
-                setArea(post.id);
+                setFullId(post.id);
+                setArea(post.name);
               }}
             >
               {post.name}
@@ -67,7 +97,7 @@ const LocalFilter = () => {
           초기화
         </Button>
         <Button width="220px" onClick={handleLocalFilterSubmit}>
-          제출하기
+          설정하기
         </Button>
       </section>
     </FilterSection>

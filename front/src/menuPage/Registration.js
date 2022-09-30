@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 
 import Header from "../mainPage/header";
 import Image from "../component/Image";
+// import Image from "../component/Image";
 
 const Registration = () => {
   const [registrationNumber, setRegistrationNumber] = useState(null);

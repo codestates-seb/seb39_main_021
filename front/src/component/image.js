@@ -114,37 +114,11 @@ const ImageContainer = styled.section`
     color: white;
     display: block;
   }
-  /* .noneImg {
-    display: inline-block;
-    width: 98px;
-  }
-  .imgBox {
-    display: flex;
-    align-items: flex-start;
-    margin: 10px 10px 10px 0;
-  }
-  .registrationImg-layout {
-    display: flex;
-  }
-  .imgBox button {
-    color: white;
-  }
-  .imageTitle {
-    margin: 10px 0;
-  }
-  .imageBtn {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-  }
-  .registrationImg {
-    background-color: #ffc700;
-  } */
-
   .userImg {
     display: inline-block;
     width: 50px;
     height: 50px;
+  }
   .noneImg {
     display: inline-block;
     width: 98px;

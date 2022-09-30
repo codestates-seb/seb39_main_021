@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 import Button from "../component/Button";
 import Image from "../component/Image";
@@ -59,16 +59,6 @@ const ReviewCreate = () => {
             아니오
           </Button>
         </section>
-        <div className="itemStarTxt">별점</div>
-        <Star />
-        <Image />
-        <div className="reviewTxtTitle">후기</div>
-        <textarea
-          placeholder="후기 내용 작성하기"
-          onChange={handleTxtChange}
-          className="reviewTxt"
-        />
-        {/* // </section> */}
         <div className="itemStarTxt">별점</div>
         <Star />
         <Image />
