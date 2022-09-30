@@ -1,29 +1,94 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import Header from "../mainPage/header";
 import Image from "../component/Image";
+import Button from "../component/Button";
+import KaKaoMap from "../Page/KakaoMap";
 // import Image from "../component/Image";
 
 const Registration = () => {
-  const [registrationNumber, setRegistrationNumber] = useState(null);
-  const storeNumber = useRef();
-  const storeName = useRef();
-  console.log(storeName);
-  console.log(storeNumber);
+  // kakao API 를 사용하기 위해 구조분해할당
+  const { kakao } = window;
+
+  const storeNumber = useRef(); // 사용자가 입력한 사업장 등록번호
+  const storeName = useRef(); // 사용자가 입력한 업체명
+  const storeAddress = useRef(); // 사용자가 입력한 주소
+  const storeInfo = useRef();
+
+  const address = storeAddress.current;
+  const name = storeName.current;
+  const number = storeNumber.current;
+  const info = storeInfo.current;
+  let addressLocation = {};
+
   const handleRegistration = () => {
     axios
       .get(
         "https://bizno.net/api/fapi?key=eWhqMDQzOUBuYXZlci5jb20g&gb=1&q=3988701116"
       )
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .then((data) => {
+        console.log(data.current);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  // const handleImageUpload = (e) => {
-  //   console.log(e.target.files);
-  // };
+  const handleCheckAddress = () => {
+    // 주소를 위도경도로 변경해주는 인스턴스 생성
+    let geocoder = new kakao.maps.services.Geocoder();
+
+    // 사용자가 입력한 주소값
+
+    //addressSearch 함수(사용자입력값,콜백함수)
+    geocoder.addressSearch(`${address.value}`, function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        addressLocation = coords;
+        alert(`${address.value} 가 맞나요?`);
+        console.log(coords);
+      } else {
+        alert("주소를 확인해 주세요 !");
+        console.log("err");
+      }
+    });
+  };
+
+  const handleCreateRegistration = () => {
+    const infomation = {
+      memberId: 1,
+      category: "음식점",
+      businessNumber: number.value,
+      name: name.value,
+      address: address.value,
+      cityId: "02",
+      areaId: "008",
+      detail: info.value,
+      longitude: addressLocation.Ma,
+      latitude: addressLocation.La,
+    };
+    // console.log(addressLocation.La);
+    axios({
+      method: "post",
+      url: "https://gloom.loca.lt/v1/shop",
+      data: {
+        memberId: 1,
+        category: "음식점",
+        businessNumber: number.value,
+        name: name.value,
+        address: address.value,
+        cityId: "02",
+        areaId: "008",
+        detail: info.value,
+        longitude: addressLocation.Ma,
+        latitude: addressLocation.La,
+        imageList: [],
+      },
+    });
+  };
+
   return (
     <>
       <Header />
@@ -48,7 +113,7 @@ const Registration = () => {
         <input
           placeholder="- 없이 숫자만 작성해 주세요"
           id="registrationNumber"
-          ref={storeNumber.current}
+          ref={storeNumber}
         />
         <button className="registrationCheckBtn" onClick={handleRegistration}>
           확인하기
@@ -56,11 +121,23 @@ const Registration = () => {
         <label htmlFor="registrationName">사업장 이름</label>
         <input id="registrationName" ref={storeName} />
         <label htmlFor="registrationAddress">사업장 주소</label>
-        <input id="registrationAddress" />
+        <input id="registrationAddress" ref={storeAddress} />
+        <Button
+          className="registrationAddressCheck"
+          buttonStyle="main"
+          width="60px"
+          onClick={handleCheckAddress}
+        >
+          확인하기
+        </Button>
+        {/* <KaKaoMap /> */}
         <label htmlFor="registrationTxt">상세 설명</label>
-        <textarea id="registrationTxt" />
+        <textarea id="registrationTxt" ref={storeInfo} />
         <label htmlFor="imageUpload">이미지</label>
         <Image />
+        <Button buttonStyle="main" onClick={handleCreateRegistration}>
+          등록하기
+        </Button>
       </RegistrationContainer>
       ;
     </>
@@ -95,6 +172,15 @@ const RegistrationContainer = styled.main`
     border: #76736e;
     color: white;
     background-color: #76736e;
+  }
+  .registrationAddressCheck {
+    margin-left: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    background-color: var(--mainYellow);
   }
   .registrationCheckBtn {
     margin-left: 10px;

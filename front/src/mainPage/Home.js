@@ -6,7 +6,6 @@ import axios from "axios";
 import { RiStarFill } from "react-icons/ri";
 
 import Header from "./header";
-import Map from "../Page/Sample";
 import categoryList from "../DummyData/categoryList";
 
 const Home = ({ selectData, setSelectData }) => {
@@ -16,9 +15,6 @@ const Home = ({ selectData, setSelectData }) => {
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
   };
-
-  // console.log(categoryList);
-  // console.log(selectData);
 
   const popularPosts = [
     {
@@ -47,7 +43,6 @@ const Home = ({ selectData, setSelectData }) => {
   useEffect(() => {
     axios
       .get("http://localhost:4000/items")
-      // .then((data) => console.log(data));
       .then((data) => setItemList(data.data));
   }, []);
 
@@ -92,7 +87,6 @@ const Home = ({ selectData, setSelectData }) => {
           ))}
         </section>
       </MainContainer>
-      {/* <Map /> */}
     </>
   ) : null;
 };

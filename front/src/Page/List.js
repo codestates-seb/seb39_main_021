@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 import Header from "../mainPage/header";
 
-const List = ({ selectData, setSelectData }) => {
+const List = ({ selectData, setSelectData, list }) => {
   const [storeData, setStoreData] = useState(null);
 
   // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
@@ -13,13 +13,15 @@ const List = ({ selectData, setSelectData }) => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:8080/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category="${selectData.category}"`
+        `https://gloom.loca.lt//v1/shop?page=1&size=10&cityId=02&areaId=008&category=%EC%9D%8C%EC%8B%9D%EC%A0%90`
       )
-      .then((filterData) => setStoreData(filterData));
+      .then((filterData) => setStoreData(filterData.data.data));
   }, []);
 
-  console.log(selectData);
-
+  if (storeData === null) {
+    return;
+  }
+  console.log(storeData);
   return (
     <StoreData>
       <Header />
@@ -38,7 +40,7 @@ const List = ({ selectData, setSelectData }) => {
       </section>
       <section>
         {storeData !== null
-          ? storeData.data?.map(
+          ? storeData?.map(
               (
                 individualStore,
                 idx // 구조분해할당으로 리펙토링
@@ -55,14 +57,18 @@ const List = ({ selectData, setSelectData }) => {
                       <img src={individualStore.images[0]} alt="더미데이터" />
                     </div>
                     <div className="informationContainer">
-                      <h3 className="title">{individualStore.name}</h3>
-                      <div className="address">{individualStore.address}</div>
-                      <div className="rating">{individualStore.ratingAVG}</div>
+                      <h3 className="title">상호명{individualStore.name}</h3>
+                      <div className="address">
+                        주소:{individualStore.address}
+                      </div>
+                      <div className="rating">
+                        별{individualStore.ratingAVG}
+                      </div>
                     </div>
                     <section>
-                      <div>{individualStore.reviewCount}</div>
-                      <div>{individualStore.visitorCount}</div>
-                      <div>{individualStore.openCount}</div>
+                      <div>전체리뷰수{individualStore.reviewCount}</div>
+                      <div>방문한 회원수{individualStore.visitorCount}</div>
+                      <div>열려있어요{individualStore.openCount}</div>
                     </section>
                   </StoreContainer>
                 </Link>

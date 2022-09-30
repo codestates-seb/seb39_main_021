@@ -80,8 +80,6 @@ const Image = () => {
     <ImageContainer>
       <div className="imageTitle">사진</div>
       <div className="registrationImg-layout">{getPreviewImg()}</div>
-      <div className="imageTitle">사진</div>
-      <div className="registrationImg-layout">{getPreviewImg()}</div>
       <input
         style={{ display: "none" }}
         type="file"

@@ -3,15 +3,14 @@ import React, { useEffect } from "react";
 // import cn from "classnames";
 // import "../styles/Map.scss";
 
-const { kakao } = window;
-
 const KaKaoMap = () => {
+  const { kakao } = window;
   useEffect(() => {
     let container = document.getElementById("map");
 
     let options = {
       center: new window.kakao.maps.LatLng(33.450701, 126.570667),
-      level: 13,
+      level: 5,
     };
 
     //지도를 생성하는 코드
