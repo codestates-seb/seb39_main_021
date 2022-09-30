@@ -34,6 +34,12 @@ public class Member extends Auditable {
     @Column
     private String businessNumber;
 
+    @Column
+    private String provider;
+
+    @Column
+    private String providerId;
+
     @Enumerated(value = EnumType.STRING)
     @Column
     private Role role;

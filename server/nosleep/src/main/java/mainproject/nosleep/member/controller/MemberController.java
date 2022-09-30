@@ -1,6 +1,7 @@
 package mainproject.nosleep.member.controller;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.auth.entity.PrincipalDetails;
 import mainproject.nosleep.member.dto.MemberRequestDto;
 import mainproject.nosleep.member.dto.MemberResponseDto;
 import mainproject.nosleep.member.entity.Member;
@@ -8,6 +9,7 @@ import mainproject.nosleep.member.mapper.MemberMapper;
 import mainproject.nosleep.member.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,9 +22,9 @@ public class MemberController {
 
 
     @GetMapping("/info")
-    public ResponseEntity<?> getMemberInfo() {
-        Member member = memberService.findMember(1L);
-        MemberResponseDto.Get response = mapper.memberToMemberResponseGet(member);
+    public ResponseEntity<?> getMemberInfo(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+
+        MemberResponseDto.Get response = mapper.memberToMemberResponseGet(principalDetails.getMember());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
