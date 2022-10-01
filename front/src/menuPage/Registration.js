@@ -69,7 +69,6 @@ const Registration = () => {
       longitude: addressLocation.Ma,
       latitude: addressLocation.La,
     };
-    // console.log(addressLocation.La);
     axios({
       method: "post",
       url: "https://gloom.loca.lt/v1/shop",
