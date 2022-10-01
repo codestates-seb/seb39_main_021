@@ -1,45 +1,75 @@
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import Button from "../component/Button";
 import Image from "../component/Image";
 import Star from "../component/Star";
 import Header from "../mainPage/header";
+import axios from "axios";
 
-const ReviewCreate = () => {
-  const {
-    state: { storeInfo },
-  } = useLocation();
-
+const ReviewCreate = ({ list }) => {
   const [buttonYes, setButtonYes] = useState(true);
   const [buttonNo, setButtonNo] = useState(false);
   const [txtChange, setTxtChange] = useState("");
+  const [checked, setChecked] = useState([false, false, false, false, false]);
+  const starNum = [0, 1, 2, 3, 4];
+
+  const navigate = useNavigate();
+
+  const handleStarChange = (index) => {
+    let clickStates = [...checked];
+    for (let i = 0; i < 5; i++) {
+      clickStates[i] = i <= index ? true : false;
+    }
+    setChecked(clickStates);
+  };
 
   const handleOpenStore = () => {
     setButtonYes(!buttonYes);
     setButtonNo(!buttonNo);
   };
 
-  const CreateReviewValue = {
-    name: storeInfo.name,
-    date: "서버에서 받아쓸것.",
-    opened: buttonYes,
-    txt: txtChange,
-    star: "별점을 등록하는 순간 점수를 서버로 보내고, 디테일 페이지에서 띄우는건 어떨까?",
-  };
-
   const handleTxtChange = (e) => {
     setTxtChange(e.target.value);
   };
-  console.log(txtChange);
+
+  const handleCreateReview = () => {
+    let likeCount = 0;
+
+    // 별의 true 개수를 확인하는 함수
+    for (let i = 0; i < checked.length; i++) {
+      if (checked[i] === true) {
+        likeCount = likeCount + 1;
+      }
+    }
+
+    axios({
+      method: "post",
+      url: "https://gloom.loca.lt/v1/review",
+      body: {
+        memberId: 1,
+        reviewBoardId: 1,
+        commentBody: {
+          shopId: 1, // 업체의 아이디
+          memberId: 1, // 고유아이디
+          rating: likeCount, // 별점
+          content: txtChange, // 후기 작성
+          openCheck: buttonYes, // 열었는지 여부확인(boolean)
+          image: [],
+        },
+      },
+    });
+    alert("리뷰 등록 완료 !");
+    navigate("/list");
+  };
 
   return (
     <CreateReview>
       <Header />
       <section className="reviewContainer">
         <div>상호</div>
-        <div className="storeInfo">{storeInfo.name}</div>
+        <div className="storeInfo"></div>
         <div>일시</div>
         <div className="storeInfo">날짜 데이터는 서버에서 받아서 사용할것.</div>
         <div className="opened">장소가 열려있었나요?</div>
@@ -60,7 +90,13 @@ const ReviewCreate = () => {
           </Button>
         </section>
         <div className="itemStarTxt">별점</div>
-        <Star />
+        <div>
+          <Star
+            handleStarChange={handleStarChange}
+            checked={checked}
+            starNum={starNum}
+          />
+        </div>
         <Image />
         <div className="reviewTxtTitle">후기</div>
         <textarea
@@ -68,9 +104,11 @@ const ReviewCreate = () => {
           onChange={handleTxtChange}
           className="reviewTxt"
         ></textarea>
-        <Link to="/reviewDetail" state={{ storeInfo: CreateReviewValue }}>
-          <Button buttonStyle="main"> 등록하기 </Button>
-        </Link>
+        {/* <Link to="/reviewDetail"> */}
+        <Button buttonStyle="main" onClick={handleCreateReview}>
+          등록하기
+        </Button>
+        {/* </Link> */}
       </section>
     </CreateReview>
   );

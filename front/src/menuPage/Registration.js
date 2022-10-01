@@ -1,27 +1,28 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Header from "../mainPage/header";
 import Image from "../component/Image";
 import Button from "../component/Button";
-import KaKaoMap from "../Page/KakaoMap";
-// import Image from "../component/Image";
 
 const Registration = () => {
   // kakao API 를 사용하기 위해 구조분해할당
   const { kakao } = window;
 
-  const storeNumber = useRef(); // 사용자가 입력한 사업장 등록번호
-  const storeName = useRef(); // 사용자가 입력한 업체명
-  const storeAddress = useRef(); // 사용자가 입력한 주소
+  const navigate = useNavigate();
+  const storeNumber = useRef();
+  const storeName = useRef();
+  const storeAddress = useRef();
   const storeInfo = useRef();
 
-  const address = storeAddress.current;
-  const name = storeName.current;
-  const number = storeNumber.current;
-  const info = storeInfo.current;
-  let addressLocation = {};
+  const address = storeAddress.current; // 사용자가 입력한 주소
+  const name = storeName.current; // 사용자가 입력한 업체명
+  const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
+  const info = storeInfo.current; // 사용자가 입력한 사업장 설명
+
+  let addressLocation = {}; // post 요청에 사용될 위도경도를 담기위한 변수
 
   const handleRegistration = () => {
     axios
@@ -57,18 +58,6 @@ const Registration = () => {
   };
 
   const handleCreateRegistration = () => {
-    const infomation = {
-      memberId: 1,
-      category: "음식점",
-      businessNumber: number.value,
-      name: name.value,
-      address: address.value,
-      cityId: "02",
-      areaId: "008",
-      detail: info.value,
-      longitude: addressLocation.Ma,
-      latitude: addressLocation.La,
-    };
     axios({
       method: "post",
       url: "https://gloom.loca.lt/v1/shop",
@@ -86,6 +75,7 @@ const Registration = () => {
         imageList: [],
       },
     });
+    navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
   };
 
   return (
@@ -129,7 +119,6 @@ const Registration = () => {
         >
           확인하기
         </Button>
-        {/* <KaKaoMap /> */}
         <label htmlFor="registrationTxt">상세 설명</label>
         <textarea id="registrationTxt" ref={storeInfo} />
         <label htmlFor="imageUpload">이미지</label>

@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { ImStarFull } from "react-icons/im";
 import styled from "styled-components";
-const Star = () => {
-  const [checked, setChecked] = useState([false, false, false, false, false]);
-  const starNum = [0, 1, 2, 3, 4];
 
-  const handleStarChange = (index) => {
-    let clickStates = [...checked];
-    for (let i = 0; i < 5; i++) {
-      clickStates[i] = i <= index ? true : false;
-    }
-    setChecked(clickStates);
-  };
+const Star = ({ handleStarChange, checked, starNum }) => {
+  // const [checked, setChecked] = useState([false, false, false, false, false]);
+  // const starNum = [0, 1, 2, 3, 4];
+
+  // const handleStarChange = (index) => {
+  //   let clickStates = [...checked];
+  //   for (let i = 0; i < 5; i++) {
+  //     clickStates[i] = i <= index ? true : false;
+  //   }
+  //   setChecked(clickStates);
+  // };
 
   // const sendReview = () => {
   //   let score = checked.filter(Boolean.length);
@@ -42,10 +43,7 @@ const StarContainer = styled.div`
   & svg {
     color: gray;
     cursor: pointer;
-<<<<<<< HEAD
     font-size: 20px;
-=======
->>>>>>> e80f9fbd5f250d6fb818fe6b2ef04e7fdebf8c47
   }
 
   :hover svg {

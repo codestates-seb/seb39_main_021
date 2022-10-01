@@ -11,6 +11,7 @@ import Registration from "../menuPage/Registration";
 import ReviewCreate from "../storeDetailPage/ReviewCreate";
 import MoreReview from "../Page/MoreReview";
 import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
+import RegistrationDetail from "../Page/RegistrationDetail";
 
 const Router = () => {
   const url = "https://gloom.loca.lt";
@@ -71,9 +72,10 @@ const Router = () => {
         <Route path="/businessRegistration" element={<Registration />} />
         <Route path="/toggleMenu" element={<Menu />} />
         <Route path="/businessRegistration" element={<Registration />} />
-        <Route path="/review" element={<ReviewCreate />} />
+        <Route path="/review" element={<ReviewCreate list={list} />} />
         <Route path="/moreReviews" element={<MoreReview />} />
         <Route path="/reviewDetail" element={<ReviewDetail />} />
+        <Route path="/RegistrationDetail" element={<RegistrationDetail />} />
       </Routes>
     </BrowserRouter>
   );
