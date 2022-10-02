@@ -50,6 +50,7 @@ dependencies {
 
 	//AWS
 	implementation 'io.awspring.cloud:spring-cloud-starter-aws:2.4.2'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.307'
 }
 
 tasks.named('test') {
