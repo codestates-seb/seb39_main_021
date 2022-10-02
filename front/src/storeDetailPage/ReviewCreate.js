@@ -17,6 +17,7 @@ const ReviewCreate = ({ list }) => {
 
   const navigate = useNavigate();
 
+  // 별점기능 함수
   const handleStarChange = (index) => {
     let clickStates = [...checked];
     for (let i = 0; i < 5; i++) {
@@ -25,15 +26,18 @@ const ReviewCreate = ({ list }) => {
     setChecked(clickStates);
   };
 
+  // 열었는지 여부를 체크하면 버튼의 색을 바꿔주는 함수
   const handleOpenStore = () => {
     setButtonYes(!buttonYes);
     setButtonNo(!buttonNo);
   };
 
+  // 후기작성의 값을 최신화 시켜주는 함수
   const handleTxtChange = (e) => {
     setTxtChange(e.target.value);
   };
 
+  // 서버로 post 요청을 보내는 함수
   const handleCreateReview = () => {
     let likeCount = 0;
 
@@ -44,24 +48,25 @@ const ReviewCreate = ({ list }) => {
       }
     }
 
-    axios({
-      method: "post",
-      url: "https://gloom.loca.lt/v1/review",
-      body: {
-        memberId: 1,
-        reviewBoardId: 1,
-        commentBody: {
-          shopId: 1, // 업체의 아이디
-          memberId: 1, // 고유아이디
-          rating: likeCount, // 별점
-          content: txtChange, // 후기 작성
-          openCheck: buttonYes, // 열었는지 여부확인(boolean)
-          image: [],
-        },
-      },
-    });
-    alert("리뷰 등록 완료 !");
-    navigate("/list");
+    // axios({
+    //   method: "post",
+    //   url: "https://gloom.loca.lt/v1/review",
+    //   body: {
+    //     memberId: 1,
+    //     reviewBoardId: 1,
+    //     commentBody: {
+    //       // 아래 키값들은 API 명세서를 보고 하드코딩으로 넣어두었습니다.
+    //       shopId: 1, // 업체의 아이디
+    //       memberId: 1, // 고유아이디
+    //       rating: likeCount, // 별점
+    //       content: txtChange, // 후기 작성
+    //       openCheck: buttonYes, // 열었는지 여부확인(boolean)
+    //       image: [],
+    //     },
+    //   },
+    // });
+    // alert("리뷰 등록 완료 !");
+    // navigate("/list");
   };
 
   return (

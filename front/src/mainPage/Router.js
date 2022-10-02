@@ -12,6 +12,7 @@ import ReviewCreate from "../storeDetailPage/ReviewCreate";
 import MoreReview from "../Page/MoreReview";
 import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
 import RegistrationDetail from "../Page/RegistrationDetail";
+import KaKaoMap from "../Page/KakaoMap";
 
 const Router = () => {
   const url = "https://gloom.loca.lt";
@@ -76,6 +77,7 @@ const Router = () => {
         <Route path="/moreReviews" element={<MoreReview />} />
         <Route path="/reviewDetail" element={<ReviewDetail />} />
         <Route path="/RegistrationDetail" element={<RegistrationDetail />} />
+        <Route path="/map" element={<KaKaoMap />} />
       </Routes>
     </BrowserRouter>
   );
