@@ -52,24 +52,31 @@ public class ShopController {
     //현재 위치 기반으로 조회 , 근처 Shop pagination 응답
     @GetMapping()
     public ResponseEntity<?> getListShop(@RequestParam int page,
-                               @RequestParam int size,
-                               @RequestParam String category,
-                               @RequestParam String cityId,
-                               @RequestParam String areaId) { //도시로 조회
+                                         @RequestParam int size,
+                                         @RequestParam String category,
+                                         @RequestParam(required = false) String cityId,
+                                         @RequestParam(required = false) String areaId,
+                                         @RequestParam(required = false) Double longitude,
+                                         @RequestParam(required = false) Double latitude) { //도시로 조회
 
         String sortPoint = "id";
         Map<String, Object> spec = new HashMap<>();
-        if(category != null){
+        if (category != null) {
             Category verifyCategory = Category.of(category);
             spec.put("category", verifyCategory);
         }
         if (cityId != null) {
             spec.put("cityId", cityId);
         }
-        if (!areaId.equals("000")) {
-            spec.put("areaId",areaId);
+        if (areaId !=null){
+            if (!areaId.equals("000")) {
+                spec.put("areaId", areaId);
+            }
         }
-
+        if (longitude != null && latitude != null) {
+            spec.put("longitude", longitude);
+            spec.put("latitude", latitude);
+        }
         Page<Shop> shopPage = shopService.findShops(page - 1, size, spec, sortPoint);
         List<Shop> shops = shopPage.getContent();
 
