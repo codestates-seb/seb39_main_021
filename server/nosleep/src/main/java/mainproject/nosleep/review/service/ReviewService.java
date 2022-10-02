@@ -1,24 +1,24 @@
 package mainproject.nosleep.review.service;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.image.service.ImageService;
 import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
-import mainproject.nosleep.opencheck.service.OpenCheckService;
+
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
 import mainproject.nosleep.shop.entity.Shop;
 import mainproject.nosleep.shop.repository.ShopRepository;
-import mainproject.nosleep.shop.service.ShopService;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import java.util.Optional;
 
 @Service
@@ -31,7 +31,7 @@ public class ReviewService {
     private final ImageService imageService;
 
     @Transactional
-    public Review createReview(Review review){
+    public Review createReview(Review review, List<String> images){
         review.getOpenCheck().addReview(review);
         Review save = reviewRepository.save(review);
 
