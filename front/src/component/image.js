@@ -6,13 +6,11 @@ import Button from "./Button";
 
 const Image = () => {
   const fileInput = useRef();
-  //   const [fileImageUrl, setFileImageUrl] = useState("");
 
   const handleReviewImage = () => {
     fileInput.current.click();
   };
 
-  //   const [deleteImg, setDeleteImg] = useState();
   const [previewImg, setPreviewImg] = useState([]);
 
   const handleInsertImg = (event) => {
@@ -29,21 +27,29 @@ const Image = () => {
       }
     };
 
-    const imageUrl = new FormData();
+    const formData = new FormData();
+    formData.append("flies", event.target.file[0]);
 
-    axios.post("https://gloom.loca.lt/v1/image/upload?type=REVIEW", {
-      header: {
-        "Content-Type": "multipart/form-data",
-        // 멀티파트
-      },
-      data: {
-        file: event.target.files[0],
-      },
-    });
-    console.log(`${previewImg} : ${event.target.files[0]}`);
+    axios
+      .post("https://gloom.loca.lt/v1/image/upload?type=REVIEW", {
+        header: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: {
+          file: formData,
+        },
+      })
+      .then(console.log("성공"))
+      .catch((err) => console.log(err));
+    console.log(`${previewImg} : ${event.target.files}`);
   };
 
   const deleteImage = () => {
+    axios({
+      method: "delete",
+      url: "https://gloom.loca.lt/v1/image",
+    }).catch((err) => console.log(err));
+
     setPreviewImg([]);
   };
 
@@ -60,8 +66,6 @@ const Image = () => {
           alt="이미지 없음"
           className="noneImg"
         />
-        // 배열의 길이가 변할 때 마다 axios post 요청 보낼것.
-        // base64 변환할 필요 없음.
       );
     } else {
       return previewImg.map((imgs, index) => {
