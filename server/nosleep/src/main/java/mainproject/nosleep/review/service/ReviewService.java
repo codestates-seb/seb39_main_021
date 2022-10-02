@@ -1,7 +1,6 @@
 package mainproject.nosleep.review.service;
 
 import lombok.RequiredArgsConstructor;
-import mainproject.nosleep.image.service.ImageService;
 import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
 import mainproject.nosleep.opencheck.service.OpenCheckService;
 import mainproject.nosleep.review.entity.Review;
@@ -27,11 +26,12 @@ import java.util.Optional;
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ShopRepository shopRepository;
+
     private final OpenCheckRepository openCheckRepository;
     private final ImageService imageService;
 
     @Transactional
-    public Review createReview(Review review, List<String> images){
+    public Review createReview(Review review){
         review.getOpenCheck().addReview(review);
         Review save = reviewRepository.save(review);
 
@@ -89,10 +89,10 @@ public class ReviewService {
     }
 
 
-    public void upvoteCountPlus(Long reviewId){
-        reviewRepository.upvotePlus(reviewId);
+    public void upvoteCountPlus(Review review){
+        reviewRepository.upvotePlus(review.getId());
     }
-    public void upvoteCountMinus(Long reviewId){
-        reviewRepository.upvoteMinus(reviewId);
+    public void upvoteCountMinus(Review review){
+        reviewRepository.upvoteMinus(review.getId());
     }
 }

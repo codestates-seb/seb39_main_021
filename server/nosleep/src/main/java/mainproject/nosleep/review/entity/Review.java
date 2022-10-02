@@ -2,7 +2,6 @@ package mainproject.nosleep.review.entity;
 
 import lombok.*;
 import mainproject.nosleep.audit.Auditable;
-import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.shop.entity.Shop;
