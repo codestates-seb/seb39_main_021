@@ -16,6 +16,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReviewResponseDto {
+    @Getter
+    @NoArgsConstructor
+    public static class CreateReview{
+        private LocalDateTime createdAt;
+        private Integer rating;
+    }
+
     @Setter
     @Getter
     @NoArgsConstructor

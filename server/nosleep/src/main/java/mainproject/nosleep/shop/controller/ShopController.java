@@ -31,7 +31,7 @@ public class ShopController {
 
         Shop shop = mapper.shopPostToShop(requestBody);
         Shop createdShop = shopService.createShop(shop, requestBody.getImageList());
-        return new ResponseEntity<>(mapper.shopToCreateDetailPage(createdShop), HttpStatus.CREATED);
+        return new ResponseEntity<>(/*mapper.shopToCreateDetailPage(createdShop),*/ HttpStatus.CREATED);
     }
 
     @PatchMapping("/{shopId}")

@@ -30,7 +30,7 @@ public class ReviewController {
     public ResponseEntity<?> postShop(@Valid @RequestBody ReviewRequestDto.Create requestBody) {
         Review review = mapper.reviewCreateToReview(requestBody);
         Review createdReview = reviewService.createReview(review, requestBody.getImageList());
-        return new ResponseEntity<>(mapper.reviewToDetailReview(createdReview), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.reviewToCreateReview(createdReview), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{reviewId}")

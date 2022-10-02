@@ -12,6 +12,9 @@ public interface ReviewMapper {
     Review reviewCreateToReview(ReviewRequestDto.Create request);
     Review reviewPatchToReview(ReviewRequestDto.Update request);
 
+
+    ReviewResponseDto.CreateReview reviewToCreateReview(Review review);
+
     ReviewResponseDto.DetailReview reviewToDetailReview(Review review);
 
 

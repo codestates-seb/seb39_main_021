@@ -7,4 +7,6 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
 
     Image findById(long id);
     void deleteById(long id);
+
+    Image findByUrl(String url);
 }
