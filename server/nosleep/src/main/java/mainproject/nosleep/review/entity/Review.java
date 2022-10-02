@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Review extends Auditable {
     @Id
@@ -50,13 +49,20 @@ public class Review extends Auditable {
     @OneToMany(mappedBy = "review")
     private List<Image> images = new ArrayList<>();
 
-
-    public Review(Integer rating, String content) {
-;
+    @Builder
+    public Review(Long id, Integer rating, String content, Long upvoteCount, Shop shop, Member member, List<Upvote> upvotes, OpenCheck openCheck, List<Image> images) {
+        this.id = id;
         this.rating = rating;
         this.content = content;
-        this.status = ReviewStatus.common;
+        this.upvoteCount = upvoteCount;
+        this.shop = shop;
+        this.member = member;
+        this.upvotes = upvotes;
+        this.openCheck = openCheck;
+        this.images = images;
     }
+
+
 
     public void addOpenCheck(OpenCheck openCheck){
         this.openCheck = openCheck;

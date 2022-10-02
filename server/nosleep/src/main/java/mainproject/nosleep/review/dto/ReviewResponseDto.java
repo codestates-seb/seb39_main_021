@@ -1,5 +1,6 @@
 package mainproject.nosleep.review.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 public class ReviewResponseDto {
     @Getter
+    @Setter
     @NoArgsConstructor
     public static class CreateReview{
         private LocalDateTime createdAt;
