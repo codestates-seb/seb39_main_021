@@ -28,15 +28,19 @@ const Image = () => {
         setPreviewImg([...previewImg, previewImgURL]);
       }
     };
-    axios.post("", {
+
+    const imageUrl = new FormData();
+
+    axios.post("https://gloom.loca.lt/v1/image/upload?type=REVIEW", {
       header: {
-        // content: "application.json",
+        "Content-Type": "multipart/form-data",
         // 멀티파트
       },
-      body: {
-        fileInput: event.target.files[0],
+      data: {
+        file: event.target.files[0],
       },
     });
+    console.log(`${previewImg} : ${event.target.files[0]}`);
   };
 
   const deleteImage = () => {
@@ -61,7 +65,6 @@ const Image = () => {
       );
     } else {
       return previewImg.map((imgs, index) => {
-        console.log(imgs);
         return (
           <span className="imgBox" key={index}>
             <img

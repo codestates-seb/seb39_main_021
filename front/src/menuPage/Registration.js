@@ -46,7 +46,7 @@ const Registration = () => {
     //addressSearch 함수(사용자입력값,콜백함수)
     geocoder.addressSearch(`${address.value}`, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
-        let coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         addressLocation = coords;
         alert(`${address.value} 가 맞나요?`);
         console.log(coords);

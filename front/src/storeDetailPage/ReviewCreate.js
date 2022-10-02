@@ -20,6 +20,7 @@ const ReviewCreate = ({ list }) => {
   // 별점기능 함수
   const handleStarChange = (index) => {
     let clickStates = [...checked];
+
     for (let i = 0; i < 5; i++) {
       clickStates[i] = i <= index ? true : false;
     }
@@ -47,26 +48,22 @@ const ReviewCreate = ({ list }) => {
         likeCount = likeCount + 1;
       }
     }
-
-    // axios({
-    //   method: "post",
-    //   url: "https://gloom.loca.lt/v1/review",
-    //   body: {
-    //     memberId: 1,
-    //     reviewBoardId: 1,
-    //     commentBody: {
-    //       // 아래 키값들은 API 명세서를 보고 하드코딩으로 넣어두었습니다.
-    //       shopId: 1, // 업체의 아이디
-    //       memberId: 1, // 고유아이디
-    //       rating: likeCount, // 별점
-    //       content: txtChange, // 후기 작성
-    //       openCheck: buttonYes, // 열었는지 여부확인(boolean)
-    //       image: [],
-    //     },
-    //   },
-    // });
-    // alert("리뷰 등록 완료 !");
-    // navigate("/list");
+    console.log(buttonYes);
+    return axios({
+      method: "post",
+      url: "https://gloom.loca.lt/v1/review",
+      data: {
+        // 아래 키값들은 API 명세서를 보고 하드코딩으로 넣어두었습니다.
+        shopId: 1, // 업체의 아이디
+        memberId: 1, // 고유아이디
+        rating: likeCount, // 별점
+        content: txtChange, // 후기 작성
+        openCheck: buttonYes, // 열었는지 여부확인(boolean)
+        imageList: [],
+      },
+    })
+      .then(alert("리뷰 등록 완료 !"))
+      .then(navigate("/"));
   };
 
   return (

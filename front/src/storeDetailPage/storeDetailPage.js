@@ -83,6 +83,7 @@ const StoreDetail = () => {
         <span className="reviews">이용후기</span>
         <div className="reviewPoint">
           <span className="reviewsLike">
+            {/* 구조분해 할당으로 코드 리팩토링 */}
             전체 평점:{storeItemDetail.like}점
           </span>
           <span>전체 {storeItemDetail.reviews.length}개</span>

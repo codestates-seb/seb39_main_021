@@ -12,7 +12,7 @@ const KaKaoMap = () => {
   const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 생성 인스턴스
 
   useEffect(() => {
-    let container = document.getElementById("map"); // 1. 엘리먼트 선택
+    const container = document.getElementById("map"); // 1. 엘리먼트 선택
     let lat;
     let lon;
 
@@ -45,29 +45,26 @@ const KaKaoMap = () => {
         let locPosition = new kakao.maps.LatLng(lat, lon);
         // 윈도우에 표시될 내용
         let message = '<div style="padding:5px;">현위치</div>';
-
         console.log(lat, lon);
+
         displayMarker(locPosition, message);
       });
     } else {
-      var locPosition = new kakao.maps.LatLng(
-          37.4812845080678,
-          126.952713197762
-        ),
+      var locPosition = new kakao.maps.LatLng(33.499655, 126.531362), // 본인 좌표를 못받았을 경우 기본위치로 설정.
         message = "현재 위치를 알 수 없어 기본 위치로 이동합니다.";
-
+      console.log("err");
       displayMarker(locPosition, message);
     }
 
     // 3. 옵션을 설정하는데, 지도의 중심이 되는 위치는 2번에서 받았던 내 위치 좌표를, 줌은 5단계로 고정.
-    let options = {
-      center: new kakao.maps.LatLng(lat, lon),
+    const options = {
+      center: new kakao.maps.LatLng(35.85133, 127.734086),
       level: 13,
     };
     console.log(lat, lon);
 
     // 4. 지도 인스턴스 생성.(엘리먼트, 옵션)
-    let map = new kakao.maps.Map(container, options);
+    const map = new kakao.maps.Map(container, options);
   }, []);
 
   const markerPosition = [
@@ -81,16 +78,18 @@ const KaKaoMap = () => {
     },
   ];
 
-  // 여러개의 마커를 생성하기 위한 반복문
-  for (let i = 0; i < markerPosition.length; i++) {
-    // 이미지의 사이즈를 정하는 인스턴스 생성
-    // const jejuMarker = new kakao.maps.Marker({
-    //   map: map, // 마커에 표시할 지도
-    //   position: markerPosition[i].latlng, //마커에 표시할 위치
-    //   title: markerPosition[i].title,
-    //   image: markerImage,
-    // });
-  }
+  const createMarker = () => {
+    // 여러개의 마커를 생성하기 위한 반복문
+    for (let i = 0; i < markerPosition.length; i++) {
+      // 이미지의 사이즈를 정하는 인스턴스 생성
+      // const jejuMarker = new kakao.maps.Marker({
+      //   map: map, // 마커에 표시할 지도
+      //   position: markerPosition[i].latlng, //마커에 표시할 위치
+      //   title: markerPosition[i].title,
+      //   image: markerImage,
+      // });
+    }
+  };
   const marker = new kakao.maps.Marker({
     // position: { jejudo },
   });
