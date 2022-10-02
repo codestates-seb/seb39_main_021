@@ -30,7 +30,7 @@ public class ShopController {
     public ResponseEntity<?> postShop(@Valid @RequestBody ShopRequestDto.Create requestBody) {
 
         Shop shop = mapper.shopPostToShop(requestBody);
-        Shop createdShop = shopService.createShop(shop, requestBody.getImageList());
+        Shop createdShop = shopService.createShop(shop, requestBody.getImageList(), requestBody.getMemberId());
         return new ResponseEntity<>(/*mapper.shopToCreateDetailPage(createdShop),*/ HttpStatus.CREATED);
     }
 

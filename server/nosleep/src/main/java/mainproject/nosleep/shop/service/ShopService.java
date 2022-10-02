@@ -2,6 +2,7 @@ package mainproject.nosleep.shop.service;
 
 import lombok.RequiredArgsConstructor;
 import mainproject.nosleep.image.service.ImageService;
+import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
 import mainproject.nosleep.shop.entity.Shop;
@@ -28,8 +29,9 @@ public class ShopService {
     private final ImageService imageService;
 
 
-    public Shop createShop(Shop shop,  List<String> images) {
-
+    public Shop createShop(Shop shop,  List<String> images, Long memberId) {
+        Member member = new Member(memberId);
+        shop.setMember(member);
         Shop save = shopRepository.save(shop);
         imageService.updateImage(images, save);
         return save;
