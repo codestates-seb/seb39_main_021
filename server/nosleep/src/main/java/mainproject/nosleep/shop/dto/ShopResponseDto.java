@@ -103,6 +103,8 @@ public class ShopResponseDto {
         private Long id;
         private String name;
         private String address;
+        private Double longitude;
+        private Double latitude;
         private Double ratingAVG;
         private Long reviewCount;
         private Long visitorCount;
