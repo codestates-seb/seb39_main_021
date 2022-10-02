@@ -1,4 +1,4 @@
-package mainproject.nosleep.config;
+package mainproject.nosleep.config.filter;
 
 import javax.servlet.*;
 import javax.servlet.FilterConfig;

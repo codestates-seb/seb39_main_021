@@ -30,8 +30,8 @@ public class MemberController {
     }
 
     @PatchMapping("")
-    public ResponseEntity<?> patchMember(@RequestBody MemberRequestDto.Patch requestBody) {
-        Member member = memberService.findMember(1L);
+    public ResponseEntity<?> patchMember(@RequestBody MemberRequestDto.Patch requestBody, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Member member = principalDetails.getMember();
 
         Member requestedMember = mapper.memberPatchToMember(requestBody);
         requestedMember.setId(member.getId());
@@ -44,8 +44,8 @@ public class MemberController {
     }
 
     @DeleteMapping("")
-    public ResponseEntity<?> deleteMember() {
-        Member member = memberService.findMember(1L);
+    public ResponseEntity<?> deleteMember(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Member member = principalDetails.getMember();
 
         Member deletedMember = memberService.deleteMember(member);
 
@@ -53,12 +53,12 @@ public class MemberController {
         return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/test")
-    public ResponseEntity<?> deleteMemberCompletely() {
-        memberService.deleteMembersCompletely(1L);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+//    @DeleteMapping("/test")
+//    public ResponseEntity<?> deleteMemberCompletely() {
+//        memberService.deleteMembersCompletely(1L);
+//
+//        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//    }
 
 
 }

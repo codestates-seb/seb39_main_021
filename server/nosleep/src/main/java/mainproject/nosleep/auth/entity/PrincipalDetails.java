@@ -14,7 +14,7 @@ import java.util.Map;
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private Member member;
-    private Map<String, Object> attributes; // 추가
+    private Map<String, Object> attributes;
 
     public PrincipalDetails(Member member) {
         this.member = member;

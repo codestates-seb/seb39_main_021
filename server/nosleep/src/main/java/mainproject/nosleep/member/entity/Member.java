@@ -70,9 +70,9 @@ public class Member extends Auditable {
     //ENUM 정의
 
     public enum Role {
-        NORMAL("일반 회원"),
-        BUSINESS("사업자 회원"),
-        ADMIN("관리자");
+        NORMAL("ROLE_NORMAL"),
+        BUSINESS("ROLE_BUSINESS"),
+        ADMIN("ROLE_ADMIN");
 
 
         @Getter

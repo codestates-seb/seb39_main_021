@@ -23,6 +23,7 @@ public class MemberService {
 
         return memberRepository.findById(id);
     }
+    public Member findMemberByEmail(String email) {return memberRepository.findByEmail(email);}
 
     public Member findMemberByNickname(String nickname) {return memberRepository.findByNickname(nickname);}
 
@@ -40,10 +41,11 @@ public class MemberService {
                 .ifPresent(status -> foundMember.setStatus(status));
         Optional.ofNullable(member.getRole())
                 .ifPresent(role -> foundMember.setRole(role));
-        if (foundMember.getRole().equals(Member.Role.BUSINESS)) {
+        if (foundMember.getRole() == (Member.Role.BUSINESS)) {
             Optional.ofNullable(member.getBusinessNumber())
                     .ifPresent(businessNumber -> foundMember.setBusinessNumber(businessNumber));
         }
+
         return memberRepository.save(foundMember);
     }
 
@@ -99,6 +101,12 @@ public class MemberService {
 //        return Member.builder().email("business@kakao.com").nickname("testBusiness").status(Member.Status.ACTIVE).role(Member.Role.BUSINESS).build();
 //    }
 //
+
+    public boolean isMemberBusiness(Member member) {
+        if (member.getRole() == Member.Role.BUSINESS || member.getRole() == Member.Role.ADMIN)
+            return true;
+        else return false;
+    }
     public Member findVerifiedMember(Long id) {
 
 
