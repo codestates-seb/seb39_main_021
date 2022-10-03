@@ -54,6 +54,7 @@ public class ShopController {
     public ResponseEntity<?> getListShop(@RequestParam int page,
                                          @RequestParam int size,
                                          @RequestParam String category,
+                                         @RequestParam(required = false) String sort,
                                          @RequestParam(required = false) String cityId,
                                          @RequestParam(required = false) String areaId,
                                          @RequestParam(required = false) Double longitude,
@@ -79,6 +80,9 @@ public class ShopController {
         }
         Page<Shop> shopPage = shopService.findShops(page - 1, size, spec, sortPoint);
         List<Shop> shops = shopPage.getContent();
+        if(sort ==null || sort.equals("distance")){
+            shops = sortShopList(longitude, latitude, shops);
+        }
 
         return new ResponseEntity<>(new MultiResponseDto(
                 mapper.shopListToPages(shops),
@@ -90,5 +94,18 @@ public class ShopController {
     public ResponseEntity<?> deleteShop(@PathVariable Long shopId) {
         shopService.deleteShop(shopId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private List<Shop> sortShopList(Double longitude, Double latitude, List<Shop> shops) {
+        List<Shop> sortShops = shopService.distanceSort(shops, latitude, longitude);
+        for(Shop ss:sortShops) {
+            for (Shop s: shops) {
+                if(ss.getId() == s.getId()){
+                    ss.setLatitude(s.getLatitude());
+                    ss.setLongitude(s.getLongitude());
+                }
+            }
+        }
+        return sortShops;
     }
 }

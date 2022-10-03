@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Shop extends Auditable {
+public class Shop extends Auditable implements Comparable<Shop>  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,7 +61,7 @@ public class Shop extends Auditable {
     private Long openCount = 0L;
 
 
-    @Column(nullable = false)
+    @Column
     private ShopStatus status = ShopStatus.common; //초기화
 
 
@@ -78,21 +78,26 @@ public class Shop extends Auditable {
     private List<Image> images = new ArrayList<>();
 
 
-
- // 테스트를 위한 빌드
-
-    public Shop( Double ratingAVG) {
-
-        this.category = Category.Etc;
-        this.businessNumber = "123456";
-        this.name = "테스트 더미값";
-        this.address = "TEST address";
-        this.detail = "TEST detail";
-        this.longitude = 123.456;
-        this.latitude = 123.789;
+    public Shop(Category category, String name,  String address, Double ratingAVG, Long reviewCount, Long visitorCount, Long openCount, List<Image> images) {
+        this.category = category;
+        this.name = name;
+        this.address = address;
         this.ratingAVG = ratingAVG;
-        this.reviewCount = 0L;
+        this.reviewCount = reviewCount;
+        this.visitorCount = visitorCount;
+        this.openCount = openCount;
+        this.images = images;
     }
 
+    private double distanceCalculation(){
+        return Math.sqrt(Math.pow(this.latitude, 2) + Math.pow(this.longitude, 2));
+    }
 
+    @Override
+    public int compareTo(Shop o) {
+        double result = this.distanceCalculation() - o.distanceCalculation();
+        if(result >0.0) return 1;
+        else if(result == 0.0) return 0;
+        else return -1;
+    }
 }
