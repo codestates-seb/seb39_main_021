@@ -6,7 +6,6 @@ import { RiStarFill } from "react-icons/ri";
 
 import Header from "./Header";
 import Button from "../component/Button";
-import KaKaoMap from "../component/KakaoMap";
 import StoreMap from "../component/StoreMap";
 
 const StoreDetail = () => {
@@ -46,11 +45,6 @@ const StoreDetail = () => {
         <span className="storeDataAddress">주소</span>
         <p>{storeItemDetail.address}</p>
         <div>네이버 지도로 길찾기</div>
-        {/* <KaKaoMap
-          storeId={storeItemDetail.id}
-          storeLat={storeItemDetail.latitude}
-          storeLng={storeItemDetail.longitude}
-        /> */}
         <StoreMap
           storeId={storeItemDetail.id}
           storeLat={storeItemDetail.latitude}
