@@ -33,7 +33,6 @@ const StoreMap = ({ storeLat, storeLng }) => {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function () {
-        console.log(storeLat);
         let locPosition = new kakao.maps.LatLng(storeLng, storeLat);
         let message = '<div style="padding:5px;">여기</div>';
 

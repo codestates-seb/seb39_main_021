@@ -6,6 +6,7 @@ import Button from "./Button";
 
 const Image = () => {
   const fileInput = useRef();
+  const [imageUrlList, setImageUrlList] = useState([]);
 
   const handleReviewImage = () => {
     fileInput.current.click();
@@ -28,32 +29,46 @@ const Image = () => {
     };
 
     const formData = new FormData();
-    formData.append("flies", event.target.file[0]);
+    formData.append("file", event.target.files[0]);
 
-    axios
-      .post("https://gloom.loca.lt/v1/image/upload?type=REVIEW", {
-        header: {
-          "Content-Type": "multipart/form-data",
-        },
-        data: {
-          file: formData,
-        },
+    axios({
+      headers: {
+        "Content-Type": "multipart/form-data",
+        "Access-Control-Allow-Origin": "*",
+      },
+      url: "https://gloom.loca.lt/v1/image/upload?type=REVIEW",
+      method: "post",
+      data: formData,
+    })
+      .then((info) => {
+        setImageUrlList([...imageUrlList, info.data.urlList]);
       })
-      .then(console.log("성공"))
       .catch((err) => console.log(err));
-    console.log(`${previewImg} : ${event.target.files}`);
   };
 
   const deleteImage = () => {
-    axios({
-      method: "delete",
-      url: "https://gloom.loca.lt/v1/image",
-    }).catch((err) => console.log(err));
-
-    setPreviewImg([]);
+    // axios({
+    //   method: "delete",
+    //   url: "https://gloom.loca.lt/v1/image",
+    //   data: { urlList: imageUrlList },
+    // }).catch((err) => console.log(err));
+    // setPreviewImg([]);
+    console.log("이미지 URL : ", imageUrlList);
   };
 
   const deletePreviewImg = (index) => {
+    const filter = imageUrlList.filter((image, idx) => idx !== index);
+    const deleteFilter = imageUrlList.filter((image, idx) => idx === index);
+    console.log(filter);
+    console.log(deleteFilter);
+    axios({
+      url: "https://gloom.loca.lt/v1/image",
+      method: "delete",
+      data: { urlList: deleteFilter[0] },
+    })
+      .then(setImageUrlList(filter))
+      .catch((err) => console.log(err));
+
     const imgView = previewImg.filter((img, imgIndex) => imgIndex !== index);
     setPreviewImg([...imgView]);
   };
