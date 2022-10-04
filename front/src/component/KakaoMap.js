@@ -19,9 +19,8 @@ const KaKaoMap = () => {
       lat: location[i].latitude,
       lng: location[i].longitude,
     });
+    console.log(arr[i].name);
   }
-
-  console.log(arr);
 
   const imageSrc =
     "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
@@ -86,7 +85,7 @@ const KaKaoMap = () => {
         map: map,
         position: arr[i].latlng,
         title: arr[i].name,
-        image: markerImage,
+        // image: markerImage,
       });
     }
   }, []);

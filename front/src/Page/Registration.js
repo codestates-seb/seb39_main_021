@@ -77,7 +77,7 @@ const Registration = () => {
         imageList: [],
       },
     }).catch((err) => console.log(err));
-    // navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
+    navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
   };
 
   return (
