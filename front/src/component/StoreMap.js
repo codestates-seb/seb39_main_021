@@ -30,6 +30,7 @@ const StoreMap = ({ storeLat, storeLng }) => {
       infoWindow.open(map, marker);
       map.setCenter(localPosition);
     };
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function () {
         console.log(storeLat);
@@ -44,10 +45,12 @@ const StoreMap = ({ storeLat, storeLng }) => {
       console.log("err");
       displayMarker(locPosition, message);
     }
+
     const options = {
       center: new kakao.maps.LatLng(35.85133, 127.734086),
       level: 5,
     };
+
     const map = new kakao.maps.Map(container, options);
   }, []);
 
