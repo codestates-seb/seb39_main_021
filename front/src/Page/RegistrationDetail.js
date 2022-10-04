@@ -61,6 +61,13 @@ const RegistrationDetail = () => {
     });
   };
 
+  // 시간 남으면 모달창으로 구현
+  const handleShopDelete = () => {
+    axios
+      .delete(`https://gloom.loca.lt/v1/shop/4`)
+      .then((result) => console.log(result));
+  };
+
   if (information === null) {
     return;
   }
@@ -105,6 +112,9 @@ const RegistrationDetail = () => {
       </ChangeableStoreInfoContainer>
       <Button width="100%" onClick={handleShopInfoChange}>
         수정하기
+      </Button>
+      <Button width="100%" onClick={handleShopDelete}>
+        삭제하기
       </Button>
     </Container>
   );
