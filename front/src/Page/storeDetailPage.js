@@ -4,7 +4,8 @@ import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 import { RiStarFill } from "react-icons/ri";
 
-import Header from "../mainPage/header";
+import Header from "./Header";
+import Button from "../component/Button";
 
 /*
     카테고리 선택 => 해당 카테고리 페이지로 이동
@@ -50,7 +51,12 @@ const StoreDetail = () => {
               storeInfo: storeItemDetail,
             }}
           >
-            방문 확인하기
+            <Button buttonStyle="main" width="100px" className="Confirmation">
+              방문 확인하기
+            </Button>
+            <Button buttonStyle="main" width="100px" className="Confirmation">
+              방문 확인하기
+            </Button>
           </Link>
         </div>
         <span className="storeDataAddress">주소</span>
@@ -75,16 +81,23 @@ const StoreDetail = () => {
         <span className="storeInfo">상세설명</span>
         <p className="storeInfoTxt">{storeItemDetail.txt}</p>
         <span className="reviews">이용후기</span>
-        <div>
-          <span className="reviewsLike">별{storeItemDetail.like}점</span>
+        <div className="reviewPoint">
+          <span className="reviewsLike">
+            {/* 구조분해 할당으로 코드 리팩토링 */}
+            전체 평점:{storeItemDetail.like}점
+          </span>
           <span>전체 {storeItemDetail.reviews.length}개</span>
         </div>
         <section>
           {/* 별점 많은 순으로 3개 노출 코드로 변경할것. */}
           {storeItemDetail.reviews.map((reviewItems, index) => (
-            <div key={index}>
+            <div key={index} className="reviewContainer">
               <span>{reviewItems.nickName}</span>
-              <span>별{reviewItems.star}</span>
+              <div className="reviewStar">
+                <RiStarFill className="star" />
+                {reviewItems.star}
+                {/* 서버와 통신 후 받아온 숫자 or 문자값을 반복문을 사용하여 별 찍어낼것. */}
+              </div>
               <p>{reviewItems.reviewTxt}</p>
             </div>
           ))}
@@ -165,5 +178,28 @@ const StoreContainer = styled.main`
   }
   .moreReviews {
     color: white;
+  }
+  .star {
+    color: #ffc700;
+    margin-right: 5px;
+  }
+  .reviewContainer {
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .reviewContainer span {
+    color: white;
+  }
+  .reviewPoint {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .reviewPoint span {
+    color: white;
+  }
+  .reviewStar {
+    margin: 5px 0;
   }
 `;
