@@ -2,14 +2,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import { RiRoadMapLine } from "react-icons/ri";
 
 import Header from "./Header";
-import categoryList from "../DummyData/categoryList";
 
 const List = ({ selectData }) => {
   const [storeData, setStoreData] = useState(null);
   const location = useLocation();
-  console.log(location);
   const categoryName = location.state.categoryInfo;
 
   // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
@@ -37,8 +36,8 @@ const List = ({ selectData }) => {
           </Link>
         </button>
         <button className="filterMap">
-          <Link to="/MapList" className="filterMap-txt">
-            {/* <RiRoadMapLine /> */}
+          <Link to="/map" className="filterMap-txt">
+            <RiRoadMapLine />
           </Link>
         </button>
       </section>
@@ -53,7 +52,7 @@ const List = ({ selectData }) => {
                   key={individualStore.id}
                   to={"/storeDetailPage"}
                   state={{
-                    storeData: storeData,
+                    storeData: individualStore.id,
                   }}
                 >
                   <StoreContainer key={individualStore.id}>
@@ -62,12 +61,12 @@ const List = ({ selectData }) => {
                       {/* 이미지 있는지 확인해볼것. */}
                     </div>
                     <div className="informationContainer">
-                      <h3 className="title">상호명{individualStore.name}</h3>
+                      <h3 className="title">상호명 : {individualStore.name}</h3>
                       <div className="address">
-                        주소:{individualStore.address}
+                        주소 : {individualStore.address}
                       </div>
                       <div className="rating">
-                        별{individualStore.ratingAVG}
+                        별 : {individualStore.ratingAVG}
                       </div>
                     </div>
                     <section>

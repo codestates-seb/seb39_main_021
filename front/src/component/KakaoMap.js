@@ -1,18 +1,23 @@
 /* global kakao */
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const KaKaoMap = () => {
+const KaKaoMap = ({ storeLat, storeLng, storeId }) => {
   const { kakao } = window;
+  const [storeLocation, setStoreLocation] = useState();
 
   const imageSrc =
     "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
   const imageSize = new kakao.maps.Size(24, 35);
   const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
   useEffect(() => {
     const container = document.getElementById("map");
     let lat;
     let lon;
+    // axios({
+    //   url: `https://gloom.loca.lt/v1/shop/${storeId}`,
+    //   method: "get",
+    // }).then((info) => setStoreLocation(info));
 
     const displayMarker = (localPosition, message) => {
       const marker = new kakao.maps.Marker({
@@ -54,34 +59,14 @@ const KaKaoMap = () => {
       center: new kakao.maps.LatLng(35.85133, 127.734086),
       level: 5,
     };
+    // 내 중심으로 지도가 생성되고, 업체의 마커만 찍어준다.
+    // => 전체 지도보기를 봣을 때,
+
+    // 하나의 업체만 보았을때는 하나의 업체의 마커만 찍어주면 된다.
 
     const map = new kakao.maps.Map(container, options);
   }, []);
-
-  const markerPosition = [
-    {
-      title: "제주도",
-      latlng: new kakao.maps.LatLng(33.450701, 126.570667),
-    },
-    {
-      title: "백록담",
-      latlng: new kakao.maps.LatLng(33.36249480036842, 126.53274754973836),
-    },
-  ];
-
-  // 여러개의 마커를 찍는 함수
-  // 서버에서 위도, 경도를 받아서 사용할 예정.
-  const createMarker = () => {
-    for (let i = 0; i < markerPosition.length; i++) {
-      // 이미지의 사이즈를 정하는 인스턴스 생성
-      // const jejuMarker = new kakao.maps.Marker({
-      //   map: map, // 마커에 표시할 지도
-      //   position: markerPosition[i].latlng, //마커에 표시할 위치
-      //   title: markerPosition[i].title,
-      //   image: markerImage,
-      // });
-    }
-  };
+  console.log(storeLocation);
 
   return (
     <div className="Map" style={{ height: "100px", margin: "50px" }}>

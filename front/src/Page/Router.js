@@ -12,7 +12,7 @@ import ReviewCreate from "./ReviewCreate";
 import MoreReview from "./MoreReview";
 import ReviewDetail from "./ReviewDetailPage";
 import RegistrationDetail from "./RegistrationDetail";
-import KaKaoMap from "./KakaoMap";
+import KaKaoMap from "../component/KakaoMap";
 
 const Router = () => {
   const url = "https://gloom.loca.lt";

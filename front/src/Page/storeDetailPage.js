@@ -6,13 +6,8 @@ import { RiStarFill } from "react-icons/ri";
 
 import Header from "./Header";
 import Button from "../component/Button";
-
-/*
-    카테고리 선택 => 해당 카테고리 페이지로 이동
-    => 리스트중 아이탬 선택 => axios 요청 
-    ( url 은 업체 리스트에서 아디값(useParams)을 받아 와야한다? )
-    => 이후 id 값 뒤에 추가 url 이 붙으면서 데이터를 받아오는게 좋을듯 싶은데,,,
-*/
+import KaKaoMap from "../component/KakaoMap";
+import StoreMap from "../component/StoreMap";
 
 const StoreDetail = () => {
   const [storeItemDetail, setStoreItemDetail] = useState(null);
@@ -20,24 +15,16 @@ const StoreDetail = () => {
     state: { storeData },
   } = useLocation();
 
-  const [store] = storeData?.stores;
-  // 배열 구조분해할당 => 배열의 0번째
-
   useEffect(() => {
-    setStoreItemDetail(store);
-    // axios
-    //   .get(
-    //     "https://bizno.net/api/fapi?key=eWhqMDQzOUBuYXZlci5jb20g&gb=1&q=3988701116"
-    //   )
-    //   .then((data) => console.log(JSON.stringify(data)));
+    axios
+      .get(`https://gloom.loca.lt/v1/shop/${storeData}`)
+      .then((data) => setStoreItemDetail(data.data));
   }, []);
 
   if (storeItemDetail === null) {
     return;
   }
-  // early return => 의도를 담기 위해 앞에서 if 문으로 리턴해도 좋다.
-  // 실무에서 사용하는 방법.
-  console.log(storeItemDetail);
+
   return (
     <StoreContainer>
       <Header />
@@ -54,30 +41,21 @@ const StoreDetail = () => {
             <Button buttonStyle="main" width="100px" className="Confirmation">
               방문 확인하기
             </Button>
-            <Button buttonStyle="main" width="100px" className="Confirmation">
-              방문 확인하기
-            </Button>
           </Link>
         </div>
         <span className="storeDataAddress">주소</span>
         <p>{storeItemDetail.address}</p>
-        <a
-          href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EA%B8%B8%EC%B0%BE%EA%B8%B0"
-          className="naverMap"
-        >
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbPTbYpFFZb3FjObdDqyvsPPsYyCWFEwEBvQ&usqp=CAU"
-            alt="네이버 지도 아이콘"
-            className="naverMapIcon"
-          />
-          네이버 지도로 길찾기
-        </a>
-        <div>
-          <img
-            src="https://cdn.pixabay.com/photo/2014/11/10/11/43/map-525349__340.png"
-            alt="더미데이터 지도"
-          ></img>
-        </div>
+        <div>네이버 지도로 길찾기</div>
+        {/* <KaKaoMap
+          storeId={storeItemDetail.id}
+          storeLat={storeItemDetail.latitude}
+          storeLng={storeItemDetail.longitude}
+        /> */}
+        <StoreMap
+          storeId={storeItemDetail.id}
+          storeLat={storeItemDetail.latitude}
+          storeLng={storeItemDetail.longitude}
+        />
         <span className="storeInfo">상세설명</span>
         <p className="storeInfoTxt">{storeItemDetail.txt}</p>
         <span className="reviews">이용후기</span>
@@ -86,26 +64,26 @@ const StoreDetail = () => {
             {/* 구조분해 할당으로 코드 리팩토링 */}
             전체 평점:{storeItemDetail.like}점
           </span>
-          <span>전체 {storeItemDetail.reviews.length}개</span>
+          <span>전체 {storeItemDetail.reviews}개</span>
         </div>
         <section>
           {/* 별점 많은 순으로 3개 노출 코드로 변경할것. */}
-          {storeItemDetail.reviews.map((reviewItems, index) => (
+          {/*storeItemDetail.reviews.map((reviewItems, index) => (
             <div key={index} className="reviewContainer">
               <span>{reviewItems.nickName}</span>
               <div className="reviewStar">
                 <RiStarFill className="star" />
                 {reviewItems.star}
-                {/* 서버와 통신 후 받아온 숫자 or 문자값을 반복문을 사용하여 별 찍어낼것. */}
               </div>
               <p>{reviewItems.reviewTxt}</p>
             </div>
-          ))}
+          ))
+          */}
           <Link
             to="/moreReviews"
-            state={{
-              storeData: store,
-            }}
+            // state={{
+            //   storeData: store,
+            // }}
             className="moreReviews"
           >
             더보기
