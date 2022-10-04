@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import Header from "../mainPage/header";
+import Header from "./Header";
 
 const List = ({ selectData, setSelectData, list }) => {
   const [storeData, setStoreData] = useState(null);
@@ -13,11 +13,11 @@ const List = ({ selectData, setSelectData, list }) => {
   useEffect(() => {
     axios
       .get(
-        `https://gloom.loca.lt//v1/shop?page=1&size=10&cityId=02&areaId=008&category=%EC%9D%8C%EC%8B%9D%EC%A0%90`
+        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=02&areaId=008&category=%EC%9D%8C%EC%8B%9D%EC%A0%90`
       )
       .then((filterData) => setStoreData(filterData.data.data));
   }, []);
-
+  console.log(storeData);
   if (storeData === null) {
     return;
   }

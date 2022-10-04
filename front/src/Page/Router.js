@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import Home from "./Home";
-import Menu from "../menuPage/menu";
-import List from "../Page/List";
-import LocalFilter from "../Page/Filter";
-import StoreDetail from "../storeDetailPage/storeDetailPage";
-import Registration from "../menuPage/Registration";
-import ReviewCreate from "../storeDetailPage/ReviewCreate";
-import MoreReview from "../Page/MoreReview";
-import ReviewDetail from "../storeDetailPage/ReviewDetailPage";
-import RegistrationDetail from "../Page/RegistrationDetail";
-import KaKaoMap from "../Page/KakaoMap";
+import Menu from "./Menu";
+import List from "./List";
+import LocalFilter from "./Filter";
+import StoreDetail from "./storeDetailPage";
+import Registration from "./Registration";
+import ReviewCreate from "./ReviewCreate";
+import MoreReview from "./MoreReview";
+import ReviewDetail from "./ReviewDetailPage";
+import RegistrationDetail from "./RegistrationDetail";
+import KaKaoMap from "./KakaoMap";
 
 const Router = () => {
   const url = "https://gloom.loca.lt";

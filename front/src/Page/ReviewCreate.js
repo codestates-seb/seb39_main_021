@@ -5,7 +5,7 @@ import { useState } from "react";
 import Button from "../component/Button";
 import Image from "../component/Image";
 import Star from "../component/Star";
-import Header from "../mainPage/header";
+import Header from "./Header";
 import axios from "axios";
 
 const ReviewCreate = ({ list }) => {

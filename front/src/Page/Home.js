@@ -5,7 +5,7 @@ import axios from "axios";
 
 import { RiStarFill } from "react-icons/ri";
 
-import Header from "./header";
+import Header from "./Header";
 import categoryList from "../DummyData/categoryList";
 
 const Home = ({ selectData, setSelectData }) => {

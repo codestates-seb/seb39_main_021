@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import Header from "../mainPage/header";
+import Header from "./Header";
 
 const RegistrationDetail = () => {
   const [information, setInformation] = useState("");

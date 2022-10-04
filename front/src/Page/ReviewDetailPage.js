@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
-import Header from "../mainPage/header";
+import Header from "./Header";
 import Button from "../component/Button";
 import Star from "../component/Star";
 

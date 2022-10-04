@@ -3,7 +3,7 @@ import axios from "axios";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Header from "../mainPage/header";
+import Header from "./Header";
 import Image from "../component/Image";
 import Button from "../component/Button";
 

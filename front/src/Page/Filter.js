@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import Button from "../component/Button";
 import localList from "../DummyData/localList";
-import Header from "../mainPage/header";
+import Header from "./Header";
 
 const LocalFilter = ({ selectData, setSelectData }) => {
   const [fullId, setFullId] = useState("01000");

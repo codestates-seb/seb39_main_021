@@ -4,7 +4,7 @@ import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 import { RiStarFill } from "react-icons/ri";
 
-import Header from "../mainPage/header";
+import Header from "./Header";
 import Button from "../component/Button";
 
 /*
