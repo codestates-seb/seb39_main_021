@@ -22,14 +22,11 @@ const Router = () => {
       .get(
         `${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=%EC%9D%8C%EC%8B%9D%EC%A0%90`
       )
-      .then((a) => {
-        // data.json();
-        // console.log(a.data.data);
-        setList(a.data.data);
+      .then((information) => {
+        setList(information.data.data);
       })
       .catch((err) => console.log(err));
   }, []);
-  // console.log(list);
 
   const [selectData, setSelectData] = useState({
     category: "임시",
@@ -70,8 +67,7 @@ const Router = () => {
           }
         />
         <Route path="/storeDetailPage" element={<StoreDetail />} />
-        <Route path="/businessRegistration" element={<Registration />} />
-        <Route path="/toggleMenu" element={<Menu />} />
+        \ <Route path="/toggleMenu" element={<Menu />} />
         <Route path="/businessRegistration" element={<Registration />} />
         <Route path="/review" element={<ReviewCreate list={list} />} />
         <Route path="/moreReviews" element={<MoreReview />} />

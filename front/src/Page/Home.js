@@ -9,7 +9,6 @@ import Header from "./Header";
 import categoryList from "../DummyData/categoryList";
 
 const Home = ({ selectData, setSelectData }) => {
-  const [itemList, setItemList] = useState(null);
   const [openMenu, setOpenMenu] = useState(true);
 
   const toggleMenu = () => {
@@ -40,23 +39,18 @@ const Home = ({ selectData, setSelectData }) => {
       rating: "2.9점",
     },
   ];
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/items")
-      .then((data) => setItemList(data.data));
-  }, []);
 
-  return itemList !== null ? (
+  return (
     <>
       <Header toggleMenu={toggleMenu} openMenu={openMenu} />
       <MainContainer>
         <section className="categoryContainer">
           <h1>카테고리</h1>
-          {categoryList.map((category) => {
+          {categoryList.map((category, index) => {
             const Icons = category.icon;
             return (
               <Link
-                key={category.id}
+                key={index}
                 className="categoryItems"
                 to={"/list"}
                 onClick={() => {
@@ -64,6 +58,10 @@ const Home = ({ selectData, setSelectData }) => {
                     ...selectData,
                     category: category.name,
                   });
+                  console.log(category);
+                }}
+                state={{
+                  categoryInfo: category.name,
                 }}
               >
                 <Icons className="iconsImage" />
@@ -88,7 +86,7 @@ const Home = ({ selectData, setSelectData }) => {
         </section>
       </MainContainer>
     </>
-  ) : null;
+  );
 };
 
 export default Home;
