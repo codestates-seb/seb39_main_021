@@ -1,23 +1,37 @@
 /* global kakao */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-const KaKaoMap = ({ storeLat, storeLng, storeId }) => {
+const KaKaoMap = () => {
   const { kakao } = window;
-  const [storeLocation, setStoreLocation] = useState();
+  const info = useLocation();
+  const location = info.state.data;
+  let arr = [];
+
+  for (let i = 0; i < location.length; i++) {
+    arr.push({
+      name: location[i].name,
+      latlng: new kakao.maps.LatLng(
+        location[i].longitude,
+        location[i].latitude
+      ),
+      lat: location[i].latitude,
+      lng: location[i].longitude,
+    });
+  }
+
+  console.log(arr);
 
   const imageSrc =
     "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
   const imageSize = new kakao.maps.Size(24, 35);
   const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
   useEffect(() => {
     const container = document.getElementById("map");
     let lat;
     let lon;
-    // axios({
-    //   url: `https://gloom.loca.lt/v1/shop/${storeId}`,
-    //   method: "get",
-    // }).then((info) => setStoreLocation(info));
 
     const displayMarker = (localPosition, message) => {
       const marker = new kakao.maps.Marker({
@@ -63,14 +77,23 @@ const KaKaoMap = ({ storeLat, storeLng, storeId }) => {
     // => 전체 지도보기를 봣을 때,
 
     // 하나의 업체만 보았을때는 하나의 업체의 마커만 찍어주면 된다.
-
     const map = new kakao.maps.Map(container, options);
+
+    for (let i = 0; i < arr.length; i++) {
+      let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+      let marker = new kakao.maps.Marker({
+        map: map,
+        position: arr[i].latlng,
+        title: arr[i].name,
+        image: markerImage,
+      });
+    }
   }, []);
-  console.log(storeLocation);
 
   return (
-    <div className="Map" style={{ height: "100px", margin: "50px" }}>
-      <div className="MapContainer" id="map" style={{ height: "100px" }}></div>
+    <div className="Map" style={{ height: "300px", margin: "50px" }}>
+      <div className="MapContainer" id="map" style={{ height: "300px" }}></div>
     </div>
   );
 };

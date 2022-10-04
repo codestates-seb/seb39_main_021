@@ -47,12 +47,12 @@ const Image = () => {
   };
 
   const deleteImage = () => {
-    // axios({
-    //   method: "delete",
-    //   url: "https://gloom.loca.lt/v1/image",
-    //   data: { urlList: imageUrlList },
-    // }).catch((err) => console.log(err));
-    // setPreviewImg([]);
+    axios({
+      method: "delete",
+      url: "https://gloom.loca.lt/v1/image",
+      data: { urlList: imageUrlList[0] },
+    }).catch((err) => console.log(err));
+    setPreviewImg([]);
     console.log("이미지 URL : ", imageUrlList);
   };
 

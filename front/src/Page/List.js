@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { RiRoadMapLine } from "react-icons/ri";
 
 import Header from "./Header";
-import Test from "../component/Test";
 
 const List = ({ selectData }) => {
   const [storeData, setStoreData] = useState(null);
@@ -25,11 +24,10 @@ const List = ({ selectData }) => {
   if (storeData === null) {
     return;
   }
-
+  console.log(storeData);
   return (
     <StoreData>
       <Header />
-      <Test />
       {selectData !== null && <h2> {selectData.category} </h2>}
       <section className="buttonContainer">
         <button className="filterLocal">
@@ -38,7 +36,7 @@ const List = ({ selectData }) => {
           </Link>
         </button>
         <button className="filterMap">
-          <Link to="/map" className="filterMap-txt">
+          <Link to="/map" className="filterMap-txt" state={{ data: storeData }}>
             <RiRoadMapLine />
           </Link>
         </button>
