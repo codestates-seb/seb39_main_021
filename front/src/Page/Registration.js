@@ -16,11 +16,13 @@ const Registration = () => {
   const storeName = useRef();
   const storeAddress = useRef();
   const storeInfo = useRef();
+  const storeType = useRef();
 
   const address = storeAddress.current; // 사용자가 입력한 주소
   const name = storeName.current; // 사용자가 입력한 업체명
   const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
   const info = storeInfo.current; // 사용자가 입력한 사업장 설명
+  const type = storeType.current;
 
   let addressLocation = {}; // post 요청에 사용될 위도경도를 담기위한 변수
 
@@ -63,7 +65,7 @@ const Registration = () => {
       url: "https://gloom.loca.lt/v1/shop",
       data: {
         memberId: 1,
-        category: "음식점",
+        category: type.value,
         businessNumber: number.value,
         name: name.value,
         address: address.value,
@@ -74,8 +76,24 @@ const Registration = () => {
         latitude: addressLocation.La,
         imageList: [],
       },
-    });
-    navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
+    })
+      .then((data) =>
+        console.log({
+          memberId: 1,
+          category: type.value,
+          businessNumber: number.value,
+          name: name.value,
+          address: address.value,
+          cityId: "02",
+          areaId: "008",
+          detail: info.value,
+          longitude: addressLocation.Ma,
+          latitude: addressLocation.La,
+          imageList: [],
+        })
+      )
+      .catch((err) => console.log(err));
+    // navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
   };
 
   return (
@@ -83,7 +101,7 @@ const Registration = () => {
       <Header />
       <RegistrationContainer>
         <label htmlFor="category">카테고리</label>
-        <select id="category">
+        <select id="category" ref={storeType}>
           <option>선택해 주세요</option>
           <option>음식점</option>
           <option>카페</option>
