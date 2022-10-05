@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 import Button from "../component/Button";
@@ -8,12 +8,17 @@ import Star from "../component/Star";
 import Header from "./Header";
 import axios from "axios";
 
-const ReviewCreate = ({ list }) => {
+const ReviewCreate = () => {
   const [buttonYes, setButtonYes] = useState(true);
   const [buttonNo, setButtonNo] = useState(false);
   const [txtChange, setTxtChange] = useState("");
   const [checked, setChecked] = useState([false, false, false, false, false]);
   const starNum = [0, 1, 2, 3, 4];
+  const [imageData, setImageData] = useState([]);
+
+  const info = useLocation();
+
+  const location = info;
 
   const navigate = useNavigate();
 
@@ -38,6 +43,9 @@ const ReviewCreate = ({ list }) => {
     setTxtChange(e.target.value);
   };
 
+  // if (imageData.length === 0) {
+  //   return;
+  // }
   // 서버로 post 요청을 보내는 함수
   const handleCreateReview = () => {
     let likeCount = 0;
@@ -48,20 +56,20 @@ const ReviewCreate = ({ list }) => {
         likeCount = likeCount + 1;
       }
     }
-    console.log(buttonYes);
     return axios({
       method: "post",
       url: "https://gloom.loca.lt/v1/review",
       data: {
         // 아래 키값들은 API 명세서를 보고 하드코딩으로 넣어두었습니다.
-        shopId: 1, // 업체의 아이디
+        shopId: location.state.storeInfo.id, // 업체의 아이디
         memberId: 1, // 고유아이디
         rating: likeCount, // 별점
         content: txtChange, // 후기 작성
         openCheck: buttonYes, // 열었는지 여부확인(boolean)
-        imageList: [],
+        imageList: imageData[0],
       },
     })
+      .then((data) => console.log(data))
       .then(alert("리뷰 등록 완료 !"))
       .then(navigate("/"));
   };
@@ -99,18 +107,16 @@ const ReviewCreate = ({ list }) => {
             starNum={starNum}
           />
         </div>
-        <Image />
+        <Image TYPE="SHOP" imageData={imageData} setImageData={setImageData} />
         <div className="reviewTxtTitle">후기</div>
         <textarea
           placeholder="후기 내용 작성하기"
           onChange={handleTxtChange}
           className="reviewTxt"
         ></textarea>
-        {/* <Link to="/reviewDetail"> */}
         <Button buttonStyle="main" onClick={handleCreateReview}>
           등록하기
         </Button>
-        {/* </Link> */}
       </section>
     </CreateReview>
   );

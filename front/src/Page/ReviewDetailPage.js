@@ -1,22 +1,34 @@
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { RiStarFill } from "react-icons/ri";
 
 import Header from "./Header";
 import Button from "../component/Button";
 import Star from "../component/Star";
 
 const ReviewDetail = () => {
+  const [reviewData, setReviewData] = useState(null);
+  const [starCount, setStarCount] = useState([]);
   const {
-    state: { storeData },
+    state: { reviewInfo },
   } = useLocation();
-  const years = new Date().getFullYear();
-  const months = new Date().getMonth();
-  const days = new Date().getDate();
-  const hours = new Date().getHours();
-  const minutes = new Date().getMinutes();
-  console.log(storeData);
 
-  if (storeData === null) {
+  useEffect(() => {
+    axios({
+      url: `https://gloom.loca.lt/v1/review/${reviewInfo}`,
+    }).then((data) => {
+      console.log(data.data);
+      setReviewData(data.data);
+    });
+  }, []);
+
+  const handleDeleteReview = () => {
+    alert("삭제할 수 없습니다.");
+  };
+
+  if (reviewData === null) {
     return;
   }
 
@@ -25,21 +37,15 @@ const ReviewDetail = () => {
       <Header />
       <ReviewDetailInfo>
         <div>
-          <img
-            src="https://cdn.pixabay.com/photo/2019/05/07/13/28/stone-day-bag-4185981__340.jpg"
-            alt="jeju island"
-          />
-          이미지는 서버에서 받아올것.
+          <img src={reviewData.images} alt="alt" />
         </div>
         <div className="storeName">상호</div>
-        <div className="storeInfoName">{storeData.name}</div>
+        <div className="storeInfoName">{reviewData.shopName}</div>
         <div>일시</div>
-        <div className="date">
-          {`${years}년 ${months + 1}월 ${days}일 ${hours}:${minutes} ~`}
-        </div>
-        <div className="opened">장소가 열려 있었나요?</div>
+        <div className="date">{reviewData.createAt}</div>
+        <div reviewInfo="opened">장소가 열려 있었나요?</div>
         <div>
-          {storeData.opened ? (
+          {reviewData.openCheck ? (
             <div className="btnFlex">
               <Button buttonStyle="main" width="150px">
                 예
@@ -61,12 +67,26 @@ const ReviewDetail = () => {
         </div>
         <div>별점</div>
         <div>
-          <Star />
+          <RiStarFill className="star" />
+          {reviewData.rating} 점
         </div>
         <div className="reviewTxt">후기</div>
-        <pre className="reviewInfoTxt">{storeData.txt}</pre>
-        <Button buttonStyle="main">수정하기</Button>
-        <Button buttonStyle="main" className="delete">
+        <pre className="reviewInfoTxt">{reviewData.content}</pre>
+        <Button buttonStyle="main">
+          <Link
+            to="/reviewCorrection"
+            state={{
+              reviewData: reviewData,
+            }}
+          >
+            수정하기
+          </Link>
+        </Button>
+        <Button
+          buttonStyle="main"
+          className="delete"
+          onClick={handleDeleteReview}
+        >
           삭제하기
         </Button>
       </ReviewDetailInfo>
@@ -110,5 +130,9 @@ const ReviewDetailInfo = styled.main`
   }
   .delete {
     margin: 20px 0;
+  }
+  .star {
+    color: #ffc700;
+    margin-right: 5px;
   }
 `;

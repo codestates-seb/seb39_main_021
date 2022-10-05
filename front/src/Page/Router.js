@@ -13,19 +13,19 @@ import MoreReview from "./MoreReview";
 import ReviewDetail from "./ReviewDetailPage";
 import RegistrationDetail from "./RegistrationDetail";
 import KaKaoMap from "../component/KakaoMap";
+import ReviewCorrection from "./ReviewCorrection";
 
 const Router = () => {
   const url = "https://gloom.loca.lt";
   const [list, setList] = useState(null);
-  useEffect(() => {
-    axios
-      .get(`${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=음식점`)
-      .then((information) => {
-        console.log(information);
-        // setList(information.data.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=음식점`)
+  //     .then((information) => {
+  //       setList(information.data.data);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const [selectData, setSelectData] = useState({
     category: "카페",
@@ -73,6 +73,7 @@ const Router = () => {
         <Route path="/reviewDetail" element={<ReviewDetail />} />
         <Route path="/RegistrationDetail" element={<RegistrationDetail />} />
         <Route path="/map" element={<KaKaoMap />} />
+        <Route path="/reviewCorrection" element={<ReviewCorrection />} />
       </Routes>
     </BrowserRouter>
   );

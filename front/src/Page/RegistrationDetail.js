@@ -1,185 +1,197 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import Header from "./Header";
+import Image from "../component/Image";
 import Button from "../component/Button";
 
-import Image from "../component/Image";
-import Header from "./Header";
+const Registration = () => {
+  // kakao API 를 사용하기 위해 구조분해할당
+  const { kakao } = window;
+  const [address, setAddress] = useState();
+  const [imageData, setImageData] = useState([]);
+  const [addressLocation, setAddressLocation] = useState(null);
 
-const RegistrationDetail = () => {
-  const [information, setInformation] = useState({});
-  const [changedInformation, setChangedInformation] = useState({
-    memberId: null,
-    name: null,
-    detail: null,
-    imageList: [],
-  });
-  const shopId = 1;
+  const navigate = useNavigate();
+  const storeNumber = useRef();
+  const storeName = useRef();
+  const storeAddress = useRef();
+  const storeInfo = useRef();
+  const storeType = useRef();
 
-  // registeredImage 에 이미지 넣는 코드 필요
-  const registeredImage = [
-    "https://item.kakaocdn.net/do/6bd1e4f0a9b84a0d58b0bee30e78d6dc8f324a0b9c48f77dbce3a43bd11ce785",
-    "https://item.kakaocdn.net/do/6bd1e4f0a9b84a0d58b0bee30e78d6dcb3a18fdf58bc66ec3f4b6084b7d0b570",
-    "https://item.kakaocdn.net/do/6bd1e4f0a9b84a0d58b0bee30e78d6dcb3a18fdf58bc66ec3f4b6084b7d0b570",
-  ];
+  const name = storeName.current; // 사용자가 입력한 업체명
+  const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
+  const info = storeInfo.current; // 사용자가 입력한 사업장 설명
+  const type = storeType.current;
 
-  useEffect(() => {
+  const handleRegistration = () => {
     axios
-      .get(`https://gloom.loca.lt/v1/shop/1`)
-      //   해당 아이디를 찾으려면 로그인이 된 상태 아니면 클릭을 해서 페이지 이동할 때 데이터를 받아와서 id 가 일치하는걸 뿌려줘야 하는데,, 둘 다 안되어 있음.
-      .then((info) => {
-        console.log(info);
-        setInformation(info.data);
-        setChangedInformation({
-          memberId: info.id,
-          name: info.name,
-          detail: info.detail,
-          imageList: info.images,
-        });
+      .get(
+        "https://bizno.net/api/fapi?key=eWhqMDQzOUBuYXZlci5jb20g&gb=1&q=3988701116"
+      )
+      .then((data) => {
+        console.log(data.current);
       })
-      .then
-      // (info) => console.log(info)
-      ();
-  }, []);
-
-  // console.log(changedInformation);
-
-  const handleShopInfoChange = () => {
-    axios
-      .patch(`https://gloom.loca.lt/v1/shop/${shopId}`, changedInformation)
-      .then((result) => console.log(result));
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const handleDetailChange = (detailContent) => {
-    console.log(detailContent.target.value);
-    setChangedInformation({
-      ...changedInformation,
-      detail: detailContent.target.value,
+  const handleAddressValue = (event) => {
+    setAddress(event.target.value);
+  };
+  const handleCheckAddress = () => {
+    // 주소를 위도경도로 변경해주는 인스턴스 생성
+    let geocoder = new kakao.maps.services.Geocoder();
+    // 사용자가 입력한 주소값
+
+    //addressSearch 함수(사용자입력값,콜백함수)
+    geocoder.addressSearch(`${address}`, function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        setAddressLocation(coords);
+        console.log(addressLocation);
+        alert(`${address} 가 맞나요?`);
+      } else {
+        alert("주소를 확인해 주세요 !");
+        console.log("err");
+      }
     });
   };
 
-  const handleNameChange = (nameContent) => {
-    console.log(nameContent.target.value);
-    setChangedInformation({
-      ...changedInformation,
-      name: nameContent.target.value,
-    });
+  const handleCreateRegistration = () => {
+    axios({
+      method: "post",
+      url: "https://gloom.loca.lt/v1/shop",
+      data: {
+        memberId: 1,
+        category: type.value,
+        businessNumber: number.value,
+        name: name.value,
+        address: address,
+        cityId: "02",
+        areaId: "008",
+        detail: info.value,
+        longitude: addressLocation.Ma,
+        latitude: addressLocation.La,
+        imageList: imageData[0],
+      },
+    }).catch((err) => console.log(err));
+    navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
   };
-
-  // 이미지파일을 수정하고, 서버로 patch요청을 보내는 함수
-  const handleImageChange = (imageContent) => {
-    setChangedInformation({
-      ...changedInformation,
-      image: imageContent.target.value,
-    });
-  };
-
-  // 시간 남으면 모달창으로 구현
-  const handleShopDelete = () => {
-    axios
-      .delete(`https://gloom.loca.lt/v1/shop/${shopId}`)
-      .then((result) => console.log(result));
-  };
-
-  if (information === null) {
-    return;
-  }
 
   return (
-    <Container>
+    <>
       <Header />
-      <section>
-        <h2>나의 사업장</h2>
-      </section>
-      <ChangeableStoreInfoContainer>
-        <h3> 사업장 이름</h3>
+      <RegistrationContainer>
+        <label htmlFor="category">카테고리</label>
+        <select id="category" ref={storeType}>
+          <option>선택해 주세요</option>
+          <option>음식점</option>
+          <option>카페</option>
+          <option>동물병원</option>
+          <option>약국</option>
+          <option>병원</option>
+          <option>노래방</option>
+          <option>세탁방</option>
+          <option>편의점</option>
+          <option>pc방</option>
+          <option>주유소</option>
+          <option>무인 판매점</option>
+          <option>기타 등등</option>
+        </select>
+        <label htmlFor="registrationNumber">사업자 등록번호</label>
         <input
-          onChange={handleNameChange}
-          placeholder={information.name}
-        ></input>
-        {/* <h3>카테고리</h3>
-        <div>{information.category}</div> */}
-        {/* <h3>사업자등록번호</h3>
-        <div>{information.number}</div> */}
-        <h3>상세설명</h3>
+          placeholder="- 없이 숫자만 작성해 주세요"
+          id="registrationNumber"
+          ref={storeNumber}
+        />
+        <button className="registrationCheckBtn" onClick={handleRegistration}>
+          확인하기
+        </button>
+        <label htmlFor="registrationName">사업장 이름</label>
+        <input id="registrationName" ref={storeName} />
+        <label htmlFor="registrationAddress">사업장 주소</label>
         <input
-          onChange={handleDetailChange}
-          placeholder={information.detail}
-        ></input>
-      </ChangeableStoreInfoContainer>
-      <ImmutableStoreInfoContainer>
-        <h3>주소</h3>
-        <div>{information.address}</div>
-      </ImmutableStoreInfoContainer>
-      <ChangeableStoreInfoContainer>
-        <h3>사진</h3>
-        {information.imageList != null ? (
-          <section>
-            <button>수정하기</button>
-            <div>
-              <image src={information.imageList[0]} />
-              <image src={information.imageList[1]} />
-              <image src={information.imageList[2]} />
-            </div>
-          </section>
-        ) : null}
-        <Image registeredImage={registeredImage} />
-      </ChangeableStoreInfoContainer>
-      <Button width="100%" onClick={handleShopInfoChange}>
-        수정하기
-      </Button>
-      <Button width="100%" onClick={handleShopDelete}>
-        삭제하기
-      </Button>
-    </Container>
+          id="registrationAddress"
+          ref={storeAddress}
+          onChange={(event) => handleAddressValue(event)}
+        />
+        <Button
+          className="registrationAddressCheck"
+          buttonStyle="main"
+          width="60px"
+          onClick={handleCheckAddress}
+        >
+          확인하기
+        </Button>
+        <label htmlFor="registrationTxt">상세 설명</label>
+        <textarea id="registrationTxt" ref={storeInfo} />
+        <label htmlFor="imageUpload">이미지</label>
+        <Image TYPE="SHOP" imageData={imageData} setImageData={setImageData} />
+        <Button buttonStyle="main" onClick={handleCreateRegistration}>
+          등록하기
+        </Button>
+      </RegistrationContainer>
+      ;
+    </>
   );
 };
 
-export default RegistrationDetail;
+export default Registration;
 
-const Container = styled.article`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 14px;
-
-  button {
-    margin-top: 10px;
+const RegistrationContainer = styled.main`
+  label {
+    display: block;
+    color: white;
+    margin: 20px 0 10px;
   }
-
-  h2 {
-    font-size: 1.8rem;
-    margin-top: 24px;
-    color: #ffc700;
+  label::after {
+    content: "*";
+    color: red;
   }
-`;
-
-const ImmutableStoreInfoContainer = styled.section`
-  h3 {
-    font-size: 1.4rem;
-    margin-top: 24px;
-    font-weight: 400;
-    color: #76736e;
+  select {
+    background-color: #76736e;
+    color: white;
+    width: 70%;
+    padding: 10px 5px;
   }
-
-  div {
-    font-size: 1.4rem;
-    margin-top: 10px;
-    font-weight: 700;
-    color: #fff;
+  option {
+    color: white;
+    background-color: #76736e;
   }
-`;
-const ChangeableStoreInfoContainer = styled.section`
-  h3 {
-    font-size: 1.4rem;
-    margin-top: 24px;
-    font-weight: 400;
-    color: #76736e;
-  }
-
   input {
-    width: 80%;
-    margin-top: 10px;
-    font-weight: 700;
+    padding: 10px 5px;
+    width: 70%;
+    border: #76736e;
+    color: white;
+    background-color: #76736e;
+  }
+  .registrationAddressCheck {
+    margin-left: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 3px;
+    border: none;
+    background-color: var(--mainYellow);
+  }
+  .registrationCheckBtn {
+    margin-left: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 3px;
+    background-color: var(--mainYellow);
+  }
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px 5px;
+    border: #76736e;
+    background-color: #76736e;
+    color: white;
   }
 `;

@@ -13,12 +13,19 @@ const StoreDetail = () => {
   const {
     state: { storeData },
   } = useLocation();
+  console.log(storeData);
 
   useEffect(() => {
     axios
       .get(`https://gloom.loca.lt/v1/shop/${storeData}`)
-      .then((data) => setStoreItemDetail(data.data));
+      .then((data) => {
+        console.log(data.data);
+        console.log(storeData);
+        setStoreItemDetail(data.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
+  console.log(storeItemDetail);
 
   if (storeItemDetail === null) {
     return;
@@ -34,6 +41,7 @@ const StoreDetail = () => {
             to="/review"
             className="reviewConfirm"
             state={{
+              storeData: storeData,
               storeInfo: storeItemDetail,
             }}
           >
@@ -58,28 +66,29 @@ const StoreDetail = () => {
             {/* 구조분해 할당으로 코드 리팩토링 */}
             전체 평점:{storeItemDetail.like}점
           </span>
-          <span>전체 {storeItemDetail.reviews}개</span>
+          <span>전체 {storeItemDetail.reviewCount}개</span>
         </div>
         <section>
-          {/* 별점 많은 순으로 3개 노출 코드로 변경할것. */}
-          {/*storeItemDetail.reviews.map((reviewItems, index) => (
-            <div key={index} className="reviewContainer">
-              <span>{reviewItems.nickName}</span>
-              <div className="reviewStar">
-                <RiStarFill className="star" />
-                {reviewItems.star}
+          {storeItemDetail.reviews.map((reviewItems, index) => (
+            <Link
+              key={index}
+              to="/reviewDetail"
+              state={{
+                reviewInfo: reviewItems.id,
+              }}
+            >
+              <div key={index} className="reviewContainer">
+                <span>{reviewItems.nickname}</span>
+                <div className="reviewStar">
+                  <RiStarFill className="star" />
+                  {reviewItems.rating} 점
+                </div>
+                <p>{reviewItems.content}</p>
               </div>
-              <p>{reviewItems.reviewTxt}</p>
-            </div>
-          ))
-          */}
-          <Link
-            to="/moreReviews"
-            // state={{
-            //   storeData: store,
-            // }}
-            className="moreReviews"
-          >
+            </Link>
+          ))}
+
+          <Link to="/moreReviews" className="moreReviews">
             더보기
           </Link>
         </section>
