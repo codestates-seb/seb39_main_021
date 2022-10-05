@@ -6,8 +6,6 @@ import Button from "../component/Button";
 import localList from "../DummyData/localList";
 import Header from "./Header";
 
-import GoodButton from "../component/GoodButton";
-
 const LocalFilter = ({ selectData, setSelectData }) => {
   const [fullId, setFullId] = useState("01000");
   const [local, setLocal] = useState("전국");
@@ -54,10 +52,9 @@ const LocalFilter = ({ selectData, setSelectData }) => {
   return (
     <FilterSection>
       <Header />
-      <GoodButton />
-      <section>
+      <section className="resultFilter">
         {filtered === false ? (
-          <div>전국</div>
+          <div>지역을 선택하세요</div>
         ) : local === "전국" ? (
           <div>{local}</div>
         ) : (
@@ -66,7 +63,7 @@ const LocalFilter = ({ selectData, setSelectData }) => {
           </div>
         )}
         <Link to="/list" state={{ info: local }}>
-          검색 적용하기
+          <Button width="100px">검색 적용하기</Button>
         </Link>
       </section>
       <section className="filter">
@@ -78,6 +75,7 @@ const LocalFilter = ({ selectData, setSelectData }) => {
               onClick={() => {
                 setLocal(post.city);
                 setArea("");
+                setFiltered(false);
               }}
             >
               {post.city}
@@ -118,6 +116,14 @@ const FilterSection = styled.div`
   display: flex;
   flex-direction: column;
 
+  .resultFilter {
+    div {
+      border: 1px solid #ffc700;
+      color: #ffc700;
+      padding: 4px 20px;
+    }
+  }
+
   .buttonSection {
     background-color: #303134;
     position: fixed;
@@ -143,7 +149,7 @@ const FilterSection = styled.div`
     width: 100%;
   }
   .buttonStyle:focus {
-    background-color: white;
+    background-color: #ffc700;
     color: black;
   }
 `;
@@ -153,7 +159,12 @@ const LocalFilterSection = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  border: 1px solid black;
+
+  button {
+    border-left: 2px solid #303134;
+    margin-bottom: 1px;
+    background-color: #504e4a;
+  }
 `;
 
 const AreaFilterSection = styled.div`
@@ -167,7 +178,13 @@ const AreaFilterSection = styled.div`
   flex-wrap: nowrap;
 
   div {
-    height: 100px;
+    height: 120px;
+  }
+
+  button {
+    border-left: 2px solid #303134;
+    margin-bottom: 1px;
+    background-color: #504e4a;
   }
 `;
 export default LocalFilter;
