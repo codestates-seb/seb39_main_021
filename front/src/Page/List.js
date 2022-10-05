@@ -4,12 +4,10 @@ import axios from "axios";
 import styled from "styled-components";
 
 import Header from "./Header";
-import categoryList from "../DummyData/categoryList";
 
-const List = ({ selectData }) => {
+const List = ({ selectData, setSelectData }) => {
   const [storeData, setStoreData] = useState(null);
   const location = useLocation();
-  console.log(location);
   const categoryName = location.state.categoryInfo;
 
   // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
@@ -17,9 +15,10 @@ const List = ({ selectData }) => {
   useEffect(() => {
     axios
       .get(
-        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=02&areaId=008&category=${categoryName}&sort=1`
+        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
       )
-      .then((filterData) => setStoreData(filterData.data.data));
+      .then((filterData) => setStoreData(filterData.data.data))
+      .then((filterData) => console.log(filterData));
   }, []);
 
   if (storeData === null) {
