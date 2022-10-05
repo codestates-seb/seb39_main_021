@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
-
-import { RiStarFill } from "react-icons/ri";
 
 import Header from "./Header";
 import categoryList from "../DummyData/categoryList";
+import Footer from "../component/Footer";
 
 const Home = ({ selectData, setSelectData }) => {
   const [openMenu, setOpenMenu] = useState(true);
@@ -19,8 +17,15 @@ const Home = ({ selectData, setSelectData }) => {
     <>
       <Header toggleMenu={toggleMenu} openMenu={openMenu} />
       <MainContainer>
+        <h1>카테고리</h1>
+        <a
+          href="https://github.com/codestates-seb/seb39_main_021"
+          className="mainBanner"
+          target="_blank"
+        >
+          <img src="https://user-images.githubusercontent.com/103917785/194164782-ed2474d5-3f09-4720-8a96-0720f4b0bd18.png" />
+        </a>
         <section className="categoryContainer">
-          <h1>카테고리</h1>
           {categoryList.map((category, index) => {
             const Icons = category.icon;
             return (
@@ -44,9 +49,8 @@ const Home = ({ selectData, setSelectData }) => {
             );
           })}
         </section>
-
-        <footer className="footer"></footer>
       </MainContainer>
+      <Footer />
     </>
   );
 };
@@ -54,33 +58,41 @@ const Home = ({ selectData, setSelectData }) => {
 export default Home;
 
 const MainContainer = styled.main`
-  padding: 20px 10px 0;
-  border-top: 1px solid blue;
+  padding: 36px 24px;
+
   h1 {
     display: none;
   }
-  h2 {
-    color: white;
+
+  .mainBanner {
+    width: 100%;
+    margin-top: 10px;
+
+    img {
+      width: 100%;
+    }
   }
+
   .categoryContainer {
-    text-align: center;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
-  }
-  .categoryItems {
-    display: inline-block;
-    width: 30%;
-    margin-bottom: 10px;
-  }
-  .categoryItems h3 {
-    margin-top: 5px;
-    color: white;
-  }
-  .categoryContainer img {
-    width: 150px;
-    height: 150px;
+
+    align-items: center;
+    justify-items: center;
+
+    .categoryItems {
+      margin: 2.4rem 0px 5rem 0px;
+      width: 33%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      h3 {
+        text-align: center;
+        margin-top: 5px;
+      }
+    }
   }
 
   .footer {
@@ -93,9 +105,5 @@ const MainContainer = styled.main`
     font-size: 50px;
     height: 50px;
     color: white;
-  }
-  .star {
-    color: #ffc700;
-    margin-right: 5px;
   }
 `;

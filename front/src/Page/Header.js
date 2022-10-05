@@ -28,7 +28,8 @@ const MainHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 43px;
+  width: 100%;
+  height: 47px;
 
   div {
     height: 24px;
@@ -43,14 +44,14 @@ const MainHeader = styled.header`
     width: 24px;
 
     svg {
-      height: 18px;
-      width: 18px;
+      height: 20px;
+      width: 20px;
     }
   }
 
   a {
     img {
-      height: 32px;
+      height: 36px;
     }
   }
 `;
