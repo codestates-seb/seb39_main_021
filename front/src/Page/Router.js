@@ -19,17 +19,16 @@ const Router = () => {
   const [list, setList] = useState(null);
   useEffect(() => {
     axios
-      .get(
-        `${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=%EC%9D%8C%EC%8B%9D%EC%A0%90`
-      )
+      .get(`${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=음식점`)
       .then((information) => {
-        setList(information.data.data);
+        console.log(information);
+        // setList(information.data.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   const [selectData, setSelectData] = useState({
-    category: "임시",
+    category: "카페",
     filter: {
       local: "전국",
       localId: "01",

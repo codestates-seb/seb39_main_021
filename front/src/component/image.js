@@ -59,8 +59,7 @@ const Image = () => {
   const deletePreviewImg = (index) => {
     const filter = imageUrlList.filter((image, idx) => idx !== index);
     const deleteFilter = imageUrlList.filter((image, idx) => idx === index);
-    console.log(filter);
-    console.log(deleteFilter);
+
     axios({
       url: "https://gloom.loca.lt/v1/image",
       method: "delete",

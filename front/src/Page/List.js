@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -8,21 +8,18 @@ import Header from "./Header";
 
 const List = ({ selectData }) => {
   const [storeData, setStoreData] = useState(null);
-  const location = useLocation();
-  const categoryName = location.state.categoryInfo;
 
-  // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
-  // 2. 서버에서 받은 값을 storeData 로 저장한다. - 종렬
   console.log(selectData);
   useEffect(() => {
     axios
       .get(
-        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=02&areaId=008&category=${selectData.category}&sort=id`
+        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
       )
-      .then((filterData) => setStoreData(filterData.data.data));
+      .then((filterData) => setStoreData(filterData.data.data))
+      .then((filterData) => console.log(filterData));
   }, []);
 
-  if (storeData === null) {
+  if (storeData == null) {
     return;
   }
   console.log(storeData);
@@ -44,41 +41,35 @@ const List = ({ selectData }) => {
       </section>
       <section>
         {storeData !== null
-          ? storeData?.map(
-              (
-                individualStore,
-                idx // 구조분해할당으로 리펙토링
-              ) => (
-                <Link
-                  key={individualStore.id}
-                  to={"/storeDetailPage"}
-                  state={{
-                    storeData: individualStore.id,
-                  }}
-                >
-                  <StoreContainer key={individualStore.id}>
-                    <div className="imgContainer">
-                      <img src={individualStore.images[0]} alt="더미데이터" />
-                      {/* 이미지 있는지 확인해볼것. */}
+          ? storeData?.map((individualStore) => (
+              <Link
+                key={individualStore.id}
+                to={"/storeDetailPage"}
+                state={{
+                  storeData: individualStore.id,
+                }}
+              >
+                <StoreContainer key={individualStore.id}>
+                  <div className="imgContainer">
+                    <img src={individualStore.images[0]} alt="더미데이터" />
+                  </div>
+                  <div className="informationContainer">
+                    <h3 className="title">상호명 : {individualStore.name}</h3>
+                    <div className="address">
+                      주소 : {individualStore.address}
                     </div>
-                    <div className="informationContainer">
-                      <h3 className="title">상호명 : {individualStore.name}</h3>
-                      <div className="address">
-                        주소 : {individualStore.address}
-                      </div>
-                      <div className="rating">
-                        별 : {individualStore.ratingAVG}
-                      </div>
+                    <div className="rating">
+                      별 : {individualStore.ratingAVG}
                     </div>
-                    <section>
-                      <div>전체리뷰수{individualStore.reviewCount}</div>
-                      <div>방문한 회원수{individualStore.visitorCount}</div>
-                      <div>열려있어요{individualStore.openCount}</div>
-                    </section>
-                  </StoreContainer>
-                </Link>
-              )
-            )
+                  </div>
+                  <section>
+                    <div>전체리뷰수{individualStore.reviewCount}</div>
+                    <div>방문한 회원수{individualStore.visitorCount}</div>
+                    <div>열려있어요{individualStore.openCount}</div>
+                  </section>
+                </StoreContainer>
+              </Link>
+            ))
           : null}
       </section>
     </StoreData>
