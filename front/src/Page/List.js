@@ -13,10 +13,11 @@ const List = ({ selectData }) => {
 
   // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
   // 2. 서버에서 받은 값을 storeData 로 저장한다. - 종렬
+  console.log(selectData);
   useEffect(() => {
     axios
       .get(
-        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=02&areaId=008&category=${categoryName}&sort=1`
+        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=02&areaId=008&category=${selectData.category}&sort=id`
       )
       .then((filterData) => setStoreData(filterData.data.data));
   }, []);

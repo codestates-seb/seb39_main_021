@@ -19,7 +19,6 @@ const KaKaoMap = () => {
       lat: location[i].latitude,
       lng: location[i].longitude,
     });
-    console.log(arr[i].name);
   }
 
   const imageSrc =
@@ -71,6 +70,7 @@ const KaKaoMap = () => {
     const options = {
       center: new kakao.maps.LatLng(35.85133, 127.734086),
       level: 5,
+      marker: arr,
     };
     // 내 중심으로 지도가 생성되고, 업체의 마커만 찍어준다.
     // => 전체 지도보기를 봣을 때,
@@ -85,6 +85,7 @@ const KaKaoMap = () => {
         map: map,
         position: arr[i].latlng,
         title: arr[i].name,
+        text: arr[i].name,
         // image: markerImage,
       });
     }

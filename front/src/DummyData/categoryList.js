@@ -51,7 +51,7 @@ const categoryList = [
   },
   {
     id: "8",
-    name: "pc방",
+    name: "PC방",
     icon: RiComputerLine,
   },
   {
