@@ -44,8 +44,11 @@ public class ShopService {
         Optional.ofNullable(shop.getName()).ifPresent(updateShop::setName);
         Optional.ofNullable(shop.getDetail()).ifPresent(updateShop::setDetail);
         if(images.size() >0){imageService.updateImage(images, updateShop);}
+
         Shop save = shopRepository.save(updateShop);
         save.setReviews(threeReviews(save).getContent());
+        imageService.urlToRawUrl(save.getImages());
+
         return save;
     }
 
@@ -55,6 +58,7 @@ public class ShopService {
 
 
         verifiedShop.setReviews( threeReviews(verifiedShop).getContent());
+        imageService.urlToRawUrl(verifiedShop.getImages());
 
         return verifiedShop;
     }

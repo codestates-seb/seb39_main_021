@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional
 @RequiredArgsConstructor
@@ -32,6 +33,9 @@ public class ImageService {
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
+    @Value("${cloud.aws.s3.imageEndpoint}")
+    String imageEndpoint;
+
 
     public List<String> uploadImages(Image.Type type, List<MultipartFile> multipartFileList) {
         List<String> fileUrlList = new ArrayList<>();
@@ -42,7 +46,7 @@ public class ImageService {
             if (fileUrlList.size() > 3) {
                 throw new RuntimeException();       // 에러 핸들러 작성 필요
             }
-                                                    // 지원하는 확장자명 유효성검사 필요
+            // 지원하는 확장자명 유효성검사 필요
 
             int fileExtensionIndex = multipartFile.getOriginalFilename().lastIndexOf(".");
             String fileExtension = multipartFile.getOriginalFilename().substring(fileExtensionIndex);
@@ -69,9 +73,10 @@ public class ImageService {
     public Image findByUrl(String url) {
         return imageRepository.findByUrl(url);
     }
+
     public void updateImage(List<String> urlList, Review review) {
 
-        for (String rawUrl:urlList) {
+        for (String rawUrl : urlList) {
             String url = rawUrlToUrl(rawUrl);
             Image image = findByUrl(url);
             image.setReview(review);
@@ -80,7 +85,7 @@ public class ImageService {
     }
 
     public void updateImage(List<String> urlList, Shop shop) {
-        for (String rawUrl:urlList) {
+        for (String rawUrl : urlList) {
             String url = rawUrlToUrl(rawUrl);
             Image image = findByUrl(url);
             image.setShop(shop);
@@ -105,7 +110,7 @@ public class ImageService {
 
     private boolean imageExistsAtUrl(String rawUrl) {
         String url = rawUrlToUrl(rawUrl);
-        if(amazonS3Client.doesObjectExist(bucket, url))
+        if (amazonS3Client.doesObjectExist(bucket, url))
             return true;
         else return false;
     }
@@ -120,9 +125,8 @@ public class ImageService {
         List<Image> createdImages = new ArrayList<>();
         if (imageList.size() == 0) {
             return null;
-        }
-        else {
-            for(int i = 0; i < imageList.size(); i++) {
+        } else {
+            for (int i = 0; i < imageList.size(); i++) {
                 createdImages.add(imageRepository.save(imageList.get(i)));
             }
         }
@@ -174,6 +178,7 @@ public class ImageService {
             imageRepository.delete(deletedImage);
         }
     }
+
     public void deleteImageById(long id) {
         Image deletedImage = imageRepository.findById(id);
         if (deletedImage != null) {
@@ -184,14 +189,22 @@ public class ImageService {
 
     public String rawUrlToUrl(String rawUrl) {
         String url;
-        if(!rawUrl.contains("/"))
+        if (!rawUrl.contains("/"))
             url = rawUrl;
         else {
             int lastIndex = rawUrl.lastIndexOf("/");
-            url = rawUrl.substring(lastIndex+1);
+            url = rawUrl.substring(lastIndex + 1);
         }
 
         return url;
     }
 
+    public void urlToRawUrl(List<Image> urlList) {
+
+        urlList.stream().map(image -> {
+            if (!image.getUrl().contains("/"))
+                image.setUrl(imageEndpoint + image.getUrl());
+            return image;
+        }).collect(Collectors.toList());
+    }
 }
