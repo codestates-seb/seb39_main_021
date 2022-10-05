@@ -22,7 +22,6 @@ const List = ({ selectData }) => {
   if (storeData == null) {
     return;
   }
-  console.log(storeData);
   return (
     <StoreData>
       <Header />
