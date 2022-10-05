@@ -1,6 +1,7 @@
 package mainproject.nosleep.review.service;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.image.service.ImageService;
 import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
 
@@ -20,6 +21,7 @@ import java.math.BigInteger;
 import java.util.List;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,10 +57,14 @@ public class ReviewService {
         Optional.ofNullable(review.getRating()).ifPresent(updateReview::setRating);
         Optional.ofNullable(review.getContent()).ifPresent(updateReview::setContent);
         if(images.size() >0){imageService.updateImage(images, updateReview);}
-        return reviewRepository.save(updateReview); // 더티체킹
+
+        Review editReview = reviewRepository.save(updateReview);// 더티체킹
+        imageService.urlToRawUrl(editReview.getImages());
+        return editReview;
     }
     public Review findReview(Long id){
         Review verifiedReview = findVerifiedReview(id);
+        imageService.urlToRawUrl(verifiedReview.getImages());
         //좋아요 이슈
         return verifiedReview;
     }
