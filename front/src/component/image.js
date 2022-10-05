@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Button from "./Button";
 
-const Image = () => {
+const Image = ({ registeredImage }) => {
   const fileInput = useRef();
 
   const handleReviewImage = () => {
@@ -26,6 +26,8 @@ const Image = () => {
         setPreviewImg([...previewImg, previewImgURL]);
       }
     };
+
+    console.log(registeredImage);
 
     const formData = new FormData();
     formData.append("flies", event.target.file[0]);
