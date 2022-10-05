@@ -14,7 +14,10 @@ const List = ({ selectData }) => {
       .get(
         `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
       )
-      .then((filterData) => setStoreData(filterData.data.data));
+      .then((filterData) => {
+        console.log(filterData.data.data);
+        setStoreData(filterData.data.data);
+      });
   }, []);
 
   if (storeData == null) {

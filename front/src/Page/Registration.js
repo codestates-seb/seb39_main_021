@@ -11,6 +11,8 @@ const Registration = () => {
   // kakao API 를 사용하기 위해 구조분해할당
   const { kakao } = window;
   const [address, setAddress] = useState();
+  const [imageData, setImageData] = useState([]);
+  const [addressLocation, setAddressLocation] = useState(null);
 
   const navigate = useNavigate();
   const storeNumber = useRef();
@@ -24,8 +26,6 @@ const Registration = () => {
   const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
   const info = storeInfo.current; // 사용자가 입력한 사업장 설명
   const type = storeType.current;
-
-  let addressLocation = {}; // post 요청에 사용될 위도경도를 담기위한 변수
 
   const handleRegistration = () => {
     axios
@@ -42,11 +42,11 @@ const Registration = () => {
 
   const handleAddressValue = (event) => {
     setAddress(event.target.value);
-    console.log(event.target.value);
   };
   const handleCheckAddress = () => {
     // 주소를 위도경도로 변경해주는 인스턴스 생성
     let geocoder = new kakao.maps.services.Geocoder();
+    console.log(addressLocation);
 
     // 사용자가 입력한 주소값
 
@@ -54,9 +54,9 @@ const Registration = () => {
     geocoder.addressSearch(`${address}`, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        addressLocation = coords;
+        setAddressLocation(coords);
+        console.log(addressLocation);
         alert(`${address} 가 맞나요?`);
-        console.log(coords);
       } else {
         alert("주소를 확인해 주세요 !");
         console.log("err");
@@ -64,7 +64,13 @@ const Registration = () => {
     });
   };
 
+  // if (imageData.length === 0) {
+  //   return;
+  // }
+
   const handleCreateRegistration = () => {
+    console.log(imageData);
+    console.log(addressLocation);
     axios({
       method: "post",
       url: "https://gloom.loca.lt/v1/shop",
@@ -79,7 +85,7 @@ const Registration = () => {
         detail: info.value,
         longitude: addressLocation.Ma,
         latitude: addressLocation.La,
-        imageList: [],
+        imageList: imageData[0],
       },
     }).catch((err) => console.log(err));
     navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
@@ -133,7 +139,7 @@ const Registration = () => {
         <label htmlFor="registrationTxt">상세 설명</label>
         <textarea id="registrationTxt" ref={storeInfo} />
         <label htmlFor="imageUpload">이미지</label>
-        <Image />
+        <Image TYPE="SHOP" imageData={imageData} setImageData={setImageData} />
         <Button buttonStyle="main" onClick={handleCreateRegistration}>
           등록하기
         </Button>

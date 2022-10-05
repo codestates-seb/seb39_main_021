@@ -14,6 +14,7 @@ const ReviewCreate = () => {
   const [txtChange, setTxtChange] = useState("");
   const [checked, setChecked] = useState([false, false, false, false, false]);
   const starNum = [0, 1, 2, 3, 4];
+  const [imageData, setImageData] = useState([]);
 
   const info = useLocation();
 
@@ -42,6 +43,9 @@ const ReviewCreate = () => {
     setTxtChange(e.target.value);
   };
 
+  // if (imageData.length === 0) {
+  //   return;
+  // }
   // 서버로 post 요청을 보내는 함수
   const handleCreateReview = () => {
     let likeCount = 0;
@@ -62,7 +66,7 @@ const ReviewCreate = () => {
         rating: likeCount, // 별점
         content: txtChange, // 후기 작성
         openCheck: buttonYes, // 열었는지 여부확인(boolean)
-        imageList: [],
+        imageList: imageData[0],
       },
     })
       .then((data) => console.log(data))
@@ -103,7 +107,7 @@ const ReviewCreate = () => {
             starNum={starNum}
           />
         </div>
-        <Image />
+        <Image TYPE="SHOP" imageData={imageData} setImageData={setImageData} />
         <div className="reviewTxtTitle">후기</div>
         <textarea
           placeholder="후기 내용 작성하기"

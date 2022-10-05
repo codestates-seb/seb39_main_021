@@ -72,6 +72,11 @@ const KaKaoMap = () => {
       level: 5,
       marker: arr,
     };
+
+    // const setzoomable = (zoomable) => new kakao.map.setZoomable(zoomable);
+
+    // setzoomable(false);
+
     // 내 중심으로 지도가 생성되고, 업체의 마커만 찍어준다.
     // => 전체 지도보기를 봣을 때,
 

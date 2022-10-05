@@ -19,6 +19,7 @@ const ReviewDetail = () => {
     axios({
       url: `https://gloom.loca.lt/v1/review/${reviewInfo}`,
     }).then((data) => {
+      console.log(data.data);
       setReviewData(data.data);
     });
   }, []);
@@ -36,11 +37,7 @@ const ReviewDetail = () => {
       <Header />
       <ReviewDetailInfo>
         <div>
-          <img
-            src="https://cdn.pixabay.com/photo/2019/05/07/13/28/stone-day-bag-4185981__340.jpg"
-            alt="JejuIsland"
-          />
-          이미지는 서버에서 받아올것.
+          <img src={reviewData.images} alt="alt" />
         </div>
         <div className="storeName">상호</div>
         <div className="storeInfoName">{reviewData.shopName}</div>

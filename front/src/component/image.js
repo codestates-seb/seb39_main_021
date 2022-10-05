@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Button from "./Button";
 
-const Image = () => {
+const Image = ({ TYPE, imageData, setImageData }) => {
   const fileInput = useRef();
   const [imageUrlList, setImageUrlList] = useState([]);
 
@@ -36,11 +36,14 @@ const Image = () => {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
       },
-      url: "https://gloom.loca.lt/v1/image/upload?type=REVIEW",
+      url: `https://gloom.loca.lt/v1/image/upload?type=${TYPE}`,
       method: "post",
       data: formData,
     })
       .then((info) => {
+        console.log(info.data.urlList);
+        console.log(imageData);
+        setImageData([...imageData, info.data.urlList]);
         setImageUrlList([...imageUrlList, info.data.urlList]);
       })
       .catch((err) => console.log(err));

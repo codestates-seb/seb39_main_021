@@ -15,31 +15,6 @@ const Home = ({ selectData, setSelectData }) => {
     setOpenMenu(!openMenu);
   };
 
-  const popularPosts = [
-    {
-      id: "1",
-      imageUrl:
-        "https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__340.jpg",
-      title: "WORKS.D 댄스 연습실 송파점",
-      rating: "4.9점",
-    },
-    {
-      id: "2",
-      imageUrl:
-        "https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__340.jpg",
-      title: "222WORKS.D 댄스 연습실 송파점",
-      rating: "3.9점",
-    },
-    {
-      id: "3",
-      imageUrl:
-        "https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395__340.jpg",
-      imageDescription: "아무사진 1",
-      title: "WORKS.D 댄스 연습실 송파점333",
-      rating: "2.9점",
-    },
-  ];
-
   return (
     <>
       <Header toggleMenu={toggleMenu} openMenu={openMenu} />
@@ -70,19 +45,7 @@ const Home = ({ selectData, setSelectData }) => {
           })}
         </section>
 
-        <section className="popularPostsContainer">
-          <h2>인기게시물</h2>
-          {popularPosts.map((post) => (
-            <div key={post.id} className="popularContainer">
-              <img src={post.imageUrl} alt={post.imageDescription} />
-              <h3>{post.title}</h3>
-              <span>
-                <RiStarFill className="star" />
-                {post.rating}
-              </span>
-            </div>
-          ))}
-        </section>
+        <footer className="footer"></footer>
       </MainContainer>
     </>
   );
@@ -120,24 +83,10 @@ const MainContainer = styled.main`
     height: 150px;
   }
 
-  .popularPostsContainer {
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-  }
-  .popularContainer {
-    width: 100%;
-    border: 1px solid white;
-    background-color: #76736e;
-    margin: 30px 0;
-    text-align: left;
-  }
-  .popularPostsContainer h2 {
-    margin-bottom: 20px;
-    text-align: left;
-  }
-
-  .popularPostsContainer img {
+  .footer {
+    border-top: 1px solid white;
+    /* text-align: center; */
+    margin: 20px 0;
     width: 100%;
   }
   .iconsImage {
