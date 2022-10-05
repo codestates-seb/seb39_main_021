@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { IoIosMenu } from "react-icons/io";
+import Logo from "../asset/mainProjectLogo.png";
 
 const Header = ({ toggleMenu, openMenu }) => {
   return (
     <MainHeader>
       <div> </div>
-      <a href="/">밤잠 없는 사람들</a>
+      <a href="/">
+        <img src={Logo} />
+      </a>
       <Link
         to="/toggleMenu"
         // onClick={() => toggleMenu(!openMenu)}
         className="menuBtn"
       >
-        <GiHamburgerMenu />
+        <IoIosMenu />
       </Link>
     </MainHeader>
   );
@@ -20,19 +23,34 @@ const Header = ({ toggleMenu, openMenu }) => {
 export default Header;
 
 const MainHeader = styled.header`
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #76736e;
   padding: 0px 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 43px;
 
   div {
-    align-items: center;
+    height: 24px;
+    width: 24px;
   }
+
   .menuBtn {
-    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+
+    svg {
+      height: 18px;
+      width: 18px;
+    }
   }
+
   a {
-    color: white;
-    font-size: 20px;
+    img {
+      height: 32px;
+    }
   }
 `;
