@@ -58,7 +58,6 @@ const Home = ({ selectData, setSelectData }) => {
                     ...selectData,
                     category: category.name,
                   });
-                  console.log(category);
                 }}
                 state={{
                   categoryInfo: category.name,
