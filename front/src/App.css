@@ -7,7 +7,7 @@
 }
 
 .App {
-  margin: 0px 24px;
+  margin: 0px 0px;
 }
 
 html {
@@ -16,7 +16,7 @@ html {
   line-height: 1.2;
   word-wrap: break-word;
   font-size: 62.5%;
-  background-color: var(--mainDeepGray);
+  background-color: #303134;
 }
 
 body {
@@ -160,6 +160,6 @@ button {
 }
 
 a {
-  color: black;
+  color: #ffffff;
   text-decoration: none;
 }

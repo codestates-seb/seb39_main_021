@@ -55,7 +55,7 @@ export default Home;
 
 const MainContainer = styled.main`
   padding: 20px 10px 0;
-  border-top: 1px solid white;
+  border-top: 1px solid blue;
   h1 {
     display: none;
   }
