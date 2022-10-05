@@ -58,7 +58,7 @@ const Home = ({ selectData, setSelectData }) => {
 export default Home;
 
 const MainContainer = styled.main`
-  padding: 36px 24px;
+  padding: 36px 24px 0px 24px;
 
   h1 {
     display: none;
@@ -66,7 +66,6 @@ const MainContainer = styled.main`
 
   .mainBanner {
     width: 100%;
-    margin-top: 10px;
 
     img {
       width: 100%;
@@ -79,6 +78,7 @@ const MainContainer = styled.main`
 
     align-items: center;
     justify-items: center;
+    margin: 10px 0px;
 
     .categoryItems {
       margin: 2.4rem 0px 5rem 0px;
@@ -95,12 +95,6 @@ const MainContainer = styled.main`
     }
   }
 
-  .footer {
-    border-top: 1px solid white;
-    /* text-align: center; */
-    margin: 20px 0;
-    width: 100%;
-  }
   .iconsImage {
     font-size: 50px;
     height: 50px;
