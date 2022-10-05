@@ -76,24 +76,8 @@ const Registration = () => {
         latitude: addressLocation.La,
         imageList: [],
       },
-    })
-      .then((data) =>
-        console.log({
-          memberId: 1,
-          category: type.value,
-          businessNumber: number.value,
-          name: name.value,
-          address: address.value,
-          cityId: "02",
-          areaId: "008",
-          detail: info.value,
-          longitude: addressLocation.Ma,
-          latitude: addressLocation.La,
-          imageList: [],
-        })
-      )
-      .catch((err) => console.log(err));
-    // navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
+    }).catch((err) => console.log(err));
+    navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
   };
 
   return (

@@ -7,15 +7,16 @@ import Star from "../component/Star";
 
 const ReviewDetail = () => {
   const {
-    state: { storeInfo },
+    state: { storeData },
   } = useLocation();
   const years = new Date().getFullYear();
   const months = new Date().getMonth();
   const days = new Date().getDate();
   const hours = new Date().getHours();
   const minutes = new Date().getMinutes();
+  console.log(storeData);
 
-  if (storeInfo === null) {
+  if (storeData === null) {
     return;
   }
 
@@ -31,14 +32,14 @@ const ReviewDetail = () => {
           이미지는 서버에서 받아올것.
         </div>
         <div className="storeName">상호</div>
-        <div className="storeInfoName">{storeInfo.name}</div>
+        <div className="storeInfoName">{storeData.name}</div>
         <div>일시</div>
         <div className="date">
           {`${years}년 ${months + 1}월 ${days}일 ${hours}:${minutes} ~`}
         </div>
         <div className="opened">장소가 열려 있었나요?</div>
         <div>
-          {storeInfo.opened ? (
+          {storeData.opened ? (
             <div className="btnFlex">
               <Button buttonStyle="main" width="150px">
                 예
@@ -63,7 +64,7 @@ const ReviewDetail = () => {
           <Star />
         </div>
         <div className="reviewTxt">후기</div>
-        <pre className="reviewInfoTxt">{storeInfo.txt}</pre>
+        <pre className="reviewInfoTxt">{storeData.txt}</pre>
         <Button buttonStyle="main">수정하기</Button>
         <Button buttonStyle="main" className="delete">
           삭제하기

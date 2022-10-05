@@ -12,18 +12,17 @@ import ReviewCreate from "./ReviewCreate";
 import MoreReview from "./MoreReview";
 import ReviewDetail from "./ReviewDetailPage";
 import RegistrationDetail from "./RegistrationDetail";
-import KaKaoMap from "./KakaoMap";
+import KaKaoMap from "../component/KakaoMap";
 
 const Router = () => {
   const url = "https://gloom.loca.lt";
   const [list, setList] = useState(null);
   useEffect(() => {
     axios
-      .get(
-        `${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=%EC%9D%8C%EC%8B%9D%EC%A0%90`
-      )
+      .get(`${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=음식점`)
       .then((information) => {
-        setList(information.data.data);
+        console.log(information);
+        // setList(information.data.data);
       })
       .catch((err) => console.log(err));
   }, []);

@@ -16,7 +16,7 @@ import { BiStore, BiDotsHorizontal } from "react-icons/bi";
 const categoryList = [
   {
     id: "1",
-    name: "식당",
+    name: "음식점",
     icon: RiRestaurant2Line,
   },
   {
@@ -51,7 +51,7 @@ const categoryList = [
   },
   {
     id: "8",
-    name: "pc방",
+    name: "PC방",
     icon: RiComputerLine,
   },
   {

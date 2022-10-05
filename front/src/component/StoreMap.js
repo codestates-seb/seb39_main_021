@@ -1,7 +1,7 @@
 /* global kakao */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
-const KaKaoMap = () => {
+const StoreMap = ({ storeLat, storeLng }) => {
   const { kakao } = window;
 
   const imageSrc =
@@ -11,8 +11,6 @@ const KaKaoMap = () => {
 
   useEffect(() => {
     const container = document.getElementById("map");
-    let lat;
-    let lon;
 
     const displayMarker = (localPosition, message) => {
       const marker = new kakao.maps.Marker({
@@ -34,12 +32,9 @@ const KaKaoMap = () => {
     };
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        lat = position.coords.latitude;
-        lon = position.coords.longitude;
-
-        let locPosition = new kakao.maps.LatLng(lat, lon);
-        let message = '<div style="padding:5px;">현위치</div>';
+      navigator.geolocation.getCurrentPosition(function () {
+        let locPosition = new kakao.maps.LatLng(storeLng, storeLat);
+        let message = '<div style="padding:5px;">여기</div>';
 
         displayMarker(locPosition, message);
       });
@@ -58,31 +53,6 @@ const KaKaoMap = () => {
     const map = new kakao.maps.Map(container, options);
   }, []);
 
-  const markerPosition = [
-    {
-      title: "제주도",
-      latlng: new kakao.maps.LatLng(33.450701, 126.570667),
-    },
-    {
-      title: "백록담",
-      latlng: new kakao.maps.LatLng(33.36249480036842, 126.53274754973836),
-    },
-  ];
-
-  // 여러개의 마커를 찍는 함수
-  // 서버에서 위도, 경도를 받아서 사용할 예정.
-  const createMarker = () => {
-    for (let i = 0; i < markerPosition.length; i++) {
-      // 이미지의 사이즈를 정하는 인스턴스 생성
-      // const jejuMarker = new kakao.maps.Marker({
-      //   map: map, // 마커에 표시할 지도
-      //   position: markerPosition[i].latlng, //마커에 표시할 위치
-      //   title: markerPosition[i].title,
-      //   image: markerImage,
-      // });
-    }
-  };
-
   return (
     <div className="Map" style={{ height: "100px", margin: "50px" }}>
       <div className="MapContainer" id="map" style={{ height: "100px" }}></div>
@@ -90,4 +60,4 @@ const KaKaoMap = () => {
   );
 };
 
-export default KaKaoMap;
+export default StoreMap;
