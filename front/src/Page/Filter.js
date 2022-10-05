@@ -6,6 +6,8 @@ import Button from "../component/Button";
 import localList from "../DummyData/localList";
 import Header from "./Header";
 
+import GoodButton from "../component/GoodButton";
+
 const LocalFilter = ({ selectData, setSelectData }) => {
   const [fullId, setFullId] = useState("01000");
   const [local, setLocal] = useState("전국");
@@ -52,6 +54,7 @@ const LocalFilter = ({ selectData, setSelectData }) => {
   return (
     <FilterSection>
       <Header />
+      <GoodButton />
       <section>
         {filtered === false ? (
           <div>전국</div>
