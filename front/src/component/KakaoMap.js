@@ -1,6 +1,5 @@
 /* global kakao */
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const KaKaoMap = () => {
@@ -73,14 +72,6 @@ const KaKaoMap = () => {
       marker: arr,
     };
 
-    // const setzoomable = (zoomable) => new kakao.map.setZoomable(zoomable);
-
-    // setzoomable(false);
-
-    // 내 중심으로 지도가 생성되고, 업체의 마커만 찍어준다.
-    // => 전체 지도보기를 봣을 때,
-
-    // 하나의 업체만 보았을때는 하나의 업체의 마커만 찍어주면 된다.
     const map = new kakao.maps.Map(container, options);
 
     for (let i = 0; i < arr.length; i++) {
@@ -91,14 +82,13 @@ const KaKaoMap = () => {
         position: arr[i].latlng,
         title: arr[i].name,
         text: arr[i].name,
-        // image: markerImage,
       });
     }
   }, []);
 
   return (
-    <div className="Map" style={{ height: "300px", margin: "50px" }}>
-      <div className="MapContainer" id="map" style={{ height: "300px" }}></div>
+    <div className="Map" style={{ height: "500px", margin: "20px" }}>
+      <div className="MapContainer" id="map" style={{ height: "500px" }}></div>
     </div>
   );
 };
