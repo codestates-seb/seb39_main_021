@@ -5,9 +5,11 @@ import styled from "styled-components";
 import { RiRoadMapLine } from "react-icons/ri";
 
 import Header from "./Header";
+import { ReactComponent as Star } from "../asset/star.svg";
 
 const List = ({ selectData }) => {
-  const [storeData, setStoreData] = useState(null);
+  // const [storeData, setStoreData] = useState(null);
+  const [storeData, setStoreData] = useState([{ id: 1, images: [] }]);
 
   useEffect(() => {
     axios
@@ -24,89 +26,95 @@ const List = ({ selectData }) => {
     return;
   }
   return (
-    <StoreData>
+    <section>
       <Header />
-      {selectData !== null && <h2> {selectData.category} </h2>}
-      <section className="buttonContainer">
-        <button className="filterLocal">
-          <Link to="/LocalFilter" className="filterLocal-txt">
-            {selectData.filter.local} {selectData.filter.area}
-          </Link>
-        </button>
-        <button className="filterMap">
-          <Link to="/map" className="filterMap-txt" state={{ data: storeData }}>
-            <RiRoadMapLine />
-          </Link>
-        </button>
-      </section>
-      <section>
-        {storeData !== null
-          ? storeData?.map((individualStore) => (
-              <Link
-                key={individualStore.id}
-                to={"/storeDetailPage"}
-                state={{
-                  storeData: individualStore.id,
-                }}
-              >
-                <StoreContainer key={individualStore.id}>
-                  <div className="imgContainer">
-                    <img src={individualStore.images[0]} alt="더미데이터" />
-                  </div>
-                  <div className="informationContainer">
-                    <h3 className="title">상호명 : {individualStore.name}</h3>
-                    <div className="address">
-                      주소 : {individualStore.address}
-                    </div>
-                    <div className="rating">
-                      별 : {individualStore.ratingAVG}
-                    </div>
-                  </div>
-                  <section>
-                    <div>전체리뷰수{individualStore.reviewCount}</div>
-                    <div>방문한 회원수{individualStore.visitorCount}</div>
-                    <div>열려있어요{individualStore.openCount}</div>
-                  </section>
-                </StoreContainer>
-              </Link>
-            ))
-          : null}
-      </section>
-    </StoreData>
+      <StoreData>
+        {selectData !== null && <h2> {selectData.category} </h2>}
+        <section className="buttonContainer">
+          <button className="filterLocal">
+            <Link to="/LocalFilter" className="filterLocal-txt">
+              {selectData.filter.local} {selectData.filter.area}
+            </Link>
+          </button>
+          <button className="filterMap">
+            <Link
+              to="/map"
+              className="filterMap-txt"
+              state={{ data: storeData }}
+            >
+              <RiRoadMapLine />
+            </Link>
+          </button>
+        </section>
+        <section>
+          {storeData !== null
+            ? storeData?.map((individualStore) => (
+                <Link
+                  key={individualStore.id}
+                  to={"/storeDetailPage"}
+                  state={{
+                    storeData: individualStore.id,
+                  }}
+                >
+                  <StoreContainer key={individualStore.id}>
+                    <section>
+                      <div className="imgContainer">
+                        <img src={individualStore.images[0]} alt="더미데이터" />
+                      </div>
+                      <div className="informationContainer">
+                        <h3 className="title">
+                          WORKS.D {individualStore.name}
+                        </h3>
+                        <div className="address">
+                          주소 : {individualStore.address}
+                        </div>
+                        <div className="rating">
+                          <Star fill="#FFC700" width="10px" />
+                          <div>132 {individualStore.ratingAVG}</div>
+                        </div>
+                      </div>
+                    </section>
+                    <section className="verificationContainer">
+                      <div>전체리뷰수{individualStore.reviewCount}</div>
+                      <div>방문한 회원수{individualStore.visitorCount}</div>
+                      <div>열려있어요{individualStore.openCount}</div>
+                    </section>
+                  </StoreContainer>
+                </Link>
+              ))
+            : null}
+        </section>
+      </StoreData>
+    </section>
   );
 };
 
 const StoreData = styled.section`
   color: white;
-  padding-top: 24px;
+  padding: 0px 24px;
   h2 {
     margin-top: 28px;
   }
-
   .buttonContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 12px 0px;
   }
-
   .filterLocal {
     border: 1px solid #ffc700;
   }
   .filterLocal-txt {
     color: #ffc700;
   }
-
   .filterMap-txt {
     color: white;
     font-size: 15px;
   }
-
   .star {
     margin-right: 5px;
     color: yellow;
   }
-
   .storeReviewsInfo {
     margin-top: 6px;
     display: flex;
@@ -125,46 +133,47 @@ const StoreContainer = styled.div`
   padding: 12px;
   background-color: #504e4a;
 
-  .storeInfo {
+  section {
     display: flex;
   }
-  .starContainer {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-  }
+
   .imgContainer {
     width: 96px;
     height: 96px;
     margin-right: 12px;
-
     img {
-      border-radius: 3px;
+      border-radius: 5px;
       height: 100%;
     }
   }
-
   .informationContainer {
     color: white;
     padding: 10px 0px;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .title {
       font-size: 1.6rem;
-      font-weight: bold;
+      font-weight: 700;
     }
-
     .address {
       font-size: 1.2rem;
-      font-weight: bold;
+      margin-bottom: 13px;
     }
-
     .rating {
       font-size: 1.2rem;
-    }
-
-    section {
       display: flex;
+      align-items: center;
+      div {
+        padding: 2px 0px 0px 3px;
+        text-align: center;
+      }
     }
+  }
+
+  .verificationContainer {
+    display: flex;
+    justify-content: space-between;
   }
 `;
 

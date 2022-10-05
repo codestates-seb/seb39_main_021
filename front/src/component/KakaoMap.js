@@ -1,12 +1,14 @@
 /* global kakao */
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import Header from "../Page/Header";
 
 const KaKaoMap = () => {
   const { kakao } = window;
   const info = useLocation();
   const location = info.state.data;
   let arr = [];
+  const windowHeight = window.innerHeight;
 
   for (let i = 0; i < location.length; i++) {
     arr.push({
@@ -87,8 +89,11 @@ const KaKaoMap = () => {
   }, []);
 
   return (
-    <div className="Map" style={{ height: "500px", margin: "20px" }}>
-      <div className="MapContainer" id="map" style={{ height: "500px" }}></div>
+    <div>
+      <Header />
+      <div className="Map" style={{ height: `${windowHeight}px` }}>
+        <div className="MapContainer" id="map" style={{ height: "100%" }}></div>
+      </div>
     </div>
   );
 };
