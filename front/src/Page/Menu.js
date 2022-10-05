@@ -8,11 +8,7 @@ const Menu = () => {
         <Link className="loginBtn" to="/login">
           로그인 하기
         </Link>
-        <Link
-          to="/"
-          className="menuClose"
-          // onClick={() => toggleMenu(!openMenu)}
-        >
+        <Link to="/" className="menuClose">
           X
         </Link>
       </header>
