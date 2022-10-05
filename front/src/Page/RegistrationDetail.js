@@ -28,26 +28,22 @@ const RegistrationDetail = () => {
       .get(`https://gloom.loca.lt/v1/shop/1`)
       //   해당 아이디를 찾으려면 로그인이 된 상태 아니면 클릭을 해서 페이지 이동할 때 데이터를 받아와서 id 가 일치하는걸 뿌려줘야 하는데,, 둘 다 안되어 있음.
       .then((info) => {
-        console.log(info);
+        console.log(info.data);
         setInformation(info.data);
         setChangedInformation({
-          memberId: info.id,
-          name: info.name,
-          detail: info.detail,
-          imageList: info.images,
+          memberId: info.data.id,
+          name: info.data.name,
+          detail: info.data.detail,
+          imageList: info.data.images,
         });
-      })
-      .then
-      // (info) => console.log(info)
-      ();
+      });
   }, []);
-
-  // console.log(changedInformation);
 
   const handleShopInfoChange = () => {
     axios
       .patch(`https://gloom.loca.lt/v1/shop/${shopId}`, changedInformation)
-      .then((result) => console.log(result));
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   };
 
   const handleDetailChange = (detailContent) => {

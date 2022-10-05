@@ -21,8 +21,7 @@ const Router = () => {
     axios
       .get(`${url}/v1/shop?page=1&size=10&cityId=02&areaId=008&category=음식점`)
       .then((information) => {
-        console.log(information);
-        // setList(information.data.data);
+        setList(information.data.data);
       })
       .catch((err) => console.log(err));
   }, []);

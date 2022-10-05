@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Header from "./Header";
@@ -10,6 +10,7 @@ import Button from "../component/Button";
 const Registration = () => {
   // kakao API 를 사용하기 위해 구조분해할당
   const { kakao } = window;
+  const [address, setAddress] = useState();
 
   const navigate = useNavigate();
   const storeNumber = useRef();
@@ -18,7 +19,7 @@ const Registration = () => {
   const storeInfo = useRef();
   const storeType = useRef();
 
-  const address = storeAddress.current; // 사용자가 입력한 주소
+  // const address = storeAddress.current; // 사용자가 입력한 주소
   const name = storeName.current; // 사용자가 입력한 업체명
   const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
   const info = storeInfo.current; // 사용자가 입력한 사업장 설명
@@ -39,6 +40,10 @@ const Registration = () => {
       });
   };
 
+  const handleAddressValue = (event) => {
+    setAddress(event.target.value);
+    console.log(event.target.value);
+  };
   const handleCheckAddress = () => {
     // 주소를 위도경도로 변경해주는 인스턴스 생성
     let geocoder = new kakao.maps.services.Geocoder();
@@ -46,11 +51,11 @@ const Registration = () => {
     // 사용자가 입력한 주소값
 
     //addressSearch 함수(사용자입력값,콜백함수)
-    geocoder.addressSearch(`${address.value}`, function (result, status) {
+    geocoder.addressSearch(`${address}`, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         addressLocation = coords;
-        alert(`${address.value} 가 맞나요?`);
+        alert(`${address} 가 맞나요?`);
         console.log(coords);
       } else {
         alert("주소를 확인해 주세요 !");
@@ -68,7 +73,7 @@ const Registration = () => {
         category: type.value,
         businessNumber: number.value,
         name: name.value,
-        address: address.value,
+        address: address,
         cityId: "02",
         areaId: "008",
         detail: info.value,
@@ -112,7 +117,11 @@ const Registration = () => {
         <label htmlFor="registrationName">사업장 이름</label>
         <input id="registrationName" ref={storeName} />
         <label htmlFor="registrationAddress">사업장 주소</label>
-        <input id="registrationAddress" ref={storeAddress} />
+        <input
+          id="registrationAddress"
+          ref={storeAddress}
+          onChange={(event) => handleAddressValue(event)}
+        />
         <Button
           className="registrationAddressCheck"
           buttonStyle="main"
