@@ -17,6 +17,9 @@ function GoodButton() {
     }
   };
 
+  console.log(thumbsUp);
+  console.log(thumbsUpCount);
+
   return thumbsUpCount >= 100 ? (
     <ThumbsUpButton
       onClick={handleThumbsUpButton}
