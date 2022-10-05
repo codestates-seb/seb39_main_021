@@ -11,14 +11,16 @@ const LocalFilter = ({ selectData, setSelectData }) => {
   const [fullId, setFullId] = useState("01000");
   const [local, setLocal] = useState("전국");
   const [area, setArea] = useState("전체보기");
+  const [filtered, setFiltered] = useState(false);
 
   const [cities] = localList.filter((post) => post.city === local);
   const { area: targetArea } = cities;
   const submitLocal = fullId?.slice(0, 2);
   const submitArea = fullId?.slice(2, 5);
 
-  //제출하기 눌렀을때의 함수
+  //설정하기 눌렀을때의 함수
   const handleLocalFilterSubmit = () => {
+    setFiltered(true);
     if (fullId != null) {
       setSelectData({
         ...selectData,
@@ -34,6 +36,7 @@ const LocalFilter = ({ selectData, setSelectData }) => {
 
   //초기화 눌렀을때의 함수
   const handleReset = () => {
+    setFiltered(false);
     setSelectData({
       ...selectData,
       filter: {
@@ -45,11 +48,15 @@ const LocalFilter = ({ selectData, setSelectData }) => {
     });
   };
 
+  console.log(selectData);
+
   return (
     <FilterSection>
       <Header />
       <section>
-        {local === "전국" ? (
+        {filtered === false ? (
+          <div>전국</div>
+        ) : local === "전국" ? (
           <div>{local}</div>
         ) : (
           <div>
@@ -60,7 +67,7 @@ const LocalFilter = ({ selectData, setSelectData }) => {
           검색 적용하기
         </Link>
       </section>
-      <section>
+      <section className="filter">
         <LocalFilterSection>
           {localList.map((post) => (
             <button
@@ -90,9 +97,10 @@ const LocalFilter = ({ selectData, setSelectData }) => {
               {post.name}
             </button>
           ))}
+          <div></div>
         </AreaFilterSection>
       </section>
-      <section>
+      <section className="buttonSection">
         <Button width="100px" onClick={handleReset}>
           초기화
         </Button>
@@ -108,29 +116,56 @@ const FilterSection = styled.div`
   display: flex;
   flex-direction: column;
 
+  .buttonSection {
+    background-color: #303134;
+    position: fixed;
+    bottom: 0px;
+    width: 89%;
+    padding: 50px 0px;
+  }
+
   section {
-    margin-top: 12px;
     display: flex;
+    align-items: baseline;
     justify-content: space-between;
   }
 
+  div {
+    margin-top: 12px;
+    display: flex;
+  }
+
+  .buttonStyle {
+    color: white;
+    height: 30px;
+    width: 100%;
+  }
   .buttonStyle:focus {
     background-color: white;
+    color: black;
   }
 `;
-const LocalFilterSection = styled.section`
+const LocalFilterSection = styled.div`
   width: 50%;
-  border: 1px solid white;
-
+  height: 600px;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  border: 1px solid black;
 `;
 
-const AreaFilterSection = styled.section`
-  border: 1px solid blue;
+const AreaFilterSection = styled.div`
   width: 50%;
-
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: baseline;
+
+  overflow-y: scroll;
+  flex-wrap: nowrap;
+
+  div {
+    height: 100px;
+  }
 `;
 export default LocalFilter;

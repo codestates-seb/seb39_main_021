@@ -1,28 +1,28 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
 import Header from "./Header";
-import categoryList from "../DummyData/categoryList";
 
-const List = ({ selectData }) => {
+const List = ({ selectData, setSelectData }) => {
   const [storeData, setStoreData] = useState(null);
-  const location = useLocation();
-  console.log(location);
-  const categoryName = location.state.categoryInfo;
+
+  console.log(selectData);
 
   // 1. filter된 값들을 요청보낸다 (기본값 : 전국) - 종렬
   // 2. 서버에서 받은 값을 storeData 로 저장한다. - 종렬
   useEffect(() => {
     axios
       .get(
-        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=02&areaId=008&category=${categoryName}&sort=1`
+        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
+        // { headers: "Access-Controller-Allow-Origin: *" }
       )
-      .then((filterData) => setStoreData(filterData.data.data));
+      .then((filterData) => setStoreData(filterData.data.data))
+      .then((filterData) => console.log(filterData));
   }, []);
 
-  if (storeData === null) {
+  if (storeData == null) {
     return;
   }
 

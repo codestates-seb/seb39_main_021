@@ -29,7 +29,7 @@ const Router = () => {
   }, []);
 
   const [selectData, setSelectData] = useState({
-    category: "임시",
+    category: "카페",
     filter: {
       local: "전국",
       localId: "01",
