@@ -67,7 +67,8 @@ public class ShopController {
             spec.put("category", verifyCategory);
         }
         if (cityId != null) {
-            spec.put("cityId", cityId);
+            if(!cityId.equals("01"))
+              spec.put("cityId", cityId);
         }
         if (areaId !=null){
             if (!areaId.equals("000")) {

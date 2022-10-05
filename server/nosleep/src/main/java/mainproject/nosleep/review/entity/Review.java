@@ -50,11 +50,11 @@ public class Review extends Auditable {
     private List<Image> images = new ArrayList<>();
 
     @Builder
-    public Review(Long id, Integer rating, String content, Long upvoteCount, Shop shop, Member member, List<Upvote> upvotes, OpenCheck openCheck, List<Image> images) {
+    public Review(Long id, Integer rating, String content, Shop shop, Member member, List<Upvote> upvotes, OpenCheck openCheck, List<Image> images) {
         this.id = id;
         this.rating = rating;
         this.content = content;
-        this.upvoteCount = upvoteCount;
+        this.upvoteCount = 0L;
         this.shop = shop;
         this.member = member;
         this.upvotes = upvotes;
