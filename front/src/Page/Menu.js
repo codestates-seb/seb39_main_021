@@ -23,9 +23,9 @@ const Menu = () => {
           사업장 등록하기
         </Link>
         <a href="https://14ddk.channel.io">1:1 문의하기</a>
-        <a href="">이용약관</a>
-        <a href="">개인정보처리방침</a>
-        <a href="">만든이</a>
+        <a href="*">이용약관</a>
+        <a href="*">개인정보처리방침</a>
+        <a href="*">만든이</a>
       </MenuContent>
     </HamburgerMenu>
   );
