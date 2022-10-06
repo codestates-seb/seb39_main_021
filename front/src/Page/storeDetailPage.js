@@ -7,6 +7,7 @@ import { RiStarFill } from "react-icons/ri";
 import Header from "./Header";
 import Button from "../component/Button";
 import StoreMap from "../component/StoreMap";
+import GoodButton from "../component/GoodButton.js";
 
 const StoreDetail = ({ selectData }) => {
   const [storeItemDetail, setStoreItemDetail] = useState(null);
@@ -66,26 +67,26 @@ const StoreDetail = ({ selectData }) => {
           <span>전체 {storeItemDetail.reviewCount}개</span>
         </div>
         <section>
-          {storeItemDetail.reviews.length === 0
-            ? "리뷰가 없습니다 !"
-            : storeItemDetail.reviews.map((reviewItems, index) => (
-                <Link
-                  key={index}
-                  to="/reviewDetail"
-                  state={{
-                    reviewInfo: reviewItems.id,
-                  }}
-                >
-                  <div key={index} className="reviewContainer">
-                    <span>{reviewItems.nickname}</span>
-                    <div className="reviewStar">
-                      <RiStarFill className="star" />
-                      {reviewItems.rating} 점
-                    </div>
-                    <p>{reviewItems.content}</p>
-                  </div>
-                </Link>
-              ))}
+
+          {storeItemDetail.reviews.map((reviewItems, index) => (
+            <Link
+              key={index}
+              to="/reviewDetail"
+              state={{
+                reviewInfo: reviewItems.id,
+              }}
+            >
+              <div key={index} className="reviewContainer">
+                <span>{reviewItems.nickname}</span>
+                <div className="reviewStar">
+                  <RiStarFill className="star" />
+                  {reviewItems.rating} 점
+                </div>
+                <GoodButton reviewInfo={reviewItems.id} />
+                <p>{reviewItems.content}</p>
+              </div>
+            </Link>
+          ))}
 
           <Link to="/moreReviews" className="moreReviews">
             더보기
