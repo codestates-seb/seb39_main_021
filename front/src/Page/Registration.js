@@ -69,7 +69,7 @@ const Registration = () => {
   const handleCreateRegistration = () => {
     axios({
       method: "post",
-      url: "https://gloom.loca.lt/v1/shop",
+      url: "http://api.main21test.cf:8080/v1/shop",
       data: {
         memberId: 1,
         category: type.value,
@@ -123,6 +123,7 @@ const Registration = () => {
           id="registrationcityId"
           onChange={(e) => setFilter({ ...filter, cityId: e.target.value })}
         >
+          <option>선택해 주세요</option>
           {localList.map((post) => (
             <option className="buttonStyle" value={post.id}>
               {post.city}
@@ -173,6 +174,8 @@ const Registration = () => {
 export default Registration;
 
 const RegistrationContainer = styled.main`
+  padding: 0px 24px;
+  height: 2000px;
   label {
     display: block;
     color: white;
