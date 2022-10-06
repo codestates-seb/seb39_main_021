@@ -16,9 +16,6 @@ import ReviewCorrection from "./ReviewCorrection";
 import Login from "./Login";
 
 const Router = () => {
-  const url = "https://gloom.loca.lt";
-  const [list, setList] = useState(null);
-
   const [selectData, setSelectData] = useState({
     category: "카페",
     filter: {
@@ -41,11 +38,7 @@ const Router = () => {
         <Route
           path="/list"
           element={
-            <List
-              list={list}
-              selectData={selectData}
-              setSelectData={setSelectData}
-            />
+            <List selectData={selectData} setSelectData={setSelectData} />
           }
         />
         <Route
@@ -68,7 +61,7 @@ const Router = () => {
         />
         <Route path="/toggleMenu" element={<Menu />} />
         <Route path="/businessRegistration" element={<Registration />} />
-        <Route path="/review" element={<ReviewCreate list={list} />} />
+        <Route path="/review" element={<ReviewCreate />} />
         <Route path="/moreReviews" element={<MoreReview />} />
         <Route path="/reviewDetail" element={<ReviewDetail />} />
         <Route path="/RegistrationDetail" element={<RegistrationDetail />} />

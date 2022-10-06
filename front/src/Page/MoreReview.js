@@ -1,14 +1,13 @@
 import Header from "./Header";
 
 import { Link } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { RiStarFill } from "react-icons/ri";
 import axios from "axios";
 
 const MoreReview = () => {
   const [reviewList, setReviewList] = useState(null);
-  const test = useRef();
   useEffect(() => {
     axios({
       url: `${process.env.REACT_APP_URL_API}/v1/review/?page=1&shopId=1&sort=upvote`,

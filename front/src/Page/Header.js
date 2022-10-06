@@ -3,18 +3,14 @@ import { Link } from "react-router-dom";
 import { IoIosMenu } from "react-icons/io";
 import Logo from "../asset/mainProjectLogo.png";
 
-const Header = ({ toggleMenu, openMenu }) => {
+const Header = () => {
   return (
     <MainHeader>
       <div> </div>
-      <a href="/">
-        <img src={Logo} />
+      <a href="*">
+        <img src={Logo} alt="Logo" />
       </a>
-      <Link
-        to="/toggleMenu"
-        // onClick={() => toggleMenu(!openMenu)}
-        className="menuBtn"
-      >
+      <Link to="/toggleMenu" className="menuBtn">
         <IoIosMenu />
       </Link>
     </MainHeader>

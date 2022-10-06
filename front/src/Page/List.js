@@ -16,7 +16,6 @@ const List = ({ selectData }) => {
         `${process.env.REACT_APP_URL_API}/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
       )
       .then((filterData) => {
-        console.log(filterData.data.data);
         setStoreData(filterData.data.data);
       });
   }, []);
