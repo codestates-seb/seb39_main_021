@@ -9,7 +9,7 @@ import Button from "../component/Button";
 import StoreMap from "../component/StoreMap";
 import GoodButton from "../component/GoodButton.js";
 
-const StoreDetail = ({ selectData }) => {
+const StoreDetail = () => {
   const [storeItemDetail, setStoreItemDetail] = useState(null);
   const {
     state: { storeData },
@@ -19,7 +19,6 @@ const StoreDetail = ({ selectData }) => {
     axios
       .get(`${process.env.REACT_APP_URL_API}/v1/shop/${storeData}`)
       .then((data) => {
-        console.log(data.data);
         setStoreItemDetail(data.data);
       })
       .catch((err) => console.log(err));
@@ -67,7 +66,6 @@ const StoreDetail = ({ selectData }) => {
           <span>전체 {storeItemDetail.reviewCount}개</span>
         </div>
         <section>
-
           {storeItemDetail.reviews.map((reviewItems, index) => (
             <Link
               key={index}

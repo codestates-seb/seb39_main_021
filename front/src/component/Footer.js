@@ -5,14 +5,14 @@ import Logo from "../asset/mainProjectLogo.png";
 const Footer = () => {
   return (
     <FooterContainer>
-      <img src={Logo} />
+      <img src={Logo} alt="Logo" />
       <div>Copyright 2022. 밤잠 없는 사람들 all rights reserved.</div>
       <section>
-        <a href="">이용약관</a>
+        <a href="*">이용약관</a>
         <div />
-        <a href="">개인정보처리방침</a>
+        <a href="*">개인정보처리방침</a>
         <div />
-        <a href="">만든이</a>
+        <a href="*">만든이</a>
       </section>
     </FooterContainer>
   );

@@ -37,7 +37,7 @@ const ReviewCorrection = () => {
       }
     }
     axios({
-      url: `https://gloom.loca.lt/v1/review/${reviewData.id}`,
+      url: `${process.env.REACT_APP_URL_API}/v1/review/${reviewData.id}`,
       method: "patch",
       data: {
         rating: likeCount,

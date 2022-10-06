@@ -56,7 +56,6 @@ function Button({ children, ...props }) {
     ) : (
       <EtcButton {...props}> {children} </EtcButton>
     )
-    // </ButtonStyled>
   );
 }
 

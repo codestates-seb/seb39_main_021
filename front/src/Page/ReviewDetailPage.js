@@ -6,11 +6,9 @@ import { RiStarFill } from "react-icons/ri";
 
 import Header from "./Header";
 import Button from "../component/Button";
-import Star from "../component/Star";
 
 const ReviewDetail = () => {
   const [reviewData, setReviewData] = useState(null);
-  const [starCount, setStarCount] = useState([]);
   const {
     state: { reviewInfo },
   } = useLocation();

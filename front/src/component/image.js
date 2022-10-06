@@ -41,8 +41,6 @@ const Image = ({ TYPE, imageData, setImageData }) => {
       data: formData,
     })
       .then((info) => {
-        console.log(info.data.urlList);
-        console.log(imageData);
         setImageData([...imageData, info.data.urlList]);
         setImageUrlList([...imageUrlList, info.data.urlList]);
       })
