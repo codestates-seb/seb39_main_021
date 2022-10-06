@@ -4,26 +4,30 @@ import styled from "styled-components";
 
 function GoodButton({ reviewInfo }) {
   const [thumbsUp, setThumbsUp] = useState(false);
-  // const [thumbsUpCount, setThumbsUpCount] = useState(50);
 
   useEffect(() => {
-    axios.get(`/v1/review/${reviewInfo}/upvote`).then((upvote) => {
-      setThumbsUp(upvote);
-    });
+    axios
+      .get(`${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}/upvote`)
+      .then((upvote) => {
+        setThumbsUp(upvote);
+      });
   }, []);
 
   // 버튼 눌렀을 때 실행되는 함수
   const handleThumbsUpButton = () => {
     if (thumbsUp === false) {
       // setThumbsUpCount(thumbsUpCount + 1);
-      axios.post(`${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}/upvote`);
+      axios.post(
+        `${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}/upvote`
+      );
     } else {
       // setThumbsUpCount(thumbsUpCount - 1);
-      axios.delete(`${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}/upvote`);
+      axios.delete(
+        `${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}/upvote`
+      );
     }
   };
 
-  console.log(thumbsUp);
   // console.log(thumbsUpCount);
 
   // return thumbsUpCount >= 100 ? (

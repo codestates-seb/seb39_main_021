@@ -16,6 +16,7 @@ const List = ({ selectData }) => {
         `${process.env.REACT_APP_URL_API}/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
       )
       .then((filterData) => {
+        console.log(filterData);
         setStoreData(filterData.data.data);
       });
   }, []);
@@ -54,7 +55,7 @@ const List = ({ selectData }) => {
                     storeData: individualStore.id,
                   }}
                 >
-                  <StoreContainer key={individualStore.id}>
+                  <StoreContainer>
                     <section>
                       <div className="imgContainer">
                         <img src={individualStore.images[0]} alt="더미데이터" />

@@ -7,12 +7,11 @@ import Button from "./Button";
 const Image = ({ TYPE, imageData, setImageData }) => {
   const fileInput = useRef();
   const [imageUrlList, setImageUrlList] = useState([]);
+  const [previewImg, setPreviewImg] = useState([]);
 
   const handleReviewImage = () => {
     fileInput.current.click();
   };
-
-  const [previewImg, setPreviewImg] = useState([]);
 
   const handleInsertImg = (event) => {
     let render = new FileReader();
@@ -45,6 +44,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
         setImageUrlList([...imageUrlList, info.data.urlList]);
       })
       .catch((err) => console.log(err));
+    console.log(`${TYPE}의 이미지 post 요청 완료 !`);
   };
 
   const deleteImage = () => {
@@ -53,8 +53,9 @@ const Image = ({ TYPE, imageData, setImageData }) => {
       url: `${process.env.REACT_APP_URL_API}/v1/image`,
       data: { urlList: imageUrlList[0] },
     }).catch((err) => console.log(err));
+    setImageUrlList([]);
     setPreviewImg([]);
-    console.log("이미지 URL : ", imageUrlList);
+    console.log(`${TYPE}의 이미지 삭제 완료 !`);
   };
 
   const deletePreviewImg = (index) => {
@@ -69,11 +70,13 @@ const Image = ({ TYPE, imageData, setImageData }) => {
       .then(setImageUrlList(filter))
       .catch((err) => console.log(err));
 
-    const imgView = previewImg.filter((img, imgIndex) => imgIndex !== index);
-    setPreviewImg([...imgView]);
+    setImageUrlList([...filter]);
+    setPreviewImg([...filter]);
+    console.log(`${TYPE}의 이미지 삭제 완료 !`);
   };
 
   const getPreviewImg = () => {
+    console.log(`${TYPE}의 이미지 미리보기 완료 !`);
     if (previewImg.length === 0) {
       return (
         <img
