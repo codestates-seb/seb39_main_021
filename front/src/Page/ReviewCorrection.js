@@ -50,7 +50,7 @@ const ReviewCorrection = () => {
   };
 
   return (
-    <>
+    <ReviewContainer>
       <Header />
       <ReviewDetailInfo>
         <div>이미지</div>
@@ -96,12 +96,14 @@ const ReviewCorrection = () => {
           <Link to="/">수정완료</Link>
         </Button>
       </ReviewDetailInfo>
-    </>
+    </ReviewContainer>
   );
 };
 
 export default ReviewCorrection;
 
-const ReviewDetailInfo = styled.main`
+const ReviewContainer = styled.main``;
+
+const ReviewDetailInfo = styled.section`
   color: white;
 `;

@@ -6,11 +6,7 @@ const Menu = () => {
   return (
     <HamburgerMenu>
       <header className="menuHeader">
-        <Link
-          to="/"
-          className="menuClose"
-          // onClick={() => toggleMenu(!openMenu)}
-        >
+        <Link to="/" className="menuClose">
           <IoIosClose />
         </Link>
       </header>

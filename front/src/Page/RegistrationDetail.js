@@ -39,9 +39,17 @@ const Registration = () => {
       });
   };
 
+  // const handleShopInfoChange = () => {
+  //   axios
+  //     .patch(`https://gloom.loca.lt/v1/shop/${shopId}`, changedInformation)
+  //     .then((result) => console.log(result))
+  //     .catch((err) => console.log(err));
+  // };
+
   const handleAddressValue = (event) => {
     setAddress(event.target.value);
   };
+
   const handleCheckAddress = () => {
     // 주소를 위도경도로 변경해주는 인스턴스 생성
     let geocoder = new kakao.maps.services.Geocoder();
@@ -81,6 +89,25 @@ const Registration = () => {
     }).catch((err) => console.log(err));
     navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
   };
+
+  // 이미지파일을 수정하고, 서버로 patch요청을 보내는 함수
+  // const handleImageChange = (imageContent) => {
+  //   setChangedInformation({
+  //     ...changedInformation,
+  //     image: imageContent.target.value,
+  //   });
+  // };
+
+  // 시간 남으면 모달창으로 구현
+  // const handleShopDelete = () => {
+  //   axios
+  //     .delete(`https://gloom.loca.lt/v1/shop/${shopId}`)
+  //     .then((result) => console.log(result));
+  // };
+
+  // if (information === null) {
+  //   return;
+  // }
 
   return (
     <>
