@@ -66,7 +66,15 @@ const Router = () => {
             />
           }
         />
-        <Route path="/storeDetailPage" element={<StoreDetail />} />
+        <Route
+          path="/storeDetailPage"
+          element={
+            <StoreDetail
+              selectData={selectData}
+              setSelectData={setSelectData}
+            />
+          }
+        />
         <Route path="/toggleMenu" element={<Menu />} />
         <Route path="/businessRegistration" element={<Registration />} />
         <Route path="/review" element={<ReviewCreate list={list} />} />
