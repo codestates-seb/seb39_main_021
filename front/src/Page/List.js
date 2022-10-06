@@ -62,9 +62,7 @@ const List = ({ selectData }) => {
                         <img src={individualStore.images[0]} alt="더미데이터" />
                       </div>
                       <div className="informationContainer">
-                        <h3 className="title">
-                          WORKS.D {individualStore.name}
-                        </h3>
+                        <h3 className="title">이름 : {individualStore.name}</h3>
                         <div className="address">
                           주소 : {individualStore.address}
                         </div>
