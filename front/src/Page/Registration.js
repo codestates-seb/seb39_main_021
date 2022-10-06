@@ -68,7 +68,7 @@ const Registration = () => {
   const handleCreateRegistration = () => {
     axios({
       method: "post",
-      url: "http://api.main21test.cf:8080/v1/shop",
+      url: `${process.env.REACT_APP_URL_API}/v1/shop`,
       data: {
         memberId: 1,
         category: type.value,

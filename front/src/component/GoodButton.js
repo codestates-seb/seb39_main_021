@@ -10,10 +10,16 @@ function GoodButton() {
   const handleThumbsUpButton = () => {
     if (thumbsUp === false) {
       setThumbsUpCount(thumbsUpCount + 1);
-      axios.post("", thumbsUpCount);
+      axios.post(
+        `${process.env.REACT_APP_URL_API}/v1/review/${리뷰아이디}/upvote`,
+        thumbsUpCount
+      );
     } else {
       setThumbsUpCount(thumbsUpCount - 1);
-      axios.post("", thumbsUpCount);
+      axios.post(
+        `${process.env.REACT_APP_URL_API}/v1/review/${리뷰아이디}/upvote`,
+        thumbsUpCount
+      );
     }
   };
 

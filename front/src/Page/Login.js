@@ -9,8 +9,12 @@ const Login = () => {
       <Header />
       <LoginContainer>
         <div>우리 아직 안됫는디?</div>
-        <a href="">
-          <img className="kakaologinButton" src={KakaoLoginButton} />
+        <a href="*">
+          <img
+            className="kakaologinButton"
+            src={KakaoLoginButton}
+            alt="kakao login"
+          />
         </a>
       </LoginContainer>
     </section>

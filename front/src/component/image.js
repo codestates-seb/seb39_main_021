@@ -36,7 +36,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
       },
-      url: `https://gloom.loca.lt/v1/image/upload?type=${TYPE}`,
+      url: `${process.env.REACT_APP_URL_API}/v1/image/upload?type=${TYPE}`,
       method: "post",
       data: formData,
     })
@@ -52,7 +52,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
   const deleteImage = () => {
     axios({
       method: "delete",
-      url: "https://gloom.loca.lt/v1/image",
+      url: `${process.env.REACT_APP_URL_API}/v1/image`,
       data: { urlList: imageUrlList[0] },
     }).catch((err) => console.log(err));
     setPreviewImg([]);
@@ -64,7 +64,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
     const deleteFilter = imageUrlList.filter((image, idx) => idx === index);
 
     axios({
-      url: "https://gloom.loca.lt/v1/image",
+      url: `${process.env.REACT_APP_URL_API}/v1/image`,
       method: "delete",
       data: { urlList: deleteFilter[0] },
     })
