@@ -7,6 +7,7 @@ import { RiStarFill } from "react-icons/ri";
 import Header from "./Header";
 import Button from "../component/Button";
 import StoreMap from "../component/StoreMap";
+import GoodButton from "../component/GoodButton.js";
 
 const StoreDetail = ({ selectData }) => {
   const [storeItemDetail, setStoreItemDetail] = useState(null);
@@ -82,6 +83,7 @@ const StoreDetail = ({ selectData }) => {
                   <RiStarFill className="star" />
                   {reviewItems.rating} 점
                 </div>
+                <GoodButton reviewInfo={reviewItems.id} />
                 <p>{reviewItems.content}</p>
               </div>
             </Link>
