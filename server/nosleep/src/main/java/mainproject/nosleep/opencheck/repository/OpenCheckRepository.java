@@ -13,5 +13,5 @@ import java.util.List;
 public interface OpenCheckRepository extends JpaRepository<OpenCheck,Long> {
 
     @Query(value = "select COUNT(distinct MEMBER_ID), SUM(oc.OPEN_TRUE) From open_check oc WHERE oc.shop_id = :shopId ", nativeQuery = true) // 고민필요
-    List<BigInteger[]> allPeopleNumberAndCountOpenNumber(@Param("shopId") Long shopId);
+    List<Long[]> allPeopleNumberAndCountOpenNumber(@Param("shopId") Long shopId);
 }
