@@ -64,7 +64,6 @@ const Registration = () => {
       }
     });
   };
-  console.log(filter);
 
   const handleCreateRegistration = () => {
     axios({
