@@ -6,8 +6,6 @@ import Button from "../component/Button";
 import localList from "../DummyData/localList";
 import Header from "./Header";
 
-import GoodButton from "../component/GoodButton";
-
 const LocalFilter = ({ selectData, setSelectData }) => {
   const [fullId, setFullId] = useState("01000");
   const [local, setLocal] = useState("전국");
@@ -52,122 +50,137 @@ const LocalFilter = ({ selectData, setSelectData }) => {
   console.log(selectData);
 
   return (
-    <FilterSection>
+    <section>
       <Header />
-      <GoodButton />
-      <section>
-        {filtered === false ? (
-          <div>전국</div>
-        ) : local === "전국" ? (
-          <div>{local}</div>
-        ) : (
+      <FilterSection style={{ height: `${window.innerHeight - 47}px` }}>
+        <section className="filterButton">
+          {filtered === false ? (
+            <div>전국</div>
+          ) : local === "전국" ? (
+            <div>{local}</div>
+          ) : (
+            <div>
+              {local} {area}
+            </div>
+          )}
+          {/* <Link to="/list" state={{ info: local }}>
+            검색 적용하기
+          </Link> */}
+        </section>
+        <section className="filterValue">
           <div>
-            {local} {area}
+            {localList.map((post) => (
+              <button
+                className="buttonStyle"
+                key={post.id}
+                onClick={() => {
+                  setFiltered(false);
+                  setLocal(post.city);
+                  setArea("");
+                }}
+              >
+                {post.city}
+              </button>
+            ))}
           </div>
-        )}
-        <Link to="/list" state={{ info: local }}>
-          검색 적용하기
-        </Link>
-      </section>
-      <section className="filter">
-        <LocalFilterSection>
-          {localList.map((post) => (
-            <button
-              className="buttonStyle"
-              key={post.id}
-              onClick={() => {
-                setLocal(post.city);
-                setArea("");
-              }}
+          <div>
+            {targetArea?.map((post) => (
+              //undefined, null 을 체크할때는 == 만 사용한다.
+              //data == null => null 또는 undefined 를 같이 찾는다.
+              <button
+                className="buttonStyle"
+                key={post.id}
+                onClick={() => {
+                  setFullId(post.id);
+                  setArea(post.name);
+                  setFiltered(true);
+                  if (fullId != null) {
+                    setSelectData({
+                      ...selectData,
+                      filter: {
+                        local: local,
+                        localId: submitLocal,
+                        area: area,
+                        areaId: submitArea,
+                      },
+                    });
+                  }
+                }}
+              >
+                {post.name}
+              </button>
+            ))}
+            <div></div>
+          </div>
+        </section>
+        <section className="buttonSection">
+          <Button width="100px" onClick={handleReset}>
+            초기화
+          </Button>
+          <Link to="/list" state={{ info: local }}>
+            <Button
+              buttonStyle="main"
+              padding="3px 0px"
+              width="220px"
+              onClick={handleLocalFilterSubmit}
             >
-              {post.city}
-            </button>
-          ))}
-        </LocalFilterSection>
-        <AreaFilterSection>
-          {targetArea?.map((post) => (
-            //undefined, null 을 체크할때는 == 만 사용한다.
-            //data == null => null 또는 undefined 를 같이 찾는다.
-            <button
-              className="buttonStyle"
-              key={post.id}
-              onClick={() => {
-                setFullId(post.id);
-                setArea(post.name);
-              }}
-            >
-              {post.name}
-            </button>
-          ))}
-          <div></div>
-        </AreaFilterSection>
-      </section>
-      <section className="buttonSection">
-        <Button width="100px" onClick={handleReset}>
-          초기화
-        </Button>
-        <Button width="220px" onClick={handleLocalFilterSubmit}>
-          설정하기
-        </Button>
-      </section>
-    </FilterSection>
+              설정하기
+            </Button>
+          </Link>
+        </section>
+      </FilterSection>
+    </section>
   );
 };
 
 const FilterSection = styled.div`
+  padding: 0px 24px;
   display: flex;
   flex-direction: column;
+
+  .filterButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 36px;
+
+    div {
+      color: #ffc700;
+      border: 1px solid #ffc700;
+      padding: 3px 10px;
+      border-radius: 5px;
+    }
+  }
+
+  .filterValue {
+    display: flex;
+    height: 696px;
+
+    div {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+      background-color: #504e4a;
+      border-left: 1px solid #303134;
+
+      button {
+        height: 24px;
+        color: #fff;
+        background-color: #504e4a;
+      }
+      button:active {
+        color: #000;
+        background-color: #ffc700;
+      }
+    }
+  }
 
   .buttonSection {
-    background-color: #303134;
-    position: fixed;
-    bottom: 0px;
-    width: 89%;
-    padding: 50px 0px;
-  }
-
-  section {
+    margin-top: 14px;
     display: flex;
-    align-items: baseline;
     justify-content: space-between;
   }
-
-  div {
-    margin-top: 12px;
-    display: flex;
-  }
-
-  .buttonStyle {
-    color: white;
-    height: 30px;
-    width: 100%;
-  }
-  .buttonStyle:focus {
-    background-color: white;
-    color: black;
-  }
-`;
-const LocalFilterSection = styled.div`
-  width: 50%;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  border: 1px solid black;
 `;
 
-const AreaFilterSection = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: baseline;
-
-  overflow-y: scroll;
-  flex-wrap: nowrap;
-
-  div {
-    height: 100px;
-  }
-`;
 export default LocalFilter;

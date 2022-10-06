@@ -16,23 +16,32 @@ const ButtonStyled = styled.div`
 
 const MainButton = styled.button`
   width: ${(props) => props.width || "342px"};
+  padding: ${(props) => props.padding || "0px"};
   background-color: var(--mainYellow);
   color: var(--mainDeepGray);
   border: 2px solid var(--mainYellow);
+  border-radius: 5px;
+  font-weight: bold;
 `;
 
 const SubMainButton = styled.button`
   width: ${(props) => props.width || "342px"};
+  padding: ${(props) => props.padding || "0px 0px"};
   background-color: var(--mainDeepGray);
   color: var(--mainYellow);
   border: 2px solid var(--mainYellow);
+  border-radius: 5px;
+  font-weight: bold;
 `;
 
 const EtcButton = styled.button`
   width: ${(props) => props.width || "342px"};
+  padding: ${(props) => props.padding || "0px"};
   background-color: var(--mainLighitGray);
   color: white;
   border: 2px solid var(--mainLighitGray);
+  border-radius: 5px;
+  font-weight: bold;
 `;
 
 function Button({ children, ...props }) {

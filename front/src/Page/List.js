@@ -103,6 +103,7 @@ const StoreData = styled.section`
   }
   .filterLocal {
     border: 1px solid #ffc700;
+    border-radius: 5px;
   }
   .filterLocal-txt {
     color: #ffc700;
