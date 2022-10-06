@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Header from "./Header";
 import categoryList from "../DummyData/categoryList";
-import Footer from "../component/Footer";
+import Footer from "../component/Footer.js";
 
 const Home = ({ selectData, setSelectData }) => {
   const [openMenu, setOpenMenu] = useState(true);

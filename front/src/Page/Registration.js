@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Image from "../component/Image";
 import Button from "../component/Button";
+import localList from "../DummyData/localList";
 
 const Registration = () => {
   // kakao API 를 사용하기 위해 구조분해할당
@@ -13,6 +14,7 @@ const Registration = () => {
   const [address, setAddress] = useState();
   const [imageData, setImageData] = useState([]);
   const [addressLocation, setAddressLocation] = useState(null);
+  const [filter, setFilter] = useState({ cityId: null, areaId: null });
 
   const navigate = useNavigate();
   const storeNumber = useRef();
@@ -25,6 +27,8 @@ const Registration = () => {
   const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
   const info = storeInfo.current; // 사용자가 입력한 사업장 설명
   const type = storeType.current;
+  const ffffff = localList.filter((local) => local.id === filter.cityId)[0]
+    ?.area;
 
   const handleRegistration = () => {
     axios
@@ -60,6 +64,7 @@ const Registration = () => {
       }
     });
   };
+  console.log(filter);
 
   const handleCreateRegistration = () => {
     axios({
@@ -71,8 +76,8 @@ const Registration = () => {
         businessNumber: number.value,
         name: name.value,
         address: address,
-        cityId: "02",
-        areaId: "008",
+        cityId: filter.cityId,
+        areaId: filter.areaId,
         detail: info.value,
         longitude: addressLocation.Ma,
         latitude: addressLocation.La,
@@ -114,9 +119,34 @@ const Registration = () => {
         <label htmlFor="registrationName">사업장 이름</label>
         <input id="registrationName" ref={storeName} />
         <label htmlFor="registrationAddress">사업장 주소</label>
+        <select
+          id="registrationcityId"
+          onChange={(e) => setFilter({ ...filter, cityId: e.target.value })}
+        >
+          {localList.map((post) => (
+            <option className="buttonStyle" value={post.id}>
+              {post.city}
+            </option>
+          ))}
+        </select>
+        <select
+          id="areaId"
+          onChange={(e) =>
+            setFilter({ ...filter, areaId: e.target.value.slice(2, 5) })
+          }
+        >
+          {filter.cityId == null
+            ? null
+            : ffffff.map((post) => (
+                <option className="buttonStyle" value={post.id}>
+                  {post.name}
+                </option>
+              ))}
+        </select>
         <input
           id="registrationAddress"
           ref={storeAddress}
+          placeholder="상세주소를 입력해주세요"
           onChange={(event) => handleAddressValue(event)}
         />
         <Button

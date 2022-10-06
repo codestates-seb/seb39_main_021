@@ -1,11 +1,11 @@
 const localList = [
   {
-    id: "1",
+    id: "01",
     city: "전국",
     area: [{ id: "01000", name: "전체보기" }],
   },
   {
-    id: "2",
+    id: "02",
     city: "서울시",
     area: [
       { id: "02000", name: "전체" },
@@ -37,7 +37,7 @@ const localList = [
     ],
   },
   {
-    id: "3",
+    id: "03",
     city: "부산시",
     area: [
       { id: "03000", name: "전체" },
@@ -60,7 +60,7 @@ const localList = [
     ],
   },
   {
-    id: "4",
+    id: "04",
     city: "대구시",
     area: [
       { id: "04000", name: "전체" },
@@ -75,7 +75,7 @@ const localList = [
     ],
   },
   {
-    id: "5",
+    id: "05",
     city: "인천시",
     area: [
       { id: "05000", name: "전체" },
@@ -92,7 +92,7 @@ const localList = [
     ],
   },
   {
-    id: "6",
+    id: "06",
     city: "광주시",
     area: [
       { id: "06000", name: "전체" },
@@ -104,7 +104,7 @@ const localList = [
     ],
   },
   {
-    id: "7",
+    id: "07",
     city: "대전시",
     area: [
       { id: "07000", name: "전체" },
@@ -116,7 +116,7 @@ const localList = [
     ],
   },
   {
-    id: "8",
+    id: "08",
     city: "울산시",
     area: [
       { id: "08000", name: "전체" },
@@ -128,7 +128,7 @@ const localList = [
     ],
   },
   {
-    id: "9",
+    id: "09",
     city: "세종시",
     area: [{ id: "09000", name: "전체" }],
   },
