@@ -16,10 +16,10 @@ function GoodButton({ reviewInfo }) {
   const handleThumbsUpButton = () => {
     if (thumbsUp === false) {
       // setThumbsUpCount(thumbsUpCount + 1);
-      axios.post(`/v1/review/${reviewInfo}/upvote`);
+      axios.post(`${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}/upvote`);
     } else {
       // setThumbsUpCount(thumbsUpCount - 1);
-      axios.delete(`/v1/review/${reviewInfo}/upvote`);
+      axios.delete(`${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}/upvote`);
     }
   };
 

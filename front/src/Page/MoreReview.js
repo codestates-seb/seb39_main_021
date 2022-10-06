@@ -11,7 +11,7 @@ const MoreReview = () => {
   const test = useRef();
   useEffect(() => {
     axios({
-      url: `https://gloom.loca.lt/v1/review/?page=1&shopId=1&sort=upvote`,
+      url: `${process.env.REACT_APP_URL_API}/v1/review/?page=1&shopId=1&sort=upvote`,
       method: "get",
     }).then((data) => {
       setReviewList(data.data.data);
@@ -21,7 +21,7 @@ const MoreReview = () => {
   const viewLike = () => {
     console.log("hello world");
     axios({
-      url: `https://gloom.loca.lt/v1/review/?page=1&shopId=1&sort=upvote`, // 좋아요 순서 url
+      url: `${process.env.REACT_APP_URL_API}/v1/review/?page=1&shopId=1&sort=upvote`, // 좋아요 순서 url
       method: "get",
     }).then((data) => console.log(data));
   };
@@ -30,11 +30,11 @@ const MoreReview = () => {
     console.log(event.target.value);
     if (event.target.value === "최신순서") {
       axios({
-        url: `https://gloom.loca.lt/v1/review/?page=1&shopId=1&sort=""`, // 최신순서 url
+        url: `${process.env.REACT_APP_URL_API}/v1/review/?page=1&shopId=1&sort=""`, // 최신순서 url
       }).then((data) => setReviewList(data.data.data));
     } else {
       axios({
-        url: `https://gloom.loca.lt/v1/review/?page=1&shopId=1&sort=upvote`, // 최신순서 url
+        url: `${process.env.REACT_APP_URL_API}/v1/review/?page=1&shopId=1&sort=upvote`, // 최신순서 url
       }).then((data) => setReviewList(data.data.data));
     }
   };

@@ -12,7 +12,10 @@ const Menu = () => {
       </header>
       <LoginContainer>
         <div>
-          <img src="https://user-images.githubusercontent.com/103917785/194172721-0b79e251-587e-48d3-84cd-0acd26bb0cd3.png" />
+          <img
+            src="https://user-images.githubusercontent.com/103917785/194172721-0b79e251-587e-48d3-84cd-0acd26bb0cd3.png"
+            alt="profile icon"
+          />
         </div>
         <Link className="loginBtn" to="/login">
           로그인 하기

@@ -43,9 +43,6 @@ const ReviewCreate = () => {
     setTxtChange(e.target.value);
   };
 
-  // if (imageData.length === 0) {
-  //   return;
-  // }
   // 서버로 post 요청을 보내는 함수
   const handleCreateReview = () => {
     let likeCount = 0;
@@ -58,7 +55,7 @@ const ReviewCreate = () => {
     }
     return axios({
       method: "post",
-      url: "https://gloom.loca.lt/v1/review",
+      url: `${process.env.REACT_APP_URL_API}/v1/review`,
       data: {
         shopId: location.state.storeInfo.id, // 업체의 아이디
         memberId: 1, // 고유아이디

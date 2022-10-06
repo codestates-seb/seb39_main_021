@@ -14,18 +14,16 @@ const StoreDetail = ({ selectData }) => {
   const {
     state: { storeData },
   } = useLocation();
-
+  console.log(storeData);
   useEffect(() => {
     axios
-      .get(`https://gloom.loca.lt/v1/shop/${selectData.category}`)
+      .get(`${process.env.REACT_APP_URL_API}/v1/shop/${storeData}`)
       .then((data) => {
         console.log(data.data);
-        console.log(storeData);
         setStoreItemDetail(data.data);
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(storeItemDetail);
 
   if (storeItemDetail === null) {
     return;
@@ -69,6 +67,7 @@ const StoreDetail = ({ selectData }) => {
           <span>전체 {storeItemDetail.reviewCount}개</span>
         </div>
         <section>
+
           {storeItemDetail.reviews.map((reviewItems, index) => (
             <Link
               key={index}

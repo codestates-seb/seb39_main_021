@@ -15,9 +15,12 @@ const ReviewDetail = () => {
     state: { reviewInfo },
   } = useLocation();
 
+  console.log(reviewInfo);
+
   useEffect(() => {
     axios({
-      url: `https://gloom.loca.lt/v1/review/${reviewInfo}`,
+      method: "get",
+      url: `${process.env.REACT_APP_URL_API}/v1/review/${reviewInfo}`,
     }).then((data) => {
       console.log(data.data);
       setReviewData(data.data);

@@ -8,13 +8,12 @@ import Header from "./Header";
 import { ReactComponent as Star } from "../asset/star.svg";
 
 const List = ({ selectData }) => {
-  // const [storeData, setStoreData] = useState(null);
   const [storeData, setStoreData] = useState([{ id: 1, images: [] }]);
 
   useEffect(() => {
     axios
       .get(
-        `https://gloom.loca.lt/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
+        `${process.env.REACT_APP_URL_API}/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
       )
       .then((filterData) => {
         console.log(filterData.data.data);

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -22,8 +22,12 @@ const Home = ({ selectData, setSelectData }) => {
           href="https://github.com/codestates-seb/seb39_main_021"
           className="mainBanner"
           target="_blank"
+          rel="noreferrer"
         >
-          <img src="https://user-images.githubusercontent.com/103917785/194164782-ed2474d5-3f09-4720-8a96-0720f4b0bd18.png" />
+          <img
+            src="https://user-images.githubusercontent.com/103917785/194164782-ed2474d5-3f09-4720-8a96-0720f4b0bd18.png"
+            alt="Logo"
+          />
         </a>
         <section className="categoryContainer">
           {categoryList.map((category, index) => {
