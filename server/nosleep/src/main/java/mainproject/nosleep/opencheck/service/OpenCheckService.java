@@ -1,6 +1,7 @@
 package mainproject.nosleep.opencheck.service;
 
 import lombok.RequiredArgsConstructor;
+import mainproject.nosleep.opencheck.dto.QueryDto;
 import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,11 @@ public class OpenCheckService {
 
     private final OpenCheckRepository openCheckRepository;
 
-    public void findVisitedAndOpen(Long shopId){
-        List<BigInteger[]> objects = openCheckRepository.allPeopleNumberAndCountOpenNumber(shopId);
-        BigInteger visitor = objects.get(0)[0];
-        BigInteger openCount = objects.get(0)[1];
-
-        System.out.println("visited = " + visitor);
-        System.out.println("openCount = " + openCount);
+    public QueryDto findVisitedAndOpen(Long shopId){
+        List<Long[]> objects = openCheckRepository.allPeopleNumberAndCountOpenNumber(shopId);
+        long visitor = objects.get(0)[0];
+        long openCount = objects.get(0)[1];
+        QueryDto queryDto = new QueryDto(visitor, openCount);
+        return queryDto;
     }
 }

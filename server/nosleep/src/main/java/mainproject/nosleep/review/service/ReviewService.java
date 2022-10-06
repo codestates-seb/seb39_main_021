@@ -1,10 +1,11 @@
 package mainproject.nosleep.review.service;
 
 import lombok.RequiredArgsConstructor;
-import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.image.service.ImageService;
+import mainproject.nosleep.opencheck.dto.QueryDto;
 import mainproject.nosleep.opencheck.repository.OpenCheckRepository;
 
+import mainproject.nosleep.opencheck.service.OpenCheckService;
 import mainproject.nosleep.review.entity.Review;
 import mainproject.nosleep.review.repository.ReviewRepository;
 import mainproject.nosleep.shop.entity.Shop;
@@ -21,14 +22,13 @@ import java.math.BigInteger;
 import java.util.List;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ShopRepository shopRepository;
-
+    private final OpenCheckService openCheckService;
     private final OpenCheckRepository openCheckRepository;
     private final ImageService imageService;
 
@@ -43,12 +43,9 @@ public class ReviewService {
         //평점 계산
         Double ratingAverage = findRatingAverage(shopId);
         // 이용후기 + 1, 평점 갱신
+        QueryDto visitedAndOpen = openCheckService.findVisitedAndOpen(shopId);
 
-        List<BigInteger[]> objects = openCheckRepository.allPeopleNumberAndCountOpenNumber(shopId);
-        Long visitorCount = objects.get(0)[0].longValue();;
-        Long openCount = objects.get(0)[1].longValue();
-
-        shopRepository.updateShopData(shopId, ratingAverage, visitorCount, openCount); // transactional
+        shopRepository.updateShopData(shopId, ratingAverage, visitedAndOpen.getVisitor(), visitedAndOpen.getOpenCount()); // transactional
 
         return save;
     }
@@ -62,12 +59,14 @@ public class ReviewService {
         imageService.urlToRawUrl(editReview.getImages());
         return editReview;
     }
+
     public Review findReview(Long id){
         Review verifiedReview = findVerifiedReview(id);
         imageService.urlToRawUrl(verifiedReview.getImages());
         //좋아요 이슈
         return verifiedReview;
     }
+
     public Page<Review> findReviews(int page, Long shopId, String sort){
         Shop shop = new Shop();
         shop.setId(shopId);
@@ -75,7 +74,6 @@ public class ReviewService {
 
 
     }
-
 
     public void deleteReview(Long id){
         Review verifiedReview = findVerifiedReview(id);
@@ -89,11 +87,11 @@ public class ReviewService {
                 ()-> new IllegalArgumentException("존재하지않는 이용후기 입니다.")
         );
     }
-    public Double findRatingAverage(Long shopId){
-        List<Object[]> objects = reviewRepository.averageAndCountAllRating(shopId);
-        return (Double) objects.get(0)[0];
-    }
 
+    public Double findRatingAverage(Long shopId){
+        List<Double> objects = reviewRepository.averageAndCountAllRating(shopId);
+        return objects.get(0);
+    }
 
     public void upvoteCountPlus(Review review){
         reviewRepository.upvotePlus(review.getId());

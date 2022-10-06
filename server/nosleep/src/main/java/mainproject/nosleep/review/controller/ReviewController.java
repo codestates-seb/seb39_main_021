@@ -44,6 +44,7 @@ public class ReviewController {
 
     @GetMapping("/{reviewId}")
     public ResponseEntity<?> getDetailShop(@PathVariable Long reviewId) {
+        //null 예외처리필요
         Review findReview = reviewService.findReview(reviewId);
         return new ResponseEntity<>(mapper.reviewToDetailReview(findReview), HttpStatus.OK);
     }
