@@ -8,16 +8,15 @@ import Header from "./Header";
 import Button from "../component/Button";
 import StoreMap from "../component/StoreMap";
 
-const StoreDetail = () => {
+const StoreDetail = ({ selectData }) => {
   const [storeItemDetail, setStoreItemDetail] = useState(null);
   const {
     state: { storeData },
   } = useLocation();
-  console.log(storeData);
 
   useEffect(() => {
     axios
-      .get(`https://gloom.loca.lt/v1/shop/${storeData}`)
+      .get(`https://gloom.loca.lt/v1/shop/${selectData.category}`)
       .then((data) => {
         console.log(data.data);
         console.log(storeData);
