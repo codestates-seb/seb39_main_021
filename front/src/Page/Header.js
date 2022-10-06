@@ -1,40 +1,57 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { IoIosMenu } from "react-icons/io";
+import Logo from "../asset/mainProjectLogo.png";
 
 const Header = ({ toggleMenu, openMenu }) => {
   return (
     <MainHeader>
-      <div>
-        <a href="/">밤잠 없는 사람들</a>
-        <Link
-          to="/toggleMenu"
-          // onClick={() => toggleMenu(!openMenu)}
-          className="menuBtn"
-        >
-          <GiHamburgerMenu />
-        </Link>
-      </div>
+      <div> </div>
+      <a href="/">
+        <img src={Logo} />
+      </a>
+      <Link
+        to="/toggleMenu"
+        // onClick={() => toggleMenu(!openMenu)}
+        className="menuBtn"
+      >
+        <IoIosMenu />
+      </Link>
     </MainHeader>
   );
 };
 export default Header;
 
 const MainHeader = styled.header`
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #76736e;
+  padding: 0px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 47px;
 
   div {
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
+    height: 24px;
+    width: 24px;
   }
+
   .menuBtn {
-    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
   }
+
   a {
-    color: white;
-    font-size: 20px;
+    img {
+      height: 36px;
+    }
   }
 `;

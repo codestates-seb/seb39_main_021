@@ -21,10 +21,6 @@ const Registration = () => {
   const storeInfo = useRef();
   const storeType = useRef();
 
-<<<<<<< HEAD
-=======
-  // const address = storeAddress.current; // 사용자가 입력한 주소
->>>>>>> 9774fed1cd987f0d3229ec0e43b7bfc9ca2ec007
   const name = storeName.current; // 사용자가 입력한 업체명
   const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
   const info = storeInfo.current; // 사용자가 입력한 사업장 설명
@@ -49,11 +45,6 @@ const Registration = () => {
   const handleCheckAddress = () => {
     // 주소를 위도경도로 변경해주는 인스턴스 생성
     let geocoder = new kakao.maps.services.Geocoder();
-<<<<<<< HEAD
-=======
-    console.log(addressLocation);
-
->>>>>>> 9774fed1cd987f0d3229ec0e43b7bfc9ca2ec007
     // 사용자가 입력한 주소값
 
     //addressSearch 함수(사용자입력값,콜백함수)
@@ -70,13 +61,7 @@ const Registration = () => {
     });
   };
 
-  // if (imageData.length === 0) {
-  //   return;
-  // }
-
   const handleCreateRegistration = () => {
-    console.log(imageData);
-    console.log(addressLocation);
     axios({
       method: "post",
       url: "https://gloom.loca.lt/v1/shop",

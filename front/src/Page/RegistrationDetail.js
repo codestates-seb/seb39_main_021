@@ -28,27 +28,6 @@ const Registration = () => {
 
   const handleRegistration = () => {
     axios
-<<<<<<< HEAD
-      .get(`https://gloom.loca.lt/v1/shop/1`)
-      //   해당 아이디를 찾으려면 로그인이 된 상태 아니면 클릭을 해서 페이지 이동할 때 데이터를 받아와서 id 가 일치하는걸 뿌려줘야 하는데,, 둘 다 안되어 있음.
-      .then((info) => {
-        console.log(info.data);
-        setInformation(info.data);
-        setChangedInformation({
-          memberId: info.data.id,
-          name: info.data.name,
-          detail: info.data.detail,
-          imageList: info.data.images,
-        });
-      });
-  }, []);
-
-  const handleShopInfoChange = () => {
-    axios
-      .patch(`https://gloom.loca.lt/v1/shop/${shopId}`, changedInformation)
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
-=======
       .get(
         "https://bizno.net/api/fapi?key=eWhqMDQzOUBuYXZlci5jb20g&gb=1&q=3988701116"
       )
@@ -58,12 +37,19 @@ const Registration = () => {
       .catch((err) => {
         console.log(err);
       });
->>>>>>> 9774fed1cd987f0d3229ec0e43b7bfc9ca2ec007
   };
+
+  // const handleShopInfoChange = () => {
+  //   axios
+  //     .patch(`https://gloom.loca.lt/v1/shop/${shopId}`, changedInformation)
+  //     .then((result) => console.log(result))
+  //     .catch((err) => console.log(err));
+  // };
 
   const handleAddressValue = (event) => {
     setAddress(event.target.value);
   };
+
   const handleCheckAddress = () => {
     // 주소를 위도경도로 변경해주는 인스턴스 생성
     let geocoder = new kakao.maps.services.Geocoder();
@@ -104,28 +90,25 @@ const Registration = () => {
     navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
   };
 
-<<<<<<< HEAD
   // 이미지파일을 수정하고, 서버로 patch요청을 보내는 함수
-  const handleImageChange = (imageContent) => {
-    setChangedInformation({
-      ...changedInformation,
-      image: imageContent.target.value,
-    });
-  };
+  // const handleImageChange = (imageContent) => {
+  //   setChangedInformation({
+  //     ...changedInformation,
+  //     image: imageContent.target.value,
+  //   });
+  // };
 
   // 시간 남으면 모달창으로 구현
-  const handleShopDelete = () => {
-    axios
-      .delete(`https://gloom.loca.lt/v1/shop/${shopId}`)
-      .then((result) => console.log(result));
-  };
+  // const handleShopDelete = () => {
+  //   axios
+  //     .delete(`https://gloom.loca.lt/v1/shop/${shopId}`)
+  //     .then((result) => console.log(result));
+  // };
 
-  if (information === null) {
-    return;
-  }
+  // if (information === null) {
+  //   return;
+  // }
 
-=======
->>>>>>> 9774fed1cd987f0d3229ec0e43b7bfc9ca2ec007
   return (
     <>
       <Header />
