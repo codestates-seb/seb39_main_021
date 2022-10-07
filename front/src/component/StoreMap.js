@@ -12,31 +12,22 @@ const StoreMap = ({ storeLat, storeLng }) => {
   useEffect(() => {
     const container = document.getElementById("map");
 
-    const displayMarker = (localPosition, message) => {
+    const displayMarker = (localPosition) => {
       const marker = new kakao.maps.Marker({
         map: map,
         position: localPosition,
         image: markerImage,
+        title: localPosition.name,
       });
 
-      let markerMessage = message;
-      let markerRemoveAble = true;
-
-      const infoWindow = new kakao.maps.InfoWindow({
-        content: markerMessage,
-        removable: markerRemoveAble,
-      });
-
-      infoWindow.open(map, marker);
       map.setCenter(localPosition);
     };
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function () {
         let locPosition = new kakao.maps.LatLng(storeLng, storeLat);
-        let message = '<div style="padding:5px;">여기</div>';
 
-        displayMarker(locPosition, message);
+        displayMarker(locPosition);
       });
     } else {
       var locPosition = new kakao.maps.LatLng(33.499655, 126.531362),
@@ -54,8 +45,8 @@ const StoreMap = ({ storeLat, storeLng }) => {
   }, []);
 
   return (
-    <div className="Map" style={{ height: "100px", margin: "50px" }}>
-      <div className="MapContainer" id="map" style={{ height: "100px" }}></div>
+    <div className="Map" style={{ height: "300px", margin: "50px" }}>
+      <div className="MapContainer" id="map" style={{ height: "300px" }}></div>
     </div>
   );
 };

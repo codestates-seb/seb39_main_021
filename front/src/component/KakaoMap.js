@@ -52,26 +52,36 @@ const KaKaoMap = () => {
     };
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+      const handlePosition = (position) => {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
+        console.log(position.coords);
 
         let locPosition = new kakao.maps.LatLng(lat, lon);
         let message = '<div style="padding:5px;">현위치</div>';
 
         displayMarker(locPosition, message);
-      });
+      };
+
+      const handlePositionError = (err) => {
+        console.log(err);
+      };
+      navigator.geolocation.getCurrentPosition(
+        handlePosition,
+        handlePositionError,
+        { timeout: 10000 }
+      );
     } else {
       var locPosition = new kakao.maps.LatLng(33.499655, 126.531362),
         message = "현재 위치를 알 수 없어 기본 위치로 이동합니다.";
       console.log("err");
       displayMarker(locPosition, message);
     }
-
     const options = {
       center: new kakao.maps.LatLng(35.85133, 127.734086),
       level: 5,
       marker: arr,
+      text: arr.name,
     };
 
     const map = new kakao.maps.Map(container, options);
@@ -83,7 +93,6 @@ const KaKaoMap = () => {
         map: map,
         position: arr[i].latlng,
         title: arr[i].name,
-        text: arr[i].name,
       });
     }
   }, []);
