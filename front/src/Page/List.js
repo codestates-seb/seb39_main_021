@@ -47,9 +47,9 @@ const List = ({ selectData }) => {
         </section>
         <section>
           {storeData !== null
-            ? storeData?.map((individualStore) => (
+            ? storeData?.map((individualStore, idx) => (
                 <Link
-                  key={individualStore.id}
+                  key={idx}
                   to={"/storeDetailPage"}
                   state={{
                     storeData: individualStore.id,

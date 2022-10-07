@@ -29,6 +29,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
 
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
+    console.log(imageUrlList);
 
     axios({
       headers: {
@@ -52,9 +53,14 @@ const Image = ({ TYPE, imageData, setImageData }) => {
       method: "delete",
       url: `${process.env.REACT_APP_URL_API}/v1/image`,
       data: { urlList: imageUrlList[0] },
-    }).catch((err) => console.log(err));
-    setImageUrlList([]);
-    setPreviewImg([]);
+    })
+      .then(() => {
+        setImageUrlList([]);
+        setPreviewImg([]);
+      })
+      .catch((err) => console.log(err));
+    console.log(imageUrlList);
+    console.log(previewImg);
     console.log(`${TYPE}의 이미지 삭제 완료 !`);
   };
 
