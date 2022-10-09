@@ -24,6 +24,7 @@ const Router = () => {
       area: "전체",
       areaId: "000",
     },
+    checkUrl: false,
   });
 
   return (

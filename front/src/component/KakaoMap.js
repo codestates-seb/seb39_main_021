@@ -55,7 +55,6 @@ const KaKaoMap = () => {
       const handlePosition = (position) => {
         lat = position.coords.latitude;
         lon = position.coords.longitude;
-        console.log(position.coords);
 
         let locPosition = new kakao.maps.LatLng(lat, lon);
         let message = '<div style="padding:5px;">현위치</div>';

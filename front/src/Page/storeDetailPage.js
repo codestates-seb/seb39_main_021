@@ -69,25 +69,27 @@ const StoreDetail = () => {
           <span>전체 {storeItemDetail.reviewCount}개</span>
         </div>
         <section>
-          {storeItemDetail.reviews.map((reviewItems, index) => (
-            <Link
-              key={index}
-              to="/reviewDetail"
-              state={{
-                reviewInfo: reviewItems.id,
-              }}
-            >
-              <div key={index} className="reviewContainer">
-                <span>{reviewItems.nickname}</span>
-                <div className="reviewStar">
-                  <RiStarFill className="star" />
-                  {reviewItems.rating} 점
+          {storeItemDetail.reviews.map((reviewItems, index) => {
+            return (
+              <Link
+                key={index}
+                to="/reviewDetail"
+                state={{
+                  reviewInfo: reviewItems.id,
+                }}
+              >
+                <div key={index} className="reviewContainer">
+                  <span>{reviewItems.nickname}</span>
+                  <div className="reviewStar">
+                    <RiStarFill className="star" />
+                    {reviewItems.rating} 점
+                  </div>
+                  <GoodButton reviewInfo={reviewItems.id} />
+                  <p>{reviewItems.content}</p>
                 </div>
-                <GoodButton reviewInfo={reviewItems.id} />
-                <p>{reviewItems.content}</p>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
 
           <Link to="/moreReviews" className="moreReviews">
             더보기

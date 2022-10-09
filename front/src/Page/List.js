@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -8,27 +8,28 @@ import Header from "./Header";
 import { ReactComponent as Star } from "../asset/star.svg";
 
 const List = ({ selectData }) => {
-  const [storeData, setStoreData] = useState([{ id: 1, images: [] }]);
+  const location = useLocation();
+  const [storeData, setStoreData] = useState(null);
 
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_URL_API}/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${selectData.category}&sort=1`
+        `${process.env.REACT_APP_URL_API}/v1/shop?page=1&size=10&cityId=${selectData.filter.localId}&areaId=${selectData.filter.areaId}&category=${location.state.categoryInfo}&sort=1`
       )
       .then((filterData) => {
-        console.log(filterData);
         setStoreData(filterData.data.data);
       });
-  }, []);
+  }, [location, selectData]);
 
   if (storeData == null) {
     return;
   }
+
   return (
     <section>
       <Header />
       <StoreData>
-        {selectData !== null && <h2> {selectData.category} </h2>}
+        {storeData !== null && <h2>{location.state.categoryInfo} </h2>}
         <section className="buttonContainer">
           <button className="filterLocal">
             <Link to="/LocalFilter" className="filterLocal-txt">
@@ -47,38 +48,45 @@ const List = ({ selectData }) => {
         </section>
         <section>
           {storeData !== null
-            ? storeData?.map((individualStore, idx) => (
-                <Link
-                  key={idx}
-                  to={"/storeDetailPage"}
-                  state={{
-                    storeData: individualStore.id,
-                  }}
-                >
-                  <StoreContainer>
-                    <section>
-                      <div className="imgContainer">
-                        <img src={individualStore.images[0]} alt="더미데이터" />
-                      </div>
-                      <div className="informationContainer">
-                        <h3 className="title">이름 : {individualStore.name}</h3>
-                        <div className="address">
-                          주소 : {individualStore.address}
+            ? storeData?.map((individualStore, idx) => {
+                return (
+                  <Link
+                    key={idx}
+                    to={"/storeDetailPage"}
+                    state={{
+                      storeData: individualStore.id,
+                    }}
+                  >
+                    <StoreContainer>
+                      <section>
+                        <div className="imgContainer">
+                          <img
+                            src={individualStore.images[0]}
+                            alt="더미데이터"
+                          />
                         </div>
-                        <div className="rating">
-                          <Star fill="#FFC700" width="10px" />
-                          <div>132 {individualStore.ratingAVG}</div>
+                        <div className="informationContainer">
+                          <h3 className="title">
+                            이름 : {individualStore.name}
+                          </h3>
+                          <div className="address">
+                            주소 : {individualStore.address}
+                          </div>
+                          <div className="rating">
+                            <Star fill="#FFC700" width="10px" />
+                            <div>132 {individualStore.ratingAVG}</div>
+                          </div>
                         </div>
-                      </div>
-                    </section>
-                    <section className="verificationContainer">
-                      <div>전체리뷰수{individualStore.reviewCount}</div>
-                      <div>방문한 회원수{individualStore.visitorCount}</div>
-                      <div>열려있어요{individualStore.openCount}</div>
-                    </section>
-                  </StoreContainer>
-                </Link>
-              ))
+                      </section>
+                      <section className="verificationContainer">
+                        <div>전체리뷰수{individualStore.reviewCount}</div>
+                        <div>방문한 회원수{individualStore.visitorCount}</div>
+                        <div>열려있어요{individualStore.openCount}</div>
+                      </section>
+                    </StoreContainer>
+                  </Link>
+                );
+              })
             : null}
         </section>
       </StoreData>

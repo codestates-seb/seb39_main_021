@@ -60,21 +60,23 @@ const MoreReview = () => {
           <span>전체평점</span>
           <span className="itemsQuantity">개수{reviewList.length}</span>
         </div>
-        {reviewList.map((reviews, index) => (
-          <Link to="/reviewDetail">
-            <div key={reviews.id} className="itemsContents">
-              <img src={reviews.image} alt="가게 더미데이터" />
-              <div>
-                <div className="itemsName">{reviews.nickName}</div>
-                <div className="itemsStar">
-                  <RiStarFill className="star" />
-                  {reviews.rating}
+        {reviewList.map((reviews, index) => {
+          return (
+            <Link to="/reviewDetail">
+              <div key={reviews.id} className="itemsContents">
+                <img src={reviews.image} alt="가게 더미데이터" />
+                <div>
+                  <div className="itemsName">{reviews.nickName}</div>
+                  <div className="itemsStar">
+                    <RiStarFill className="star" />
+                    {reviews.rating}
+                  </div>
+                  <p>{reviews.reviewTxt}</p>
                 </div>
-                <p>{reviews.reviewTxt}</p>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </section>
     </MoreReviews>
   );
