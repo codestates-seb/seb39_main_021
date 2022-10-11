@@ -63,53 +63,52 @@ const LocalFilter = ({ selectData, setSelectData }) => {
               {local} {area}
             </div>
           )}
-          {/* <Link to="/list" state={{ info: local }}>
-            검색 적용하기
-          </Link> */}
         </section>
         <section className="filterValue">
           <div>
-            {localList.map((post) => (
-              <button
-                className="buttonStyle"
-                key={post.id}
-                onClick={() => {
-                  setFiltered(false);
-                  setLocal(post.city);
-                  setArea("");
-                }}
-              >
-                {post.city}
-              </button>
-            ))}
+            {localList.map((post) => {
+              return (
+                <button
+                  className="buttonStyle"
+                  key={post.id}
+                  onClick={() => {
+                    setFiltered(false);
+                    setLocal(post.city);
+                    setArea("");
+                  }}
+                >
+                  {post.city}
+                </button>
+              );
+            })}
           </div>
           <div>
-            {targetArea?.map((post) => (
-              //undefined, null 을 체크할때는 == 만 사용한다.
-              //data == null => null 또는 undefined 를 같이 찾는다.
-              <button
-                className="buttonStyle"
-                key={post.id}
-                onClick={() => {
-                  setFullId(post.id);
-                  setArea(post.name);
-                  setFiltered(true);
-                  if (fullId != null) {
-                    setSelectData({
-                      ...selectData,
-                      filter: {
-                        local: local,
-                        localId: submitLocal,
-                        area: area,
-                        areaId: submitArea,
-                      },
-                    });
-                  }
-                }}
-              >
-                {post.name}
-              </button>
-            ))}
+            {targetArea?.map((post) => {
+              return (
+                <button
+                  className="buttonStyle"
+                  key={post.id}
+                  onClick={() => {
+                    setFullId(post.id);
+                    setArea(post.name);
+                    setFiltered(true);
+                    if (fullId != null) {
+                      setSelectData({
+                        ...selectData,
+                        filter: {
+                          local: local,
+                          localId: submitLocal,
+                          area: area,
+                          areaId: submitArea,
+                        },
+                      });
+                    }
+                  }}
+                >
+                  {post.name}
+                </button>
+              );
+            })}
             <div></div>
           </div>
         </section>

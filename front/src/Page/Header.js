@@ -6,10 +6,10 @@ import Logo from "../asset/mainProjectLogo.png";
 const Header = () => {
   return (
     <MainHeader>
-      <a href="*">
-        <img src={Logo} alt="Logo" />
-      </a>
-      <div> </div>
+      <Link to="/">
+        <img src={Logo} alt="logo" />
+      </Link>
+      <div></div>
       <Link to="/toggleMenu" className="menuBtn">
         <IoIosMenu />
       </Link>

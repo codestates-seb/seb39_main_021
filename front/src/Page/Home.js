@@ -6,7 +6,7 @@ import Header from "./Header";
 import categoryList from "../DummyData/categoryList";
 import Footer from "../component/Footer.js";
 
-const Home = ({ selectData, setSelectData }) => {
+const Home = () => {
   const [openMenu, setOpenMenu] = useState(true);
 
   const toggleMenu = () => {
@@ -14,7 +14,7 @@ const Home = ({ selectData, setSelectData }) => {
   };
 
   return (
-    <>
+    <article>
       <Header toggleMenu={toggleMenu} openMenu={openMenu} />
       <MainContainer>
         <h1>카테고리</h1>
@@ -36,13 +36,7 @@ const Home = ({ selectData, setSelectData }) => {
               <Link
                 key={index}
                 className="categoryItems"
-                to={"/list"}
-                onClick={() => {
-                  setSelectData({
-                    ...selectData,
-                    category: category.name,
-                  });
-                }}
+                to="/list"
                 state={{
                   categoryInfo: category.name,
                 }}
@@ -55,7 +49,7 @@ const Home = ({ selectData, setSelectData }) => {
         </section>
       </MainContainer>
       <Footer />
-    </>
+    </article>
   );
 };
 

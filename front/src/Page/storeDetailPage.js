@@ -14,20 +14,23 @@ const StoreDetail = () => {
   const {
     state: { storeData },
   } = useLocation();
-  console.log(storeData);
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_URL_API}/v1/shop/${storeData}`)
       .then((data) => {
         setStoreItemDetail(data.data);
       })
-      .catch((err) => console.log(err));
-  }, []);
+      .catch((err) => {
+        console.log("err");
+        console.log(err);
+      });
+  }, [storeItemDetail, storeData]);
 
   if (storeItemDetail === null) {
     return;
   }
-
+  console.log(storeItemDetail);
   return (
     <StoreContainer>
       <Header />
@@ -56,35 +59,37 @@ const StoreDetail = () => {
           storeLng={storeItemDetail.longitude}
         />
         <span className="storeInfo">상세설명</span>
-        <p className="storeInfoTxt">{storeItemDetail.txt}</p>
+        <p className="storeInfoTxt">{storeItemDetail.detail}</p>
         <span className="reviews">이용후기</span>
         <div className="reviewPoint">
           <span className="reviewsLike">
             {/* 구조분해 할당으로 코드 리팩토링 */}
-            전체 평점:{storeItemDetail.like}점
+            전체 평점:{storeItemDetail.ratingAVG}점
           </span>
           <span>전체 {storeItemDetail.reviewCount}개</span>
         </div>
         <section>
-          {storeItemDetail.reviews.map((reviewItems, index) => (
-            <Link
-              key={index}
-              to="/reviewDetail"
-              state={{
-                reviewInfo: reviewItems.id,
-              }}
-            >
-              <div key={index} className="reviewContainer">
-                <span>{reviewItems.nickname}</span>
-                <div className="reviewStar">
-                  <RiStarFill className="star" />
-                  {reviewItems.rating} 점
+          {storeItemDetail.reviews.map((reviewItems, index) => {
+            return (
+              <Link
+                key={index}
+                to="/reviewDetail"
+                state={{
+                  reviewInfo: reviewItems.id,
+                }}
+              >
+                <div key={index} className="reviewContainer">
+                  <span>{reviewItems.nickname}</span>
+                  <div className="reviewStar">
+                    <RiStarFill className="star" />
+                    {reviewItems.rating} 점
+                  </div>
+                  <GoodButton reviewInfo={reviewItems.id} />
+                  <p>{reviewItems.content}</p>
                 </div>
-                <GoodButton reviewInfo={reviewItems.id} />
-                <p>{reviewItems.content}</p>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
 
           <Link to="/moreReviews" className="moreReviews">
             더보기

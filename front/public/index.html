@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -11,19 +11,17 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAO_JAVASCRIPT_API_KEY%&libraries=services,clusterer,drawing"
+    ></script>
 
     <title>밤잠 없는 사람들</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9fc15d26a1c75bb1b10b9bea4f06d89a&libraries=services,clusterer,drawing"
-    >
-      // react-halmet-async build 하기전에 처리해줄것.
-    </script>
-    <!-- Channel Plugin Scripts -->
+
     <script>
       (function () {
         var w = window;

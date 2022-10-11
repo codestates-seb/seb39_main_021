@@ -13,8 +13,6 @@ const ReviewDetail = () => {
     state: { reviewInfo },
   } = useLocation();
 
-  console.log(reviewInfo);
-
   useEffect(() => {
     axios({
       method: "get",
