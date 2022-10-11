@@ -4,7 +4,7 @@
 
 > (나이트 모드로 보기를 권장합니다.)
 
-![2](https://user-images.githubusercontent.com/103917785/195017332-e4d7fcab-4801-425d-81d2-f30565b205c1.png)
+![2](https://user-images.githubusercontent.com/103917785/195017990-6a94ca0c-4471-4bc6-b5a0-6a1ce35482ae.png)
 
 ![18](https://user-images.githubusercontent.com/103917785/195016510-ddfa4fc6-00d1-450d-bece-da9d6986b245.png)
 
