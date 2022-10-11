@@ -68,10 +68,10 @@
 
 <!-- ![15](https://user-images.githubusercontent.com/103917785/195011446-7161885a-f44a-49a1-a203-66b960ac13d0.png) -->
 
-<a terget="_blank" href="http://main-project-team-21.s3-website.ap-northeast-2.amazonaws.com">
+<a target="_blank" href="http://main-project-team-21.s3-website.ap-northeast-2.amazonaws.com">
     <img src="https://user-images.githubusercontent.com/103917785/195024781-07ba463f-7f72-4e4b-8ce5-6ea69d8e90cd.png" />
 </a>
 
-<a terget="_blank" href="https://youtu.be/djGg9FTZbM4">
+<a target="_blank" href="https://youtu.be/djGg9FTZbM4">
     <img src="https://user-images.githubusercontent.com/103917785/195026146-77066e8e-6a31-43ba-9e11-942b64fb580b.png" />
 </a>
