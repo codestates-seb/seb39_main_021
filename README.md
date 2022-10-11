@@ -2,11 +2,8 @@
 
 ## 서비스 소개
 
-<!-- ![2](https://user-images.githubusercontent.com/103917785/195017990-6a94ca0c-4471-4bc6-b5a0-6a1ce35482ae.png)
-
-![18](https://user-images.githubusercontent.com/103917785/195016510-ddfa4fc6-00d1-450d-bece-da9d6986b245.png) -->
-
 <br>
+
 <!-- 서비스를 시작한 이유 -->
 
 ![51](https://user-images.githubusercontent.com/103917785/195019224-cca26903-1c25-4e57-a301-dbd98992cdf4.png)
@@ -67,10 +64,15 @@
 </div>
 <br/><br/>
 
-<!-- ![14](https://user-images.githubusercontent.com/103917785/195018388-f92614f8-40eb-4a5c-ab13-10ede6ccaa52.png) -->
-
 <!-- 마무리 이미지 -->
 
-![15](https://user-images.githubusercontent.com/103917785/195011446-7161885a-f44a-49a1-a203-66b960ac13d0.png)
+<!-- ![15](https://user-images.githubusercontent.com/103917785/195011446-7161885a-f44a-49a1-a203-66b960ac13d0.png) -->
 
-<!-- 팀원 표 맞추기 -->
+<a herf="http://main-project-team-21.s3-website.ap-northeast-2.amazonaws.com">
+    <img src="https://user-images.githubusercontent.com/103917785/195024781-07ba463f-7f72-4e4b-8ce5-6ea69d8e90cd.png" />
+</a>
+
+<a href="https://youtu.be/djGg9FTZbM4">
+유튜브 영상보기
+    <!-- <img src="" /> -->
+</a>
