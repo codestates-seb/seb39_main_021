@@ -2,6 +2,10 @@
 
 ## 서비스 소개
 
+> (나이트 모드로 보기를 권장합니다.)
+
+![18](https://user-images.githubusercontent.com/103917785/195016510-ddfa4fc6-00d1-450d-bece-da9d6986b245.png)
+
 <br>
 
 ![44](https://user-images.githubusercontent.com/103917785/195011603-aa6f27a6-4925-4c53-94d7-fca520bff860.png)
