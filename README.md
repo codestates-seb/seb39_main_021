@@ -73,6 +73,5 @@
 </a>
 
 <a href="https://youtu.be/djGg9FTZbM4">
-유튜브 영상보기
-    <!-- <img src="" /> -->
+    <img src="https://user-images.githubusercontent.com/103917785/195026146-77066e8e-6a31-43ba-9e11-942b64fb580b.png" />
 </a>
