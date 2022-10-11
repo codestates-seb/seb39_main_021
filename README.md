@@ -58,12 +58,15 @@
 
 ![48](https://user-images.githubusercontent.com/103917785/195019218-7e21734e-ae04-414a-807d-3b8db36620ac.png)
 
+<div align="center">
+
 |                                                         양현준                                                          |                                                       서종렬                                                        |                                                         김치훈                                                         |                                                      신창호                                                       |
 | :---------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
 | ![현준님](https://user-images.githubusercontent.com/103917785/195020631-23e4cb20-e745-4511-b684-1e817951417c.png) | ![종렬](https://user-images.githubusercontent.com/103917785/195020675-fc153593-84ba-4166-8729-8152a68768d9.png) | ![치훈님](https://user-images.githubusercontent.com/103917785/195020599-5e305e3a-0ce2-4ffb-a6a3-669a78a46e05.png) | ![창호님](https://user-images.githubusercontent.com/103917785/195020540-b27af0fd-25a7-4ee7-9a2d-152d370550be.png) |
 |                                         [JadeHyun](https://github.com/JadeHyun)                                         |                                      [jongryeol](https://github.com/jongryeol)                                      |                                       [clgns2418](https://github.com/clgns2418)                                        |                                    [Gloom-shin](https://github.com/Gloom-shin)                                    |
 |                                                        Frontend                                                         |                                                      Frontend                                                       |                                                        Backend                                                         |                                                      Backend                                                      |
 
+</div>
 <br/><br/>
 
 <!-- ![14](https://user-images.githubusercontent.com/103917785/195018388-f92614f8-40eb-4a5c-ab13-10ede6ccaa52.png) -->
