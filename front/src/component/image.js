@@ -59,9 +59,6 @@ const Image = ({ TYPE, imageData, setImageData }) => {
         setPreviewImg([]);
       })
       .catch((err) => console.log(err));
-    console.log(imageUrlList);
-    console.log(previewImg);
-    console.log(`${TYPE}의 이미지 삭제 완료 !`);
   };
 
   const deletePreviewImg = (index) => {
@@ -78,7 +75,6 @@ const Image = ({ TYPE, imageData, setImageData }) => {
 
     setImageUrlList([...filter]);
     setPreviewImg([...filter]);
-    console.log(`${TYPE}의 이미지 삭제 완료 !`);
   };
 
   const getPreviewImg = () => {

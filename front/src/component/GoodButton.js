@@ -11,7 +11,7 @@ function GoodButton({ reviewInfo }) {
       .then((upvote) => {
         setThumbsUp(upvote);
       });
-  }, []);
+  }, [reviewInfo]);
 
   // 버튼 눌렀을 때 실행되는 함수
   const handleThumbsUpButton = () => {

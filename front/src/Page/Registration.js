@@ -9,7 +9,6 @@ import Button from "../component/Button";
 import localList from "../DummyData/localList";
 
 const Registration = () => {
-  // kakao API 를 사용하기 위해 구조분해할당
   const { kakao } = window;
   const [address, setAddress] = useState();
   const [imageData, setImageData] = useState([]);
@@ -23,44 +22,27 @@ const Registration = () => {
   const storeInfo = useRef();
   const storeType = useRef();
 
-  const name = storeName.current; // 사용자가 입력한 업체명
-  const number = storeNumber.current; // 사용자가 입력한 사업장 등록번호
-  const info = storeInfo.current; // 사용자가 입력한 사업장 설명
+  const name = storeName.current;
+  const number = storeNumber.current;
+  const info = storeInfo.current;
   const type = storeType.current;
   const ffffff = localList.filter((local) => local.id === filter.cityId)[0]
     ?.area;
-
-  const handleRegistration = () => {
-    axios
-      .get(
-        "https://bizno.net/api/fapi?key=eWhqMDQzOUBuYXZlci5jb20g&gb=1&q=3988701116"
-      )
-      .then((data) => {
-        console.log(data.current);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handleAddressValue = (event) => {
     setAddress(event.target.value);
   };
   const handleCheckAddress = () => {
-    // 주소를 위도경도로 변경해주는 인스턴스 생성
     let geocoder = new kakao.maps.services.Geocoder();
-    // 사용자가 입력한 주소값
 
-    //addressSearch 함수(사용자입력값,콜백함수)
     geocoder.addressSearch(`${address}`, function (result, status) {
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         setAddressLocation(coords);
-        console.log(addressLocation);
         alert(`${address} 가 맞나요?`);
       } else {
         alert("주소를 확인해 주세요 !");
-        console.log("err");
+        console.log("address err");
       }
     });
   };
@@ -83,7 +65,7 @@ const Registration = () => {
         imageList: imageData[0],
       },
     }).catch((err) => console.log(err));
-    navigate("/"); // 사업장 post 요청 후 메인화면으로 이동.
+    navigate("/");
   };
 
   return (
@@ -112,36 +94,38 @@ const Registration = () => {
           id="registrationNumber"
           ref={storeNumber}
         />
-        <button className="registrationCheckBtn" onClick={handleRegistration}>
-          확인하기
-        </button>
+        <button className="registrationCheckBtn">확인하기</button>
         <label htmlFor="registrationName">사업장 이름</label>
         <input id="registrationName" ref={storeName} />
         <label htmlFor="registrationAddress">사업장 주소</label>
         <select
-          id="registrationcityId"
+          className="locationFilterOption"
           onChange={(e) => setFilter({ ...filter, cityId: e.target.value })}
         >
           <option>선택해 주세요</option>
-          {localList.map((post) => (
-            <option className="buttonStyle" value={post.id}>
-              {post.city}
-            </option>
-          ))}
+          {localList.map((post, idx) => {
+            return (
+              <option className="buttonStyle" key={idx} value={post.id}>
+                {post.city}
+              </option>
+            );
+          })}
         </select>
         <select
-          id="areaId"
+          className="locationFilterOption"
           onChange={(e) =>
             setFilter({ ...filter, areaId: e.target.value.slice(2, 5) })
           }
         >
           {filter.cityId == null
             ? null
-            : ffffff.map((post) => (
-                <option className="buttonStyle" value={post.id}>
-                  {post.name}
-                </option>
-              ))}
+            : ffffff.map((post) => {
+                return (
+                  <option className="buttonStyle" value={post.id}>
+                    {post.name}
+                  </option>
+                );
+              })}
         </select>
         <input
           id="registrationAddress"
@@ -225,5 +209,9 @@ const RegistrationContainer = styled.main`
     border: #76736e;
     background-color: #76736e;
     color: white;
+  }
+  .locationFilterOption {
+    margin-bottom: 10px;
+    padding: 10px 5px;
   }
 `;

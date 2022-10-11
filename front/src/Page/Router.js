@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { lazy, useState } from "react";
 
 import Home from "./Home";
 import Menu from "./Menu";
@@ -24,6 +24,7 @@ const Router = () => {
       area: "전체",
       areaId: "000",
     },
+    checkUrl: false,
   });
 
   return (
