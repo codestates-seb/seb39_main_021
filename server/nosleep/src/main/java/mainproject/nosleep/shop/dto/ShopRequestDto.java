@@ -3,8 +3,12 @@ package mainproject.nosleep.shop.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.shop.entity.Category;
 import mainproject.nosleep.shop.entity.ShopStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShopRequestDto {
 
@@ -23,7 +27,7 @@ public class ShopRequestDto {
         private String detail;
         private Double longitude;
         private Double latitude;
-//        private String status; //enum
+        private List<String> imageList;
 
         public Category getCategory(){
             Category category1 = Category.of(category);
@@ -33,12 +37,7 @@ public class ShopRequestDto {
             }
             return category1;
         }
-//        public ShopStatus getStatus(){
-//            ShopStatus status1 = ShopStatus.of(status);
-//            if (status1 == null)
-//                return null; //예외처리, BadRequest
-//            return status1;
-//        }
+
     }
     @Getter
     @AllArgsConstructor
@@ -48,6 +47,7 @@ public class ShopRequestDto {
 
         private String name;
         private String detail;
+        private List<String> imageList;
 
     }
 }

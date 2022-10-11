@@ -1,8 +1,10 @@
 package mainproject.nosleep.review.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.shop.dto.ShopResponseDto;
@@ -12,8 +14,17 @@ import mainproject.nosleep.upvote.entity.Upvote;
 import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReviewResponseDto {
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    public static class CreateReview{
+        private LocalDateTime createdAt;
+        private Integer rating;
+    }
+
     @Setter
     @Getter
     @NoArgsConstructor
@@ -36,15 +47,16 @@ public class ReviewResponseDto {
         private String nickname;
         private LocalDateTime createdAt;
         private Integer rating;
-        private Long upvotes;
+        private Long upvoteCount;
+
+
 
         public  void setMember(Member member){
             this.member = member.getId();
             this.nickname = member.getNickname();
         }
-        public void setUpvotes(List<Upvote> upvotes){
-            this.upvotes = (long) upvotes.size();
-        }
+
+
 
     }
 
@@ -72,9 +84,9 @@ public class ReviewResponseDto {
 
         private String content;
 
-        private Long upvotes;
+        private Long upvoteCount;
 
-        //shopId, shopName, openCheck
+        private List<String> images;
 
         public void setShop(Shop shop){
             this.shop = shop.getId();
@@ -89,11 +101,12 @@ public class ReviewResponseDto {
         public void setOpenCheck(OpenCheck openCheck){
             this.openCheck = openCheck.getOpenTrue();
         }
-        public void setUpvotes(List<Upvote> upvotes){
-            this.upvotes = (long) upvotes.size();
+
+        public void setImages(List<Image> images){
+            this.images = images.stream()
+                    .map(Image::getUrl)
+                    .collect(Collectors.toList());
         }
-
-
     }
 
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.review.dto.ReviewResponseDto;
 import mainproject.nosleep.review.entity.Review;
 
@@ -20,6 +21,12 @@ public class ShopResponseDto {
         private String name;
         private String address;
         private Double ratingAVG;
+        private List<String> images;
+        public void setImages(List<Image> images){
+            this.images = images.stream()
+                    .map(Image::getUrl)
+                    .collect(Collectors.toList());
+        }
     }
 
     @Setter
@@ -41,6 +48,7 @@ public class ShopResponseDto {
         private Double ratingAVG;
         //이용후기 리스트
         private Long reviewCount;
+
     }
 
     @Setter
@@ -67,7 +75,14 @@ public class ShopResponseDto {
         private Long visitorCount;
 
         private Long openCount;
+        private List<String> images;
         private List<ReviewResponseDto.ShortReview> reviews; // reviewDTO 필요
+
+        public void setImages(List<Image> images){
+            this.images = images.stream()
+                    .map(Image::getUrl)
+                    .collect(Collectors.toList());
+        }
 
         public void setReviews(List<Review> reviews) {
             this.reviews = reviews.stream().map(
@@ -88,12 +103,18 @@ public class ShopResponseDto {
         private Long id;
         private String name;
         private String address;
+        private Double longitude;
+        private Double latitude;
         private Double ratingAVG;
         private Long reviewCount;
         private Long visitorCount;
         private Long openCount;
+        private List<String> images;
 
-
-
+        public void setImages(List<Image> images){
+            this.images = images.stream()
+                    .map(Image::getUrl)
+                    .collect(Collectors.toList());
+        }
     }
 }

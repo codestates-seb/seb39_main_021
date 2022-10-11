@@ -1,9 +1,8 @@
 package mainproject.nosleep.review.entity;
 
-
 import lombok.*;
 import mainproject.nosleep.audit.Auditable;
-
+import mainproject.nosleep.image.entity.Image;
 import mainproject.nosleep.member.entity.Member;
 import mainproject.nosleep.opencheck.entity.OpenCheck;
 import mainproject.nosleep.shop.entity.Shop;
@@ -16,7 +15,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class Review extends Auditable {
     @Id
@@ -34,9 +32,7 @@ public class Review extends Auditable {
 
 
     @Column(nullable = false)
-
     private ReviewStatus status = ReviewStatus.common; //이용후기 상태 enum
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;
@@ -47,24 +43,32 @@ public class Review extends Auditable {
     @OneToMany(mappedBy = "review")
     private List<Upvote> upvotes = new ArrayList<>();
 
-
     @OneToOne(mappedBy = "review", cascade = CascadeType.ALL)
     private OpenCheck openCheck;  //매장 오픈유무
 
+    @OneToMany(mappedBy = "review")
+    private List<Image> images = new ArrayList<>();
 
-    public Review(Integer rating, String content) {
-;
+    @Builder
+    public Review(Long id, Integer rating, String content, Shop shop, Member member, List<Upvote> upvotes, OpenCheck openCheck, List<Image> images) {
+        this.id = id;
         this.rating = rating;
         this.content = content;
-        this.status = ReviewStatus.common;
+        this.upvoteCount = 0L;
+        this.shop = shop;
+        this.member = member;
+        this.upvotes = upvotes;
+        this.openCheck = openCheck;
+        this.images = images;
     }
+
+
 
     public void addOpenCheck(OpenCheck openCheck){
         this.openCheck = openCheck;
         if(openCheck.getReview() != this){
             openCheck.addReview(this);
         }
-
     }
 
 }

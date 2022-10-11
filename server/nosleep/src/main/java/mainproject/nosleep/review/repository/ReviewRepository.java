@@ -19,26 +19,24 @@ import java.util.List;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>  {
 
-    //테트트용
-    @Query(value = "select AVG(r.rating), COUNT(r.rating) From Review r ", nativeQuery = true)
-    // 쿼리문 테스트
-    List<Object[]> sumAndCountTestAllRating();
-
-    @Query(value = "select AVG(r.rating) From Review r WHERE r.shop_id = :shopId  GROUP BY shop_id", nativeQuery = true)
-    List<Object[]> averageAndCountAllRating(@Param("shopId") Long shopId);
-
-
     Page<Review> findByShop(Shop shop, Pageable pageable);
 
+    @Query(value = "select AVG(r.rating), COUNT(r.rating) From review r ", nativeQuery = true)
+    List<Object[]> sumAndCountTestAllRating();
+
+    @Query(value = "select AVG(r.rating) From review r WHERE r.shop_id = :shopId  GROUP BY shop_id", nativeQuery = true)
+    List<Double> averageAndCountAllRating(@Param("shopId") Long shopId);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Review r SET r.upvote_count = r.upvote_count + 1 WHERE r.id = :reviewId", nativeQuery = true)
+    @Query(value = "UPDATE review r SET r.upvote_count = r.upvote_count + 1 WHERE r.id = :reviewId", nativeQuery = true)
     void upvotePlus(@Param("reviewId") Long reviewId);
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Review r SET r.upvote_count = r.upvote_count - 1 WHERE r.id = :reviewId", nativeQuery = true)
+    @Query(value = "UPDATE review r SET r.upvote_count = r.upvote_count - 1 WHERE r.id = :reviewId", nativeQuery = true)
     void upvoteMinus(@Param("reviewId") Long reviewId);
+
+
 
 }

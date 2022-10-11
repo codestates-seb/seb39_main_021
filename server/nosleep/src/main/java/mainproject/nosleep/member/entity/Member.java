@@ -58,7 +58,9 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member")
     private List<Shop> shopList = new ArrayList<>();
 
-
+    public Member(Long id) {
+        this.id = id;
+    }
 
 
     //ENUM 정의
