@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { lazy, useState } from "react";
 
 import Home from "./Home";
 import Menu from "./Menu";

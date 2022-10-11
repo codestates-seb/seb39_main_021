@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { RiRoadMapLine } from "react-icons/ri";
@@ -18,11 +18,12 @@ const List = ({ selectData }) => {
       )
       .then((filterData) => {
         setStoreData(filterData.data.data);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [location, selectData]);
 
   if (storeData == null) {
-    return;
+    return <div>응답 요청이 없습니다 !</div>;
   }
 
   return (
