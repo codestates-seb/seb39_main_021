@@ -25,7 +25,7 @@ const StoreDetail = () => {
         console.log("err");
         console.log(err);
       });
-  }, []);
+  }, [storeItemDetail, storeData]);
 
   if (storeItemDetail === null) {
     return;

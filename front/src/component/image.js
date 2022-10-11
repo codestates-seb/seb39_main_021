@@ -29,6 +29,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
 
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
+    console.log(imageUrlList);
 
     axios({
       headers: {
@@ -44,6 +45,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
         setImageUrlList([...imageUrlList, info.data.urlList]);
       })
       .catch((err) => console.log(err));
+    console.log(`${TYPE}의 이미지 post 요청 완료 !`);
   };
 
   const deleteImage = () => {
@@ -76,6 +78,7 @@ const Image = ({ TYPE, imageData, setImageData }) => {
   };
 
   const getPreviewImg = () => {
+    console.log(`${TYPE}의 이미지 미리보기 완료 !`);
     if (previewImg.length === 0) {
       return (
         <img
